@@ -20,7 +20,12 @@
 ================================================================================
 
 This Tools Hub (index.html) is built to work perfectly on GitHub Pages with
-minimal maintenance. All "Open" and "Download" buttons use RELATIVE links.
+minimal maintenance. 
+
+Most "Open" and "Download" buttons use RELATIVE links (best for portability).
+One tool — the Intern / Quick Session Tracker — currently uses an ABSOLUTE URL
+(https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html)
+because it is hosted under a different repository path.
 
 ────────────────────────────────────────────────────────────────────────────────
 STEP 1: RECOMMENDED FOLDER STRUCTURE IN YOUR GITHUB REPO
@@ -31,9 +36,8 @@ your-repo-name/                     ← Root of your GitHub repository
 ├── .gitattributes
 ├── README.md                       ← (optional but good to have)
 │
-├── job-coaching/                   ← Folder for job coaching / mentor tools
-│   ├── Queens_Public_Library_Worksheet_Tutorial_v2.html
-│   └── Mobile_Session_Tracker.html
+├── job-coaching/                   ← Folder for most job coaching / mentor tools
+│   └── Queens_Public_Library_Worksheet_Tutorial_v2.html
 │
 ├── dmv/                            ← DMV / driver's permit tools
 │   └── nys_learners_permit_practice_test_v2_balanced.html
@@ -48,6 +52,10 @@ your-repo-name/                     ← Root of your GitHub repository
 │   └── cognitive-assessment-or-other.html
 │
 └── (any other category folders you create)
+
+NOTE: The Intern Session Tracker is hosted separately at:
+https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html
+It does not need to be in your local job-coaching/ folder.
 
 ────────────────────────────────────────────────────────────────────────────────
 STEP 2: ENABLE GITHUB PAGES (ONE-TIME SETUP)
@@ -79,10 +87,12 @@ They are located inside each tool-card here:
 TO CHANGE OR FIX A LINK:
 • Search this file for the tool title (e.g. "Mentor Worksheet" or "NYS Learner’s Permit")
 • Inside the matching <a href="..."> tag, change ONLY the path between the quotes.
-• Keep it relative (no https:// at the start).
+• You can use either:
+    - Relative path (recommended for tools in the same repo): href="job-coaching/YourFile.html"
+    - Absolute GitHub Pages URL (when the tool is hosted in a different repo/path): href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html"
 • Example changes:
-    - Old: href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html"
-    - New: href="job-coaching/My_New_Mentor_Worksheet_v3.html"
+    - Relative: href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html"
+    - Absolute: href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html"
 
 If you add a completely new tool:
 1. Create the folder (e.g. surveys/) if it doesn't exist
@@ -160,7 +170,7 @@ Last updated for GitHub: June 2026
                     </div>
                 </div>
 
-                <!-- Mobile Session Tracker -->
+                <!-- Intern / Quick Session Tracker -->
                 <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
                     <div class="mb-5">
                         <h3 class="font-semibold text-xl text-slate-900">Quick Session Tracker</h3>
@@ -168,12 +178,17 @@ Last updated for GitHub: June 2026
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK LOCATION (Quick Session Tracker)
-                            Open & Download both point to: job-coaching/Mobile_Session_Tracker.html
+                            BUTTON LINK LOCATION (Intern / Quick Session Tracker)
+                            This tool is hosted on GitHub Pages at:
+                            https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html
+                            
+                            Both "Open" and "Download" buttons now use the absolute URL so it works
+                            even if this index is hosted in a different repository or subfolder.
+                            
                             To change: edit the href value in BOTH <a> tags below.
                         -->
-                        <a href="job-coaching/Mobile_Session_Tracker.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="job-coaching/Mobile_Session_Tracker.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
+                        <a href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
+                        <a href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
                 </div>
             </div>
