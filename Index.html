@@ -16,40 +16,30 @@
     
 <!-- 
 ================================================================================
-              GITHUB PORTFOLIO - INDEX.HTML SETUP INSTRUCTIONS
+                    FINAL INDEX.HTML - READY TO PUSH
 ================================================================================
 
-CRITICAL RULES (Read this first):
+FOLDER STRUCTURE YOU MUST HAVE (exact names):
 
-1. FOLDER NAMES MUST BE EXACT (GitHub Pages is case-sensitive):
-   - Use exactly: job-coaching   (lowercase, with hyphen, NO space)
-   - Use exactly: dmv
-   - Use exactly: ged
+Portfolio/
+├── index.html                          ← This file (must be lowercase)
+├── job-coaching/
+│   ├── Coaching_Guide.html             ← Main Internship Coaching Worksheet
+│   └── Mobile_Session_Tracker.html     ← Quick mobile session logger
+├── dmv/
+│   └── nys_learners_permit_practice_test_v2_balanced.html
+├── ged/
+│   └── GED_Science_Practice_Test_Population_Limiting_Factors.html
 
-   Wrong examples that will cause 404:
-   - "Job Coaching" (has space + capital letters)
-   - "DMV" or "Dmv"
-   - "Job-coaching" or "job_coaching"
+IMPORTANT:
+- All folder names must be lowercase with hyphens where shown.
+- File names are case-sensitive on GitHub Pages.
+- After any change: git add . → git commit → git push → wait 60s → hard refresh
 
-2. This file must be saved as "index.html" (all lowercase) in the ROOT of your repo.
-
-3. The Quick Session Tracker button uses an ABSOLUTE URL because that tool
-   is currently hosted under a different path (Job-Coaching). 
-   This is intentional and correct.
-
-────────────────────────────────────────────────────────────────────────────────
-HOW TO UPDATE & PUSH THIS FILE
-────────────────────────────────────────────────────────────────────────────────
-1. Save this file as: index.html (lowercase)
-2. Put it in the root of your local "Portfolio" folder
-3. Open Git Bash in that folder (right-click → Open Git Bash here)
-4. Run these commands:
-
-   git add index.html
-   git commit -m "Update Tools Hub index.html"
-   git push
-
-5. Wait 60 seconds, then hard refresh your site (Ctrl + Shift + R)
+This version has:
+- Internship Coaching Guide (new main tool)
+- Quick Session Tracker (now relative, since it's in the same repo)
+- Clean comments for future maintenance
 
 ================================================================================
 -->
@@ -73,22 +63,22 @@ HOW TO UPDATE & PUSH THIS FILE
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 
-                <!-- Mentor Worksheet -->
+                <!-- Internship Coaching Guide -->
                 <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
                     <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">Mentor Worksheet</h3>
-                        <p class="text-slate-600 mt-2 text-sm">Full job coaching worksheet with task analysis, session logging, and fading plans.</p>
+                        <h3 class="font-semibold text-xl text-slate-900">Internship Coaching Guide</h3>
+                        <p class="text-slate-600 mt-2 text-sm">Comprehensive person-centered job coaching worksheet with task analysis, session logging, fading plans, structured learning journal, and mentor resources.</p>
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK (Mentor Worksheet)
-                            Relative path: job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html
+                            BUTTON LINK: Internship Coaching Guide
+                            Points to: job-coaching/Coaching_Guide.html
                             
-                            IMPORTANT: You must create a folder literally named "job-coaching"
-                            (all lowercase, with hyphen). Do NOT use "Job Coaching" or "Job-coaching".
+                            This is the main updated coaching tool (v5).
+                            Make sure the file exists with exact name "Coaching_Guide.html"
                         -->
-                        <a href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
+                        <a href="job-coaching/Coaching_Guide.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
+                        <a href="job-coaching/Coaching_Guide.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
                 </div>
 
@@ -96,21 +86,17 @@ HOW TO UPDATE & PUSH THIS FILE
                 <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
                     <div class="mb-5">
                         <h3 class="font-semibold text-xl text-slate-900">Quick Session Tracker</h3>
-                        <p class="text-slate-600 mt-2 text-sm">Mobile-friendly tool for logging sessions on iPhone. Export and import into the main worksheet.</p>
+                        <p class="text-slate-600 mt-2 text-sm">Mobile-friendly tool for logging sessions on iPhone. Tracks per-task independence and prompts. Export and import supported.</p>
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK (Quick Session Tracker / Intern Session Tracker)
+                            BUTTON LINK: Quick Session Tracker
+                            Now using relative path since the file is in job-coaching/Mobile_Session_Tracker.html
                             
-                            This tool is hosted at a different path, so we use the absolute URL
-                            that is confirmed working:
-                            https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html
-                            
-                            Do NOT change this to relative unless you move the file into 
-                            a "job-coaching" folder in this repo.
+                            This is the correct modern version.
                         -->
-                        <a href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
+                        <a href="job-coaching/Mobile_Session_Tracker.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
+                        <a href="job-coaching/Mobile_Session_Tracker.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
                 </div>
             </div>
@@ -133,11 +119,10 @@ HOW TO UPDATE & PUSH THIS FILE
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK (DMV Test)
-                            Relative path: dmv/nys_learners_permit_practice_test_v2_balanced.html
+                            BUTTON LINK: DMV Test
+                            Points to: dmv/nys_learners_permit_practice_test_v2_balanced.html
                             
-                            You must create a folder literally named "dmv" (all lowercase).
-                            Push the folder + file to GitHub for this link to work.
+                            Create folder "dmv" (lowercase) and put the file inside.
                         -->
                         <a href="dmv/nys_learners_permit_practice_test_v2_balanced.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="dmv/nys_learners_permit_practice_test_v2_balanced.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
@@ -163,10 +148,10 @@ HOW TO UPDATE & PUSH THIS FILE
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK (GED Test)
-                            Relative path: ged/GED_Science_Practice_Test_Population_Limiting_Factors.html
+                            BUTTON LINK: GED Test
+                            Points to: ged/GED_Science_Practice_Test_Population_Limiting_Factors.html
                             
-                            Create folder literally named "ged" (lowercase).
+                            Create folder "ged" (lowercase).
                         -->
                         <a href="ged/GED_Science_Practice_Test_Population_Limiting_Factors.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="ged/GED_Science_Practice_Test_Population_Limiting_Factors.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
@@ -185,7 +170,7 @@ HOW TO UPDATE & PUSH THIS FILE
             </div>
             <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
                 <p class="mb-2">No survey tools added yet.</p>
-                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">surveys</code> (lowercase), add your HTML file, then add a new tool card in this section with the correct relative path.</p>
+                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">surveys</code> (lowercase), upload your HTML file, then add a card in this section.</p>
             </div>
         </div>
 
@@ -199,13 +184,13 @@ HOW TO UPDATE & PUSH THIS FILE
             </div>
             <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
                 <p class="mb-2">No assessment tools added yet.</p>
-                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">assessments</code> (lowercase), add your HTML file, then add a new tool card in this section.</p>
+                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">assessments</code> (lowercase), upload your HTML file, then add a card in this section.</p>
             </div>
         </div>
 
         <div class="text-center text-xs text-slate-400 mt-8">
-            Last revised: June 2026 &nbsp;•&nbsp; 
-            Push this file as <strong>index.html</strong> (lowercase) to update your live Tools Hub.
+            Last updated: June 2026 &nbsp;•&nbsp; 
+            Push this file as <strong>index.html</strong> (lowercase) after any changes.
         </div>
     </div>
 </body>
