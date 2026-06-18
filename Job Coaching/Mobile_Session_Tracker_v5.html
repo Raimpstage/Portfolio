@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Quick Session Tracker • Mobile v5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .large-input { font-size: 17px; padding: 14px 16px; }
+        .touch-target { min-height: 48px; }
+        .tab-button.active { background-color: #134e4b; color: white; }
+        .prompt-btn { transition: all 0.1s ease; }
+        .prompt-btn.active { background-color: #134e4b; color: white; border-color: #134e4b; }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-xl">
+        
+        <!-- Header -->
+        <div class="bg-teal-700 text-white px-5 py-4 sticky top-0 z-50">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-xl font-semibold">Quick Session Tracker</h1>
+                    <p class="text-teal-200 text-sm">Mobile • iPhone Optimized</p>
+                </div>
+                <i class="fa-solid fa-mobile-screen-button text-2xl text-teal-300"></i>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex border-b border-slate-200 bg-white sticky top-[65px] z-40 text-sm">
+            <button onclick="showTab('log-tab')" id="btn-log"
+                    class="tab-button flex-1 py-3 font-semibold text-teal-700 border-b-2 border-teal-700">
+                Log
+            </button>
+            <button onclick="showTab('analytics-tab')" id="btn-analytics"
+                    class="tab-button flex-1 py-3 font-semibold text-slate-600">
+                Analytics
+            </button>
+            <button onclick="showTab('guide-tab')" id="btn-guide"
+                    class="tab-button flex-1 py-3 font-semibold text-slate-600">
+                Guide
+            </button>
+        </div>
+
+        <!-- LOG TAB -->
+        <div id="log-tab" class="tab-content p-5">
+            
+            <div class="mb-5">
+                <label class="block text-xs font-semibold text-teal-700 mb-1.5 tracking-wider">STUDENT NAME</label>
+                <input id="student-name" type="text" class="large-input w-full border border-slate-300 rounded-2xl" placeholder="Enter student name">
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-3xl p-5 mb-6 shadow-sm">
+                <h2 class="font-semibold text-lg text-teal-900 mb-4">Add New Session</h2>
+
+                <div class="space-y-4">
+                    <!-- Date + Duration -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">DATE</label>
+                            <input id="session-date" type="date" class="large-input w-full border border-slate-300 rounded-2xl">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">DURATION (min)</label>
+                            <input id="duration" type="number" placeholder="45" class="large-input w-full border border-slate-300 rounded-2xl">
+                        </div>
+                    </div>
+
+                    <!-- Default Independence & Prompts -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">% INDEPENDENT</label>
+                            <div class="flex gap-2 items-center">
+                                <input id="independence" type="range" min="0" max="100" step="5" value="70" class="flex-1 accent-teal-600" oninput="updateIndependenceLabel()">
+                                <div class="w-16 text-center bg-slate-100 rounded-xl py-1 text-sm font-bold text-teal-700">
+                                    <span id="independence-value">70</span>%
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">PROMPTS USED</label>
+                            <div class="flex flex-wrap gap-1 text-xs">
+                                <div onclick="togglePrompt(this, 'Independent')" class="prompt-btn prompt-pill cursor-pointer px-2.5 py-1 bg-white border border-slate-300 rounded-xl">Independent</div>
+                                <div onclick="togglePrompt(this, 'Verbal')" class="prompt-btn prompt-pill cursor-pointer px-2.5 py-1 bg-white border border-slate-300 rounded-xl">Verbal</div>
+                                <div onclick="togglePrompt(this, 'Model')" class="prompt-btn prompt-pill cursor-pointer px-2.5 py-1 bg-white border border-slate-300 rounded-xl">Model</div>
+                                <div onclick="togglePrompt(this, 'Gestural')" class="prompt-btn prompt-pill cursor-pointer px-2.5 py-1 bg-white border border-slate-300 rounded-xl">Gestural</div>
+                                <div onclick="togglePrompt(this, 'Physical')" class="prompt-btn prompt-pill cursor-pointer px-2.5 py-1 bg-white border border-slate-300 rounded-xl">Physical</div>
+                            </div>
+                            <input type="hidden" id="prompts-used" value="">
+                        </div>
+                    </div>
+
+                    <!-- Tasks -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1.5">TASKS (each with its own independence & prompts)</label>
+                        
+                        <div class="flex gap-2 mb-2">
+                            <input id="task-input" type="text" class="large-input flex-1 border border-slate-300 rounded-2xl" placeholder="Task name">
+                            <button onclick="addTaskToSession()" class="px-4 bg-teal-600 text-white rounded-2xl text-sm font-medium">Add</button>
+                        </div>
+
+                        <div id="task-list" class="space-y-2 min-h-[40px]"></div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">NOTES</label>
+                        <textarea id="session-notes" rows="2" class="large-input w-full border border-slate-300 rounded-2xl" placeholder="General observations"></textarea>
+                    </div>
+
+                    <button onclick="addSession()" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-semibold py-4 rounded-3xl text-lg flex items-center justify-center gap-x-2 touch-target">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>LOG SESSION</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sessions List -->
+            <div>
+                <div class="flex items-center justify-between mb-3 px-1">
+                    <h2 class="font-semibold text-lg text-teal-900">Sessions Logged</h2>
+                    <span id="session-count" class="text-xs font-medium bg-teal-100 text-teal-700 px-3 py-1 rounded-full">0 sessions</span>
+                </div>
+                <div id="sessions-list" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- ANALYTICS TAB -->
+        <div id="analytics-tab" class="tab-content hidden p-5">
+            <h2 class="font-semibold text-xl text-teal-900 mb-4">Analytics</h2>
+
+            <div class="grid grid-cols-3 gap-3 mb-6">
+                <div class="bg-white border border-slate-200 rounded-2xl p-3 text-center">
+                    <div class="text-xs text-slate-500">Sessions</div>
+                    <div id="stat-total-sessions" class="text-3xl font-semibold text-teal-700">0</div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-3 text-center">
+                    <div class="text-xs text-slate-500">Avg Independence</div>
+                    <div id="stat-avg-independence" class="text-3xl font-semibold text-teal-700">0%</div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-3 text-center">
+                    <div class="text-xs text-slate-500">Total Tasks</div>
+                    <div id="stat-total-tasks" class="text-3xl font-semibold text-teal-700">0</div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-3xl p-4 text-center text-slate-500">
+                <p class="text-sm">Detailed charts coming soon.</p>
+                <p class="text-xs mt-1">Currently showing basic stats.</p>
+            </div>
+        </div>
+
+        <!-- GUIDE TAB -->
+        <div id="guide-tab" class="tab-content hidden p-5 text-sm">
+            <h2 class="font-semibold text-xl text-teal-900 mb-4">Mentor Guide</h2>
+
+            <div class="space-y-6">
+                <div>
+                    <h3 class="font-semibold text-teal-800 mb-2">How to Use This Tool</h3>
+                    <ol class="list-decimal pl-5 space-y-1.5 text-slate-700">
+                        <li>Enter the student’s name at the top (it saves automatically).</li>
+                        <li>Select the date and approximate duration of the session.</li>
+                        <li>Set the default independence level and prompts used during the session.</li>
+                        <li>Add individual tasks one by one. Each task will record the current independence % and prompts at the moment you add it.</li>
+                        <li>Add any general notes for the session.</li>
+                        <li>Tap <strong>“Log Session”</strong>. The tasks and their data are now saved as a snapshot.</li>
+                    </ol>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-teal-800 mb-2">Why Track Per-Task Independence?</h3>
+                    <p class="text-slate-700 mb-2">Tracking independence at the <strong>task level</strong> (instead of only at the session level) gives much richer information:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                        <li>You can see which specific tasks the student is becoming more independent in over time.</li>
+                        <li>You can see which tasks still require higher levels of prompting.</li>
+                        <li>It supports better <strong>fading plans</strong> — you can target support reduction on individual tasks rather than guessing.</li>
+                        <li>It helps identify tasks that may need more practice or different strategies.</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-teal-800 mb-2">Why Track Prompts Per Task?</h3>
+                    <p class="text-slate-700 mb-2">Recording the type of prompt used for each task helps you:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-700">
+                        <li>Understand the student’s current support needs more precisely.</li>
+                        <li>Track progress in reducing prompt intrusiveness (e.g., moving from Physical → Verbal → Independent).</li>
+                        <li>Build more accurate <strong>natural support plans</strong> and identify when a task is ready for fading.</li>
+                        <li>Provide better data when discussing progress with the student, family, or team.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-teal-50 border border-teal-200 rounded-2xl p-4 text-xs text-teal-700">
+                    <strong>Remember:</strong> The goal is not just to log data, but to use it to help the student become more independent on the tasks that matter most to them. Review the logged sessions regularly with the student when appropriate.
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="sticky bottom-0 bg-white border-t p-4 flex gap-3">
+            <button onclick="exportSessions()" class="flex-1 border border-teal-700 text-teal-700 font-semibold py-3 rounded-3xl flex items-center justify-center gap-x-2">
+                <i class="fa-solid fa-download"></i> Export
+            </button>
+            <button onclick="importSessions()" class="flex-1 border border-teal-700 text-teal-700 font-semibold py-3 rounded-3xl flex items-center justify-center gap-x-2">
+                <i class="fa-solid fa-upload"></i> Import
+            </button>
+            <button onclick="clearAllSessions()" class="px-5 bg-red-100 text-red-600 rounded-3xl">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let sessions = [];
+        let selectedPrompts = new Set();
+        let currentSessionTasks = [];
+
+        function updateIndependenceLabel() {
+            document.getElementById('independence-value').textContent = document.getElementById('independence').value;
+        }
+
+        function togglePrompt(element, type) {
+            if (selectedPrompts.has(type)) {
+                selectedPrompts.delete(type);
+                element.classList.remove('bg-teal-600', 'text-white', 'border-teal-600');
+                element.classList.add('bg-white', 'border-slate-300');
+            } else {
+                selectedPrompts.add(type);
+                element.classList.add('bg-teal-600', 'text-white', 'border-teal-600');
+                element.classList.remove('bg-white', 'border-slate-300');
+            }
+            document.getElementById('prompts-used').value = Array.from(selectedPrompts).join(', ');
+        }
+
+        function getCurrentPromptsString() {
+            return Array.from(selectedPrompts).join(', ') || 'None';
+        }
+
+        function addTaskToSession() {
+            const input = document.getElementById('task-input');
+            const name = input.value.trim();
+            if (!name) return;
+
+            const independence = parseInt(document.getElementById('independence').value);
+            const prompts = getCurrentPromptsString();
+
+            currentSessionTasks.push({ name, independence, prompts });
+            input.value = '';
+            renderCurrentTasks();
+        }
+
+        function removeTaskFromSession(index) {
+            currentSessionTasks.splice(index, 1);
+            renderCurrentTasks();
+        }
+
+        function renderCurrentTasks() {
+            const container = document.getElementById('task-list');
+            container.innerHTML = '';
+
+            if (currentSessionTasks.length === 0) {
+                container.innerHTML = `<div class="text-xs text-slate-400 px-1">No tasks added yet</div>`;
+                return;
+            }
+
+            currentSessionTasks.forEach((task, index) => {
+                const div = document.createElement('div');
+                div.className = `bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2 text-sm`;
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-medium text-slate-800">${task.name}</div>
+                            <div class="text-xs text-teal-600 mt-0.5">${task.independence}% • ${task.prompts}</div>
+                        </div>
+                        <button onclick="removeTaskFromSession(${index})" class="text-red-500 text-xl px-1">×</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function clearCurrentTasks() {
+            currentSessionTasks = [];
+            const container = document.getElementById('task-list');
+            if (container) container.innerHTML = '';
+        }
+
+        function addSession() {
+            const date = document.getElementById('session-date').value;
+            const duration = document.getElementById('duration').value;
+            const notes = document.getElementById('session-notes').value.trim();
+            const studentName = document.getElementById('student-name').value.trim();
+
+            if (!date) { alert("Please select a date."); return; }
+            if (currentSessionTasks.length === 0) { alert("Please add at least one task."); return; }
+
+            const session = {
+                id: Date.now(),
+                date: date,
+                duration: duration || "",
+                tasks: [...currentSessionTasks],
+                notes: notes || "",
+                studentName: studentName || "Unknown Student",
+                timestamp: new Date().toISOString()
+            };
+
+            sessions.unshift(session);
+            renderSessions();
+            saveToLocalStorage();
+
+            // Reset form
+            document.getElementById('duration').value = '';
+            document.getElementById('session-notes').value = '';
+            selectedPrompts.clear();
+            document.querySelectorAll('.prompt-btn').forEach(el => el.classList.remove('bg-teal-600', 'text-white', 'border-teal-600'));
+            document.getElementById('prompts-used').value = '';
+            clearCurrentTasks();
+            document.getElementById('independence').value = 70;
+            document.getElementById('independence-value').textContent = '70';
+        }
+
+        function renderSessions() {
+            const container = document.getElementById('sessions-list');
+            container.innerHTML = '';
+
+            if (sessions.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-slate-400"><i class="fa-solid fa-clipboard-list text-4xl mb-3"></i><p>No sessions logged yet</p></div>`;
+                document.getElementById('session-count').textContent = '0 sessions';
+                return;
+            }
+
+            sessions.forEach(session => {
+                const div = document.createElement('div');
+                div.className = `bg-white border border-slate-200 rounded-3xl p-4 shadow-sm`;
+
+                let dateFormatted = session.date;
+                try {
+                    const [y, m, d] = session.date.split('-');
+                    dateFormatted = new Date(y, m-1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                } catch(e) {}
+
+                let tasksHTML = '';
+                if (session.tasks && session.tasks.length > 0) {
+                    tasksHTML = session.tasks.map(t => 
+                        `<div class="text-xs bg-teal-50 text-teal-700 px-2 py-0.5 rounded mb-0.5">
+                            ${t.name} — <span class="font-semibold">${t.independence}%</span> (${t.prompts})
+                        </div>`
+                    ).join('');
+                }
+
+                div.innerHTML = `
+                    <div class="flex justify-between mb-2">
+                        <div class="font-semibold text-teal-900">${dateFormatted}</div>
+                        <div class="text-xs text-slate-500">${session.studentName}</div>
+                    </div>
+                    <div class="text-xs mb-2 text-slate-600">Duration: ${session.duration || '—'} min</div>
+                    <div class="mb-2">
+                        <div class="text-xs font-medium text-slate-500 mb-1">Tasks:</div>
+                        ${tasksHTML}
+                    </div>
+                    ${session.notes ? `<div class="text-xs bg-slate-50 p-2 rounded">${session.notes}</div>` : ''}
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('session-count').textContent = `${sessions.length} session${sessions.length > 1 ? 's' : ''}`;
+        }
+
+        function deleteSession(id) {
+            if (!confirm('Delete this session?')) return;
+            sessions = sessions.filter(s => s.id !== id);
+            renderSessions();
+            saveToLocalStorage();
+        }
+
+        function updateAnalytics() {
+            if (sessions.length === 0) return;
+            const total = sessions.length;
+            const avg = Math.round(sessions.reduce((sum, s) => {
+                const tAvg = s.tasks.reduce((tSum, t) => tSum + t.independence, 0) / s.tasks.length;
+                return sum + tAvg;
+            }, 0) / total);
+            const tasks = sessions.reduce((sum, s) => sum + s.tasks.length, 0);
+
+            document.getElementById('stat-total-sessions').textContent = total;
+            document.getElementById('stat-avg-independence').textContent = avg + '%';
+            document.getElementById('stat-total-tasks').textContent = tasks;
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('mobileSessionTracker_v5', JSON.stringify({
+                studentName: document.getElementById('student-name').value,
+                sessions: sessions
+            }));
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('mobileSessionTracker_v5');
+            if (!saved) return;
+            try {
+                const data = JSON.parse(saved);
+                if (data.studentName) document.getElementById('student-name').value = data.studentName;
+                if (data.sessions) sessions = data.sessions;
+            } catch(e){}
+        }
+
+        function exportSessions() {
+            const data = { exportedAt: new Date().toISOString(), studentName: document.getElementById('student-name').value, sessions };
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], {type:'application/json'}));
+            a.download = `Sessions_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        function importSessions() {
+            const input = document.createElement('input');
+            input.type = 'file'; input.accept = '.json';
+            input.onchange = e => {
+                const reader = new FileReader();
+                reader.onload = ev => {
+                    try {
+                        const imported = JSON.parse(ev.target.result);
+                        if (imported.sessions) {
+                            sessions = [...imported.sessions, ...sessions.filter(s => !imported.sessions.find(i => i.id === s.id))];
+                            renderSessions();
+                            saveToLocalStorage();
+                        }
+                    } catch(err) { alert("Invalid file"); }
+                };
+                reader.readAsText(e.target.files[0]);
+            };
+            input.click();
+        }
+
+        function clearAllSessions() {
+            if (!confirm('Clear everything?')) return;
+            sessions = [];
+            renderSessions();
+            localStorage.removeItem('mobileSessionTracker_v5');
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.getElementById('btn-log').classList.remove('active', 'border-teal-700', 'text-teal-700');
+            document.getElementById('btn-analytics').classList.remove('active', 'border-teal-700', 'text-teal-700');
+            document.getElementById('btn-guide').classList.remove('active', 'border-teal-700', 'text-teal-700');
+
+            if (tabId === 'log-tab') document.getElementById('btn-log').classList.add('active', 'border-teal-700', 'text-teal-700');
+            if (tabId === 'analytics-tab') document.getElementById('btn-analytics').classList.add('active', 'border-teal-700', 'text-teal-700');
+            if (tabId === 'guide-tab') document.getElementById('btn-guide').classList.add('active', 'border-teal-700', 'text-teal-700');
+        }
+
+        function init() {
+            loadFromLocalStorage();
+            renderSessions();
+
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('session-date').value = today;
+
+            document.getElementById('student-name').addEventListener('blur', saveToLocalStorage);
+
+            document.getElementById('log-tab').classList.remove('hidden');
+            document.getElementById('btn-log').classList.add('active', 'border-teal-700', 'text-teal-700');
+
+            console.log('%c[Session Tracker v5] Full prompt names + Mentor Guide tab added.', 'color:#14b8a6');
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
