@@ -13,6 +13,116 @@
     </style>
 </head>
 <body class="bg-slate-100">
+    
+<!-- 
+================================================================================
+                    GITHUB PORTFOLIO SETUP & BUTTON LINK INSTRUCTIONS
+================================================================================
+
+This Tools Hub (index.html) is built to work perfectly on GitHub Pages with
+minimal maintenance. All "Open" and "Download" buttons use RELATIVE links.
+
+────────────────────────────────────────────────────────────────────────────────
+STEP 1: RECOMMENDED FOLDER STRUCTURE IN YOUR GITHUB REPO
+────────────────────────────────────────────────────────────────────────────────
+your-repo-name/                     ← Root of your GitHub repository
+├── index.html                      ← RENAME THIS FILE from "Index.html" to "index.html" (lowercase recommended)
+├── LICENSE
+├── .gitattributes
+├── README.md                       ← (optional but good to have)
+│
+├── job-coaching/                   ← Folder for job coaching / mentor tools
+│   ├── Queens_Public_Library_Worksheet_Tutorial_v2.html
+│   └── Mobile_Session_Tracker.html
+│
+├── dmv/                            ← DMV / driver's permit tools
+│   └── nys_learners_permit_practice_test_v2_balanced.html
+│
+├── ged/                            ← GED practice tools
+│   └── GED_Science_Practice_Test_Population_Limiting_Factors.html
+│
+├── surveys/                        ← (CREATE THIS FOLDER when ready)
+│   └── your-future-feedback-tool.html
+│
+├── assessments/                    ← (CREATE THIS FOLDER when ready)
+│   └── cognitive-assessment-or-other.html
+│
+└── (any other category folders you create)
+
+────────────────────────────────────────────────────────────────────────────────
+STEP 2: ENABLE GITHUB PAGES (ONE-TIME SETUP)
+────────────────────────────────────────────────────────────────────────────────
+1. Go to your GitHub repository → Settings → Pages
+2. Under "Build and deployment" → Source:
+   - Select "Deploy from a branch"
+   - Branch: main (or master)
+   - Folder: / (root)
+3. Click Save.
+4. Wait 30–60 seconds. Your live site will be available at:
+   https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/
+   Example: https://arvihab.github.io/portfolio/
+
+Once live, all relative links below will work automatically.
+
+────────────────────────────────────────────────────────────────────────────────
+STEP 3: HOW TO UPDATE BUTTON LINKS (CLEAR EDITING SPOTS)
+────────────────────────────────────────────────────────────────────────────────
+Each tool has TWO buttons: "Open" and "Download".
+
+They are located inside each tool-card here:
+
+    <div class="flex gap-3">
+        <a href="FOLDER/FILENAME.html" class="...">Open</a>
+        <a href="FOLDER/FILENAME.html" download class="...">Download</a>
+    </div>
+
+TO CHANGE OR FIX A LINK:
+• Search this file for the tool title (e.g. "Mentor Worksheet" or "NYS Learner’s Permit")
+• Inside the matching <a href="..."> tag, change ONLY the path between the quotes.
+• Keep it relative (no https:// at the start).
+• Example changes:
+    - Old: href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html"
+    - New: href="job-coaching/My_New_Mentor_Worksheet_v3.html"
+
+If you add a completely new tool:
+1. Create the folder (e.g. surveys/) if it doesn't exist
+2. Upload the .html file into that folder
+3. Copy one of the existing tool-card blocks
+4. Paste it into the correct section's grid
+5. Update the title, description, icon (if desired), and BOTH href values
+
+────────────────────────────────────────────────────────────────────────────────
+STEP 4: BEST PRACTICES & EDGE CASES
+────────────────────────────────────────────────────────────────────────────────
+• Filenames and folder names are CASE-SENSITIVE on GitHub Pages.
+  Always match the exact spelling and capitalization of your uploaded files.
+• Self-contained HTML tools (Tailwind via CDN + inline JS) work great.
+• If you later move a file to a different folder, you MUST update the href in both buttons.
+• To test locally: Keep this index.html next to the subfolders and open it in any browser.
+  Relative links will resolve correctly.
+• After editing, commit → push → wait for GitHub Pages to redeploy (check the Actions tab if it takes longer).
+• If you want to link directly to the GitHub source code view instead of the live tool, 
+  you can use: https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/blob/main/job-coaching/FILE.html
+  But for users to actually USE the tools, the relative/Pages link is correct.
+
+────────────────────────────────────────────────────────────────────────────────
+ADDING FUTURE TOOLS (Surveys, Assessments, Cognitive Tools, etc.)
+────────────────────────────────────────────────────────────────────────────────
+When you finish new tools (e.g. your feedback questionnaire systems, 
+"Can You Hear Me?" cognitive assessment, or mentor feedback dashboards):
+
+1. Create a logical folder: surveys/, assessments/, cognitive-tools/, etc.
+2. Add a new section in this file if it's a major category, or add cards to existing sections.
+3. Follow the exact card structure used below for consistency.
+4. Update this comment block if you add many new categories.
+
+This file is now self-documenting. You (or future collaborators) can open it 
+and immediately know exactly where every button points and how to change it.
+
+Last updated for GitHub: June 2026
+================================================================================
+-->
+
     <div class="max-w-5xl mx-auto px-6 py-10">
         
         <!-- Header -->
@@ -39,6 +149,12 @@
                         <p class="text-slate-600 mt-2 text-sm">Full job coaching worksheet with task analysis, session logging, and fading plans.</p>
                     </div>
                     <div class="flex gap-3">
+                        <!-- 
+                            BUTTON LINK LOCATION (Mentor Worksheet)
+                            Open & Download both point to: job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html
+                            To change: edit the href value in BOTH <a> tags below.
+                            Make sure the file exists at that exact path in your GitHub repo.
+                        -->
                         <a href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
@@ -51,6 +167,11 @@
                         <p class="text-slate-600 mt-2 text-sm">Mobile-friendly tool for logging sessions on iPhone. Export and import into the main worksheet.</p>
                     </div>
                     <div class="flex gap-3">
+                        <!-- 
+                            BUTTON LINK LOCATION (Quick Session Tracker)
+                            Open & Download both point to: job-coaching/Mobile_Session_Tracker.html
+                            To change: edit the href value in BOTH <a> tags below.
+                        -->
                         <a href="job-coaching/Mobile_Session_Tracker.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="job-coaching/Mobile_Session_Tracker.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
@@ -74,6 +195,11 @@
                         <p class="text-slate-600 mt-2 text-sm">Comprehensive 50-question practice test aligned with the official New York State Driver’s Manual.</p>
                     </div>
                     <div class="flex gap-3">
+                        <!-- 
+                            BUTTON LINK LOCATION (NYS Learner’s Permit Practice Test)
+                            Open & Download both point to: dmv/nys_learners_permit_practice_test_v2_balanced.html
+                            To change: edit the href value in BOTH <a> tags below.
+                        -->
                         <a href="dmv/nys_learners_permit_practice_test_v2_balanced.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="dmv/nys_learners_permit_practice_test_v2_balanced.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
@@ -97,6 +223,11 @@
                         <p class="text-slate-600 mt-2 text-sm">23 multiple-choice + 1 extended response question focused on limiting factors and population dynamics.</p>
                     </div>
                     <div class="flex gap-3">
+                        <!-- 
+                            BUTTON LINK LOCATION (GED Science Practice Test)
+                            Open & Download both point to: ged/GED_Science_Practice_Test_Population_Limiting_Factors.html
+                            To change: edit the href value in BOTH <a> tags below.
+                        -->
                         <a href="ged/GED_Science_Practice_Test_Population_Limiting_Factors.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="ged/GED_Science_Practice_Test_Population_Limiting_Factors.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
@@ -113,7 +244,10 @@
                 <h2 class="font-semibold text-xl text-slate-800">Survey &amp; Feedback Tools</h2>
             </div>
             <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
-                No survey tools added yet.
+                <p class="mb-2">No survey tools added yet.</p>
+                <p class="text-xs max-w-md mx-auto">To add new tools (e.g. resident/staff feedback questionnaires or mentor evaluation systems): 
+                Create a <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">surveys/</code> folder, upload your HTML file, 
+                then copy a tool-card block into this section and update the two href paths. See the big comment block at the top of this file for exact instructions.</p>
             </div>
         </div>
 
@@ -126,12 +260,16 @@
                 <h2 class="font-semibold text-xl text-slate-800">Assessment Tools</h2>
             </div>
             <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
-                No assessment tools added yet.
+                <p class="mb-2">No assessment tools added yet.</p>
+                <p class="text-xs max-w-md mx-auto">To add new tools (e.g. cognitive assessments, learning profile generators, or career alignment reports): 
+                Create an <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">assessments/</code> folder, upload your HTML file, 
+                then copy a tool-card block into this section and update the two href paths. See the big comment block at the top of this file for exact instructions.</p>
             </div>
         </div>
 
         <div class="text-center text-xs text-slate-400 mt-8">
-            To add new tools, upload the HTML file into the correct folder and update this page.
+            To add new tools, upload the HTML file into the correct folder and update the links in this page.<br>
+            <span class="text-[10px]">This page is self-documented — open it in any editor to see exactly where each button points.</span>
         </div>
     </div>
 </body>
