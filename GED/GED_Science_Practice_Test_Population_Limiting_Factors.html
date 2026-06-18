@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GED Science Practice Test: Limiting Factors &amp; Population Dynamics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Georgia:wght@400;500&amp;display=swap');
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+        
+        .passage {
+            background-color: #f8fafc;
+            border-left: 4px solid #0f766e;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            page-break-inside: avoid;
+        }
+
+        .question-block {
+            page-break-inside: avoid;
+            margin-bottom: 1.35rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .option-label {
+            display: block;
+            padding: 0.35rem 0.5rem;
+            margin-bottom: 0.15rem;
+            border-radius: 0.25rem;
+        }
+        
+        .option-label:hover {
+            background-color: #f1f5f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e0f2fe;
+            font-weight: 600;
+            color: #0c4a6e;
+        }
+
+        .data-row:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .writing-area {
+            border: 1px solid #94a3b8;
+            background-image: linear-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 100% 28px;
+            line-height: 28px;
+            padding: 12px 16px;
+            min-height: 210px;
+        }
+
+        .section-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f766e;
+            border-bottom: 2px solid #14b8a6;
+            padding-bottom: 0.35rem;
+            margin-bottom: 1rem;
+        }
+
+        .ged-header {
+            background: linear-gradient(to right, #0f766e, #134e4b);
+            color: white;
+        }
+
+        @media print {
+            @page {
+                margin: 0.4in;
+                size: letter;
+            }
+
+            body {
+                font-size: 10.5pt;
+                line-height: 1.45;
+                color: #111827;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            /* === Strong Page Break Protection === */
+            .passage,
+            .question-block,
+            .extended-response-container,
+            .reflection-section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Force new pages for Answer Key and Mentor Guide */
+            .answer-key,
+            .mentor-guide {
+                break-before: page;
+                page-break-before: always;
+            }
+
+            /* Prevent headers from being left alone */
+            .section-header {
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+
+            /* Extra protection for questions */
+            .question-block {
+                margin-bottom: 1.4rem;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Extended Response area */
+            .extended-response-container {
+                margin-top: 0.75rem;
+                margin-bottom: 1.25rem;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Writing area inside extended response */
+            .writing-area {
+                min-height: 170px;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 1px solid #64748b;
+                background-image: linear-gradient(#cbd5e1 1px, transparent 1px);
+                background-size: 100% 26px;
+            }
+
+            /* Table styling for print */
+            table {
+                font-size: 9.5pt;
+                break-inside: avoid;
+            }
+
+            th {
+                background-color: #bae6fd !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* General improvements */
+            .ged-header {
+                background: #0f766e !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        
+        .answer-explanation {
+            margin-bottom: 1.1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dotted #94a3b8;
+        }
+        
+        .answer-explanation:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .quick-key {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 py-6 px-4">
+    <div class="max-w-[860px] mx-auto bg-white shadow-xl rounded-xl overflow-hidden border border-slate-200">
+        
+        <!-- Header -->
+        <div class="ged-header px-8 py-6">
+            <div class="flex items-start justify-between">
+                <div>
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8v0A2.5 2.5 0 0013 10.5v0a2.5 2.5 0 01-2.5 2.5v0A2.5 2.5 0 018 15.5v1.565" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-semibold tracking-tight">GED<sup>®</sup> Science</h1>
+                            <p class="text-emerald-200 text-sm font-medium tracking-wider">PRACTICE WORKSHEET</p>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-xl font-medium text-white">Limiting Factors &amp; Population Dynamics</p>
+                </div>
+                <div class="text-right text-sm text-emerald-100 hidden sm:block">
+                    <div class="font-medium">New York State</div>
+                    <div>GED Preparation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Info -->
+        <div class="px-8 pt-6 pb-4 border-b border-slate-200 bg-white no-print">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 tracking-wider mb-1">STUDENT NAME</label>
+                    <input type="text" id="student-name" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-600" placeholder="Full name">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 tracking-wider mb-1">DATE</label>
+                    <input type="text" id="student-date" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-600" placeholder="MM/DD/YYYY">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 tracking-wider mb-1">CLASS / INSTRUCTOR (OPTIONAL)</label>
+                    <input type="text" id="student-class" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-teal-600" placeholder="Program or teacher name">
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2">
+                <button onclick="saveAnswers()" class="inline-flex items-center gap-x-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-lg transition-colors">Save Progress</button>
+                <button onclick="loadAnswers()" class="inline-flex items-center gap-x-2 px-4 py-2 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-sm font-medium rounded-lg transition-colors">Load Saved</button>
+                <button onclick="clearAnswers()" class="inline-flex items-center gap-x-2 px-4 py-2 bg-white border border-slate-300 hover:bg-red-50 hover:border-red-200 text-slate-600 hover:text-red-600 text-sm font-medium rounded-lg transition-colors">Clear All</button>
+                <button onclick="window.print()" class="ml-auto inline-flex items-center gap-x-2 px-5 py-2 bg-white border border-teal-600 hover:bg-teal-50 text-teal-700 text-sm font-semibold rounded-lg transition-colors">Print Worksheet</button>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-2">Answers saved locally in this browser.</p>
+        </div>
+
+        <!-- Instructions -->
+        <div class="px-8 py-5 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-prose">
+                <h2 class="font-semibold text-slate-800 mb-2 flex items-center gap-x-2">
+                    <span class="text-teal-600">📋</span> 
+                    <span>Instructions</span>
+                </h2>
+                <ul class="text-sm text-slate-600 space-y-2 pl-5 list-disc marker:text-teal-600">
+                    <li>This practice test contains <strong>23 multiple-choice questions</strong> and <strong>1 extended-response question</strong>.</li>
+                    <li>Read each passage and data table carefully before answering.</li>
+                    <li>Select the <strong>best</strong> answer for each multiple-choice question. There is only one correct answer per question.</li>
+                    <li>For the extended response, write clearly and support your ideas with specific evidence from the passages <strong>and</strong> the data table.</li>
+                    <li>You may use a scientific calculator (such as the TI-30XS) for any calculations.</li>
+                    <li>Recommended time: <strong>45–55 minutes</strong>.</li>
+                </ul>
+                <div class="mt-3 text-xs bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-2 rounded-lg">
+                    <strong>Remember:</strong> Take your time and think like a scientist. Base your answers on evidence from the text and data.
+                </div>
+            </div>
+        </div>
+
+        <!-- Science-Specific Instructions -->
+        <div class="px-8 py-4 bg-teal-50 border-b border-teal-200">
+            <div class="max-w-prose">
+                <h3 class="font-semibold text-teal-800 text-sm tracking-wider mb-1.5">SCIENCE TEST FOCUS</h3>
+                <p class="text-sm text-teal-700">This worksheet emphasizes <strong>data interpretation</strong>, <strong>experimental design</strong> (variables, controls), and <strong>scientific reasoning</strong> about populations and ecosystems. Use evidence from both the passage and the data table in your answers.</p>
+            </div>
+        </div>
+
+        <div class="px-8 py-7">
+            
+            <!-- Passage 1 -->
+            <div class="mb-8">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="px-3 py-0.5 text-xs font-bold tracking-widest bg-teal-100 text-teal-700 rounded">PASSAGE 1</span>
+                    <span class="text-sm font-medium text-slate-500">Limiting Factors and Carrying Capacity</span>
+                </div>
+                
+                <div class="passage text-[15px] leading-relaxed text-slate-700">
+                    <p>In any ecosystem, populations of organisms do not grow indefinitely. The maximum number of individuals of a species that an environment can support over time is called the <strong>carrying capacity</strong>. Several factors limit population growth. These are called <strong>limiting factors</strong>.</p>
+                    
+                    <p class="mt-3">Limiting factors can be <strong>density-dependent</strong> (their effect increases as population density increases) or <strong>density-independent</strong> (their effect is unrelated to population density). Examples of density-dependent factors include competition for food or space, predation, and disease. Density-independent factors include natural disasters, extreme weather, and human activities such as habitat destruction or pollution. When a population exceeds its carrying capacity, limiting factors usually cause the population to decline until it returns to a sustainable level.</p>
+                </div>
+            </div>
+
+            <!-- Questions 1-5 -->
+            <div class="space-y-6">
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">1</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">What is the main idea of Passage 1?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q1" value="A" class="mt-1"><span><strong>A.</strong> Populations are limited by carrying capacity and both density-dependent and density-independent factors that prevent indefinite growth.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q1" value="B" class="mt-1"><span><strong>B.</strong> Only natural disasters limit population growth in ecosystems.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q1" value="C" class="mt-1"><span><strong>C.</strong> Carrying capacity always increases when more individuals are born.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q1" value="D" class="mt-1"><span><strong>D.</strong> Human activities never affect population sizes in nature.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">2</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">According to the passage, which of the following is an example of a density-dependent limiting factor?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q2" value="A" class="mt-1"><span><strong>A.</strong> A severe drought that affects an entire region</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q2" value="B" class="mt-1"><span><strong>B.</strong> Competition for limited food resources as population size increases</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q2" value="C" class="mt-1"><span><strong>C.</strong> A sudden volcanic eruption</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q2" value="D" class="mt-1"><span><strong>D.</strong> Habitat destruction caused by a hurricane</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">3</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">If a deer population greatly exceeds the carrying capacity of its habitat, what is the most likely long-term outcome according to the passage?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q3" value="A" class="mt-1"><span><strong>A.</strong> The population will continue to grow rapidly forever.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q3" value="B" class="mt-1"><span><strong>B.</strong> Limiting factors such as food shortage and disease will cause the population to decline.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q3" value="C" class="mt-1"><span><strong>C.</strong> The carrying capacity will immediately increase to match the new population size.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q3" value="D" class="mt-1"><span><strong>D.</strong> Only density-independent factors will affect the deer.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">4</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which statement best describes the relationship between carrying capacity and limiting factors?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q4" value="A" class="mt-1"><span><strong>A.</strong> Carrying capacity is determined by the combined effects of limiting factors in an environment.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q4" value="B" class="mt-1"><span><strong>B.</strong> Limiting factors have no effect on carrying capacity.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q4" value="C" class="mt-1"><span><strong>C.</strong> Carrying capacity only applies to plant populations.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q4" value="D" class="mt-1"><span><strong>D.</strong> Limiting factors always increase carrying capacity.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-sm font-bold">5</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">According to the passage, which of the following human activities would most likely act as a density-independent limiting factor for a wildlife population?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q5" value="A" class="mt-1"><span><strong>A.</strong> Increased hunting pressure as the animal population grows</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q5" value="B" class="mt-1"><span><strong>B.</strong> Large-scale deforestation that destroys habitat regardless of population size</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q5" value="C" class="mt-1"><span><strong>C.</strong> Spread of a disease that spreads more easily in crowded populations</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q5" value="D" class="mt-1"><span><strong>D.</strong> Competition for nesting sites among birds</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passage 2 + Table -->
+            <div class="mt-10 mb-6">
+                <div class="flex items-center gap-x-2 mb-3">
+                    <span class="px-3 py-0.5 text-xs font-bold tracking-widest bg-sky-100 text-sky-700 rounded">PASSAGE 2 / EXPERIMENT</span>
+                    <span class="text-sm font-medium text-slate-500">Investigating Limiting Factors on Fish Population in a Pond</span>
+                </div>
+                
+                <div class="passage text-[15px] leading-relaxed text-slate-700">
+                    <p>Scientists studied a small pond to understand what limits the population of a certain species of fish. They set up four large experimental tanks with similar conditions to the pond. Each tank started with the same number of fish. Over 12 weeks, they recorded the average number of fish surviving in each tank under different conditions.</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <div class="text-sm font-semibold text-slate-600 mb-2">Table 1. Average Number of Fish Surviving After 12 Weeks Under Different Conditions</div>
+                <div class="table-container border border-slate-300 rounded-xl overflow-hidden shadow-sm">
+                    <table class="text-sm">
+                        <thead>
+                            <tr>
+                                <th>Tank</th>
+                                <th>Food Availability</th>
+                                <th>Predators Present</th>
+                                <th class="text-center">Avg. Fish at Week 12</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="data-row"><td class="font-semibold">Tank 1 (Control)</td><td>High</td><td>No</td><td class="text-center font-bold text-emerald-600">48</td></tr>
+                            <tr class="data-row"><td class="font-semibold">Tank 2</td><td>Low</td><td>No</td><td class="text-center font-bold text-amber-600">19</td></tr>
+                            <tr class="data-row"><td class="font-semibold">Tank 3</td><td>High</td><td>Yes</td><td class="text-center font-bold text-orange-600">27</td></tr>
+                            <tr class="data-row bg-sky-50"><td class="font-semibold">Tank 4</td><td>Low</td><td>Yes</td><td class="text-center font-bold text-red-600">9</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-1.5 italic">Note: All tanks started with 50 fish. Temperature, water quality, and space were kept the same in all tanks.</p>
+            </div>
+
+            <!-- Questions 6-12 on Experiment -->
+            <div class="space-y-6">
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm font-bold">6</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">In this experiment, what is the dependent variable?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q6" value="A" class="mt-1"><span><strong>A.</strong> Food availability and presence of predators</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q6" value="B" class="mt-1"><span><strong>B.</strong> Average number of fish surviving after 12 weeks</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q6" value="C" class="mt-1"><span><strong>C.</strong> The species of fish used</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q6" value="D" class="mt-1"><span><strong>D.</strong> The size of the experimental tanks</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm font-bold">7</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which tank serves as the control group?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q7" value="A" class="mt-1"><span><strong>A.</strong> Tank 2</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q7" value="B" class="mt-1"><span><strong>B.</strong> Tank 3</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q7" value="C" class="mt-1"><span><strong>C.</strong> Tank 1</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q7" value="D" class="mt-1"><span><strong>D.</strong> Tank 4</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm font-bold">8</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Based on the data in Table 1, which limiting factor appears to have the strongest negative effect on fish survival when acting alone?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q8" value="A" class="mt-1"><span><strong>A.</strong> High food availability</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q8" value="B" class="mt-1"><span><strong>B.</strong> Low food availability</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q8" value="C" class="mt-1"><span><strong>C.</strong> Presence of predators</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q8" value="D" class="mt-1"><span><strong>D.</strong> High food with predators</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm font-bold">9</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which statement is best supported by comparing Tank 1 and Tank 4?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q9" value="A" class="mt-1"><span><strong>A.</strong> Low food and predators together caused the greatest reduction in fish numbers.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q9" value="B" class="mt-1"><span><strong>B.</strong> Predators had no effect when food was low.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q9" value="C" class="mt-1"><span><strong>C.</strong> Food availability had no impact on survival.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q9" value="D" class="mt-1"><span><strong>D.</strong> The control tank had the lowest survival rate.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm font-bold">10</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">The data suggest that low food availability and the presence of predators have which type of combined effect?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q10" value="A" class="mt-1"><span><strong>A.</strong> They cancel each other out.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q10" value="B" class="mt-1"><span><strong>B.</strong> They appear to have a combined negative effect greater than either factor alone.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q10" value="C" class="mt-1"><span><strong>C.</strong> Only food availability matters.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q10" value="D" class="mt-1"><span><strong>D.</strong> Predators improve survival when food is low.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm font-bold">11</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">If the scientists wanted to test whether disease is also a limiting factor, what would be the best improvement to the experiment?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q11" value="A" class="mt-1"><span><strong>A.</strong> Add a new tank with disease introduced while keeping other conditions the same as Tank 1.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q11" value="B" class="mt-1"><span><strong>B.</strong> Remove all food from every tank.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q11" value="C" class="mt-1"><span><strong>C.</strong> Use only one tank for the entire experiment.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q11" value="D" class="mt-1"><span><strong>D.</strong> Measure only the size of the fish instead of counting them.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm font-bold">12</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Based on the data, which condition would most likely allow a fish population to reach or exceed carrying capacity in a natural pond?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q12" value="A" class="mt-1"><span><strong>A.</strong> Very low food supply and many predators</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q12" value="B" class="mt-1"><span><strong>B.</strong> High food availability and few or no predators</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q12" value="C" class="mt-1"><span><strong>C.</strong> Low food but no predators</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q12" value="D" class="mt-1"><span><strong>D.</strong> High number of predators only</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Standalone Questions 13-23 -->
+            <div class="mt-8 pt-6 border-t border-slate-200">
+                <div class="mb-4">
+                    <span class="px-3 py-0.5 text-xs font-bold tracking-widest bg-slate-200 text-slate-600 rounded">ADDITIONAL QUESTIONS</span>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">13</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which of the following is the best example of a density-independent limiting factor?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q13" value="A" class="mt-1"><span><strong>A.</strong> A forest fire that destroys habitat for many animals regardless of how many there are</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q13" value="B" class="mt-1"><span><strong>B.</strong> Increased spread of parasites in a crowded deer population</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q13" value="C" class="mt-1"><span><strong>C.</strong> Competition for mates among male birds</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q13" value="D" class="mt-1"><span><strong>D.</strong> Starvation due to overgrazing by a large herbivore population</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">14</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">In a food chain, energy is transferred from one trophic level to the next. Approximately what percentage of energy is typically transferred?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q14" value="A" class="mt-1"><span><strong>A.</strong> 100%</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q14" value="B" class="mt-1"><span><strong>B.</strong> About 10%</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q14" value="C" class="mt-1"><span><strong>C.</strong> About 50%</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q14" value="D" class="mt-1"><span><strong>D.</strong> About 90%</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">15</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">A scientist is studying how temperature affects the growth rate of bacteria. She sets up three identical cultures at different temperatures while keeping everything else the same. What is the independent variable?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q15" value="A" class="mt-1"><span><strong>A.</strong> The growth rate of the bacteria</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q15" value="B" class="mt-1"><span><strong>B.</strong> The temperature of each culture</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q15" value="C" class="mt-1"><span><strong>C.</strong> The type of bacteria used</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q15" value="D" class="mt-1"><span><strong>D.</strong> The size of the culture containers</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">16</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which of the following would most likely increase the carrying capacity of an ecosystem for a herbivore population?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q16" value="A" class="mt-1"><span><strong>A.</strong> Introducing more predators into the ecosystem</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q16" value="B" class="mt-1"><span><strong>B.</strong> Increasing the amount of available plant food</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q16" value="C" class="mt-1"><span><strong>C.</strong> Decreasing the amount of water available</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q16" value="D" class="mt-1"><span><strong>D.</strong> Removing all shelter from the area</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">17</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">In an experiment, a researcher notices that results vary widely between trials even though conditions seem the same. What should the researcher do first?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q17" value="A" class="mt-1"><span><strong>A.</strong> Change the hypothesis immediately</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q17" value="B" class="mt-1"><span><strong>B.</strong> Check for errors in procedure or measurement and repeat the trials</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q17" value="C" class="mt-1"><span><strong>C.</strong> Ignore the inconsistent results</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q17" value="D" class="mt-1"><span><strong>D.</strong> Publish the results without further testing</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">18</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which of the following best explains why only a small amount of energy is transferred from one trophic level to the next in a food chain?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q18" value="A" class="mt-1"><span><strong>A.</strong> Energy is destroyed at each level.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q18" value="B" class="mt-1"><span><strong>B.</strong> Most energy is used for metabolism and lost as heat.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q18" value="C" class="mt-1"><span><strong>C.</strong> All energy is stored in the organism’s body.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q18" value="D" class="mt-1"><span><strong>D.</strong> Producers do not produce usable energy.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">19</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">A biologist wants to test the effect of different amounts of fertilizer on plant growth. She sets up four groups of plants and gives each group a different amount of fertilizer while keeping light, water, and soil type the same. What is the dependent variable?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q19" value="A" class="mt-1"><span><strong>A.</strong> The amount of fertilizer given to each group</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q19" value="B" class="mt-1"><span><strong>B.</strong> The growth (height or mass) of the plants</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q19" value="C" class="mt-1"><span><strong>C.</strong> The type of soil used</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q19" value="D" class="mt-1"><span><strong>D.</strong> The amount of light the plants receive</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">20</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which of the following human activities would most likely decrease the carrying capacity of an area for native wildlife?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q20" value="A" class="mt-1"><span><strong>A.</strong> Creating protected wildlife corridors</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q20" value="B" class="mt-1"><span><strong>B.</strong> Large-scale removal of native vegetation for agriculture</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q20" value="C" class="mt-1"><span><strong>C.</strong> Reintroducing native predator species</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q20" value="D" class="mt-1"><span><strong>D.</strong> Reducing pollution in local rivers</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">21</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">In a well-designed experiment, why is it important to change only one variable at a time?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q21" value="A" class="mt-1"><span><strong>A.</strong> To make the experiment more complicated</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q21" value="B" class="mt-1"><span><strong>B.</strong> To clearly determine which variable is responsible for the observed results</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q21" value="C" class="mt-1"><span><strong>C.</strong> To ensure all variables change together</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q21" value="D" class="mt-1"><span><strong>D.</strong> To reduce the need for a control group</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">22</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">Which of the following is an example of a density-dependent limiting factor that can affect human populations?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q22" value="A" class="mt-1"><span><strong>A.</strong> A major earthquake</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q22" value="B" class="mt-1"><span><strong>B.</strong> The rapid spread of an infectious disease in a crowded city</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q22" value="C" class="mt-1"><span><strong>C.</strong> A powerful hurricane</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q22" value="D" class="mt-1"><span><strong>D.</strong> A long-term drought affecting an entire country</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="flex gap-x-3">
+                        <div class="question-number flex-shrink-0 w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-bold">23</div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-800 mb-3">According to scientific understanding, which statement about carrying capacity is most accurate?</p>
+                            <div class="space-y-1 text-sm">
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q23" value="A" class="mt-1"><span><strong>A.</strong> Carrying capacity can change over time if environmental conditions change.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q23" value="B" class="mt-1"><span><strong>B.</strong> Carrying capacity is always fixed and never changes.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q23" value="C" class="mt-1"><span><strong>C.</strong> Only animal populations have a carrying capacity.</span></label>
+                                <label class="option-label flex items-start gap-x-2.5 cursor-pointer"><input type="radio" name="q23" value="D" class="mt-1"><span><strong>D.</strong> Carrying capacity only applies to very small ecosystems.</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extended Response -->
+            <div class="mt-10 pt-7 border-t-2 border-slate-300 extended-response-container">
+                <div class="mb-4">
+                    <span class="px-3 py-0.5 text-xs font-bold tracking-[1.5px] bg-rose-100 text-rose-700 rounded">EXTENDED RESPONSE</span>
+                </div>
+                
+                <div class="bg-rose-50/60 border border-rose-200 rounded-2xl p-6">
+                    <h3 class="font-semibold text-lg text-rose-800 mb-3">Extended Response Question</h3>
+                    
+                    <div class="prose prose-sm max-w-none text-slate-700">
+                        <p><strong>Prompt:</strong> Using specific evidence from <strong>Passage 1</strong> and the data in <strong>Table 1</strong>, explain how limiting factors can affect population size. Then, describe one realistic way humans could manage an ecosystem to help maintain a stable wildlife population. Support your answer with evidence from the test materials.</p>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs font-medium text-rose-700">Write your response below (aim for 5–8 clear sentences):</span>
+                        </div>
+                        <div id="extended-response-area" contenteditable="true" class="writing-area w-full rounded-xl text-[15px] focus:outline-none focus:ring-1 focus:ring-rose-300 overflow-auto" style="min-height: 195px; padding-top: 14px; padding-bottom: 14px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reflection -->
+            <div class="mt-8 pt-6 border-t border-slate-200 reflection-section">
+                <div class="section-header">Reflection &amp; Self-Assessment</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 text-sm">
+                    <div>
+                        <p class="font-medium text-slate-700 mb-1.5">How confident do you feel about your performance?</p>
+                        <div class="flex flex-wrap gap-x-4 gap-y-1">
+                            <label class="flex items-center gap-x-1.5 cursor-pointer"><input type="radio" name="confidence" value="low" class="accent-teal-600"> Not very confident</label>
+                            <label class="flex items-center gap-x-1.5 cursor-pointer"><input type="radio" name="confidence" value="medium" class="accent-teal-600"> Somewhat confident</label>
+                            <label class="flex items-center gap-x-1.5 cursor-pointer"><input type="radio" name="confidence" value="high" class="accent-teal-600"> Confident</label>
+                            <label class="flex items-center gap-x-1.5 cursor-pointer"><input type="radio" name="confidence" value="very-high" class="accent-teal-600"> Very confident</label>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-medium text-slate-700 mb-1.5">Which skill do you want to review most?</p>
+                        <input type="text" id="review-topic" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm" placeholder="e.g., identifying limiting factors, interpreting data tables">
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="font-medium text-slate-700 mb-1.5">One strategy that helped me (or one I will try next time):</p>
+                        <input type="text" id="strategy" class="w-full border border-slate-300 rounded-lg px-3 py-1.5 text-sm" placeholder="e.g., Comparing rows while holding one variable constant">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANSWER KEY -->
+    <div class="max-w-[860px] mx-auto mt-8 page-break answer-key">
+        <div class="bg-white shadow-xl rounded-xl overflow-hidden border border-red-300">
+            <div class="bg-red-700 text-white px-8 py-4">
+                <div class="flex items-center gap-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V9a4 4 0 00-8 0v4" />
+                    </svg>
+                    <div>
+                        <div class="font-bold tracking-wider text-sm">FOR INSTRUCTORS ONLY — DO NOT DISTRIBUTE TO STUDENTS</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="px-8 py-6">
+                <h3 class="font-bold text-xl text-red-800 mb-4">Quick Answer Key</h3>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-2 text-sm quick-key mb-6 bg-red-50 p-4 rounded-xl border border-red-100">
+                    <div><span class="font-semibold text-red-700">1. A</span></div>
+                    <div><span class="font-semibold text-red-700">2. B</span></div>
+                    <div><span class="font-semibold text-red-700">3. D</span></div>
+                    <div><span class="font-semibold text-red-700">4. A</span></div>
+                    <div><span class="font-semibold text-red-700">5. B</span></div>
+                    <div><span class="font-semibold text-red-700">6. C</span></div>
+                    <div><span class="font-semibold text-red-700">7. C</span></div>
+                    <div><span class="font-semibold text-red-700">8. D</span></div>
+                    <div><span class="font-semibold text-red-700">9. A</span></div>
+                    <div><span class="font-semibold text-red-700">10. B</span></div>
+                    <div><span class="font-semibold text-red-700">11. A</span></div>
+                    <div><span class="font-semibold text-red-700">12. B</span></div>
+                    <div><span class="font-semibold text-red-700">13. D</span></div>
+                    <div><span class="font-semibold text-red-700">14. B</span></div>
+                    <div><span class="font-semibold text-red-700">15. C</span></div>
+                    <div><span class="font-semibold text-red-700">16. D</span></div>
+                    <div><span class="font-semibold text-red-700">17. B</span></div>
+                    <div><span class="font-semibold text-red-700">18. C</span></div>
+                    <div><span class="font-semibold text-red-700">19. A</span></div>
+                    <div><span class="font-semibold text-red-700">20. D</span></div>
+                    <div><span class="font-semibold text-red-700">21. B</span></div>
+                    <div><span class="font-semibold text-red-700">22. C</span></div>
+                    <div><span class="font-semibold text-red-700">23. A</span></div>
+                </div>
+
+                <p class="text-xs text-red-600 mb-5">Answer distribution: A=6, B=6, C=6, D=5 (balanced and different from previous tests).</p>
+
+                <h3 class="font-bold text-xl text-red-800 mb-4">Detailed Answer Explanations</h3>
+                
+                <div class="space-y-5 text-sm">
+                    <div class="answer-explanation"><p><strong>Question 1 — Correct Answer: A</strong></p><p class="text-slate-600 mt-0.5">Option A correctly summarizes the main idea: populations are limited by carrying capacity and both types of limiting factors. The other options are either too narrow or incorrect.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 2 — Correct Answer: B</strong></p><p class="text-slate-600 mt-0.5">Competition for food is a classic density-dependent factor — its impact grows as population density increases. Options A, C, and D are density-independent.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 3 — Correct Answer: D</strong></p><p class="text-slate-600 mt-0.5">When a population exceeds carrying capacity, limiting factors cause it to decline until it returns to a sustainable level. Option D correctly reflects this outcome described in the passage.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 4 — Correct Answer: A</strong></p><p class="text-slate-600 mt-0.5">Carrying capacity is determined by the combined effects of limiting factors in the environment. This is directly supported by the passage.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 5 — Correct Answer: B</strong></p><p class="text-slate-600 mt-0.5">Large-scale deforestation affects habitat regardless of current population size, making it density-independent. The other options are density-dependent.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 6 — Correct Answer: C</strong></p><p class="text-slate-600 mt-0.5">The dependent variable is what was measured as the result of the experiment: the average number of fish surviving after 12 weeks.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 7 — Correct Answer: C</strong></p><p class="text-slate-600 mt-0.5">Tank 1 is labeled as the Control and has high food with no predators — the baseline condition.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 8 — Correct Answer: D</strong></p><p class="text-slate-600 mt-0.5">Low food availability caused the largest single drop in survival when comparing Tank 1 to Tank 2. This makes low food the strongest single limiting factor in this data set.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 9 — Correct Answer: A</strong></p><p class="text-slate-600 mt-0.5">Tank 4 (low food + predators) had only 9 fish surviving — much lower than either factor alone. This supports a combined negative effect.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 10 — Correct Answer: C</strong></p><p class="text-slate-600 mt-0.5">Tank 4 had the lowest survival. The data shows that low food combined with predators produced a stronger negative effect than either factor by itself.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 11 — Correct Answer: A</strong></p><p class="text-slate-600 mt-0.5">Adding a tank with disease while keeping other conditions like Tank 1 would allow the scientists to test disease as an additional limiting factor in a controlled way.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 12 — Correct Answer: B</strong></p><p class="text-slate-600 mt-0.5">High food and few predators (similar to Tank 1) produced the highest survival. This condition would most likely allow a population to reach or maintain carrying capacity.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 13 — Correct Answer: D</strong></p><p class="text-slate-600 mt-0.5">A forest fire affects habitat regardless of population size, which is the definition of a density-independent limiting factor.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 14 — Correct Answer: B</strong></p><p class="text-slate-600 mt-0.5">In most ecosystems, only about 10% of the energy stored at one trophic level is transferred to the next. The rest is lost as heat through metabolism.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 15 — Correct Answer: C</strong></p><p class="text-slate-600 mt-0.5">The independent variable is the factor the scientist changed on purpose: the temperature of each culture.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 16 — Correct Answer: D</strong></p><p class="text-slate-600 mt-0.5">Increasing the amount of available plant food would directly increase the carrying capacity for herbivores.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 17 — Correct Answer: B</strong></p><p class="text-slate-600 mt-0.5">When results are inconsistent, the first step should be to check for errors in procedure or measurement and repeat the trials to improve reliability.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 18 — Correct Answer: C</strong></p><p class="text-slate-600 mt-0.5">Most of the energy at each trophic level is used for metabolism and lost as heat. Only a small percentage (about 10%) is transferred to the next level.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 19 — Correct Answer: A</strong></p><p class="text-slate-600 mt-0.5">The dependent variable is what is measured in response to the independent variable. In this case, plant growth (height or mass) is being measured.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 20 — Correct Answer: D</strong></p><p class="text-slate-600 mt-0.5">Large-scale removal of native vegetation destroys habitat and food sources, directly decreasing the carrying capacity for native wildlife.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 21 — Correct Answer: B</strong></p><p class="text-slate-600 mt-0.5">Changing only one variable at a time allows the researcher to clearly determine which factor is responsible for any observed changes in results.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 22 — Correct Answer: C</strong></p><p class="text-slate-600 mt-0.5">The rapid spread of an infectious disease in a crowded city becomes worse as population density increases, which defines a density-dependent limiting factor.</p></div>
+                    
+                    <div class="answer-explanation"><p><strong>Question 23 — Correct Answer: A</strong></p><p class="text-slate-600 mt-0.5">Carrying capacity can change over time if environmental conditions (food supply, habitat quality, climate, etc.) change. This is a key concept from the passage.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENTOR GUIDE -->
+    <div class="max-w-[860px] mx-auto mt-8 page-break mentor-guide">
+        <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-teal-300">
+            <div class="bg-teal-700 px-8 py-5 text-white">
+                <div class="flex items-center gap-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <div>
+                        <div class="font-bold text-lg">Mentor Guide</div>
+                        <div class="text-teal-200 text-sm">Practical Guidance for Instructors &amp; Tutors</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="px-8 py-7 text-sm space-y-7">
+                <div>
+                    <h4 class="font-semibold text-teal-800 mb-2 flex items-center gap-x-2"><span class="text-base">✓</span> <span>Effective Grading &amp; Feedback</span></h4>
+                    <ul class="space-y-2 text-slate-600 pl-1">
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Begin feedback with genuine praise for what the student did well.</li>
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Use simple rubrics focused on 2–3 key skills: identifying limiting factors, interpreting data tables, and using evidence from text + data.</li>
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Give credit for strong reasoning even if the final answer choice is incorrect.</li>
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Provide specific, actionable comments and allow flexible response formats when writing is difficult.</li>
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Focus on growth by comparing current work to the student’s own previous efforts.</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-teal-800 mb-2 flex items-center gap-x-2"><span class="text-base">📚</span> <span>Teaching Concepts Students May Have Missed</span></h4>
+                    <div class="space-y-3 text-slate-600">
+                        <p><strong>Limiting Factors vs. Carrying Capacity:</strong> Use simple visuals (T-chart or diagram) to show that carrying capacity is the result of limiting factors. Connect to real examples like deer overpopulation or fish in a pond.</p>
+                        <p><strong>Density-Dependent vs. Density-Independent:</strong> Teach students to ask: “Does the effect get stronger when there are more individuals?” Practice with examples from the test.</p>
+                        <p><strong>Interpreting Data Tables:</strong> Practice comparing rows while holding one variable constant. Highlight key numbers and look for trends.</p>
+                        <p><strong>Experimental Design:</strong> Reinforce the three key questions: What was changed on purpose? What was measured? What was kept the same?</p>
+                        <p><strong>Multi-sensory approaches:</strong> Draw population graphs, act out “predator vs. prey,” or use sentence starters for the extended response.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-teal-800 mb-2 flex items-center gap-x-2"><span class="text-base">💡</span> <span>General Tips for Mentors</span></h4>
+                    <ul class="space-y-2 text-slate-600 pl-1">
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Be patient and encouraging. Celebrate small successes.</li>
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Adapt materials when needed (larger font, highlighters, oral responses).</li>
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Build self-advocacy and make learning relevant to students’ daily lives and goals.</li>
+                        <li class="flex gap-x-2"><span class="text-teal-500 mt-1">•</span> Review key ideas frequently and create a supportive environment.</li>
+                    </ul>
+                </div>
+                
+                <div class="pt-4 border-t border-teal-100 text-xs text-teal-600 italic">
+                    Every adult learner brings valuable life experience. Help them connect that experience to scientific concepts and build confidence as capable thinkers.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function saveAnswers() {
+            const answers = {};
+            for (let i = 1; i <= 23; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) answers[`q${i}`] = selected.value;
+            }
+            const extended = document.getElementById('extended-response-area');
+            if (extended) answers.extended = extended.innerHTML || '';
+            const conf = document.querySelector('input[name="confidence"]:checked');
+            if (conf) answers.confidence = conf.value;
+            answers.reviewTopic = document.getElementById('review-topic')?.value || '';
+            answers.strategy = document.getElementById('strategy')?.value || '';
+            answers.studentName = document.getElementById('student-name')?.value || '';
+            answers.studentDate = document.getElementById('student-date')?.value || '';
+            answers.studentClass = document.getElementById('student-class')?.value || '';
+            localStorage.setItem('gedSciencePopulationAnswers_v1', JSON.stringify(answers));
+            alert('Progress saved locally.');
+        }
+        
+        function loadAnswers() {
+            const saved = localStorage.getItem('gedSciencePopulationAnswers_v1');
+            if (!saved) { alert('No saved answers found.'); return; }
+            const answers = JSON.parse(saved);
+            for (let i = 1; i <= 23; i++) {
+                if (answers[`q${i}`]) {
+                    const radio = document.querySelector(`input[name="q${i}"][value="${answers[`q${i}`]}"]`);
+                    if (radio) radio.checked = true;
+                }
+            }
+            const ext = document.getElementById('extended-response-area');
+            if (ext && answers.extended) ext.innerHTML = answers.extended;
+            if (answers.confidence) {
+                const r = document.querySelector(`input[name="confidence"][value="${answers.confidence}"]`);
+                if (r) r.checked = true;
+            }
+            if (answers.reviewTopic) document.getElementById('review-topic').value = answers.reviewTopic;
+            if (answers.strategy) document.getElementById('strategy').value = answers.strategy;
+            if (answers.studentName) document.getElementById('student-name').value = answers.studentName;
+            if (answers.studentDate) document.getElementById('student-date').value = answers.studentDate;
+            if (answers.studentClass) document.getElementById('student-class').value = answers.studentClass;
+            alert('Answers loaded.');
+        }
+        
+        function clearAnswers() {
+            if (!confirm('Clear all answers?')) return;
+            document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+            const ext = document.getElementById('extended-response-area');
+            if (ext) ext.innerHTML = '';
+            document.querySelectorAll('input[name="confidence"]').forEach(r => r.checked = false);
+            if (document.getElementById('review-topic')) document.getElementById('review-topic').value = '';
+            if (document.getElementById('strategy')) document.getElementById('strategy').value = '';
+            localStorage.removeItem('gedSciencePopulationAnswers_v1');
+            alert('All answers cleared.');
+        }
+        
+        window.onload = function() {
+            console.log('%c[New Science Test - Population & Limiting Factors] Ready.', 'color:#64748b');
+        };
+    </script>
+</body>
+</html>
