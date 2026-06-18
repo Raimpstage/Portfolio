@@ -16,120 +16,41 @@
     
 <!-- 
 ================================================================================
-                    GITHUB PORTFOLIO SETUP & BUTTON LINK INSTRUCTIONS
+              GITHUB PORTFOLIO - INDEX.HTML SETUP INSTRUCTIONS
 ================================================================================
 
-This Tools Hub (index.html) is built to work perfectly on GitHub Pages with
-minimal maintenance. 
+CRITICAL RULES (Read this first):
 
-Most "Open" and "Download" buttons use RELATIVE links (best for portability).
-One tool — the Intern / Quick Session Tracker — currently uses an ABSOLUTE URL
-(https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html)
-because it is hosted under a different repository path.
+1. FOLDER NAMES MUST BE EXACT (GitHub Pages is case-sensitive):
+   - Use exactly: job-coaching   (lowercase, with hyphen, NO space)
+   - Use exactly: dmv
+   - Use exactly: ged
 
-────────────────────────────────────────────────────────────────────────────────
-STEP 1: RECOMMENDED FOLDER STRUCTURE IN YOUR GITHUB REPO
-────────────────────────────────────────────────────────────────────────────────
-your-repo-name/                     ← Root of your GitHub repository
-├── index.html                      ← RENAME THIS FILE from "Index.html" to "index.html" (lowercase recommended)
-├── LICENSE
-├── .gitattributes
-├── README.md                       ← (optional but good to have)
-│
-├── job-coaching/                   ← Folder for most job coaching / mentor tools
-│   └── Queens_Public_Library_Worksheet_Tutorial_v2.html
-│
-├── dmv/                            ← DMV / driver's permit tools
-│   └── nys_learners_permit_practice_test_v2_balanced.html
-│
-├── ged/                            ← GED practice tools
-│   └── GED_Science_Practice_Test_Population_Limiting_Factors.html
-│
-├── surveys/                        ← (CREATE THIS FOLDER when ready)
-│   └── your-future-feedback-tool.html
-│
-├── assessments/                    ← (CREATE THIS FOLDER when ready)
-│   └── cognitive-assessment-or-other.html
-│
-└── (any other category folders you create)
+   Wrong examples that will cause 404:
+   - "Job Coaching" (has space + capital letters)
+   - "DMV" or "Dmv"
+   - "Job-coaching" or "job_coaching"
 
-NOTE: The Intern Session Tracker is hosted separately at:
-https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html
-It does not need to be in your local job-coaching/ folder.
+2. This file must be saved as "index.html" (all lowercase) in the ROOT of your repo.
+
+3. The Quick Session Tracker button uses an ABSOLUTE URL because that tool
+   is currently hosted under a different path (Job-Coaching). 
+   This is intentional and correct.
 
 ────────────────────────────────────────────────────────────────────────────────
-STEP 2: ENABLE GITHUB PAGES (ONE-TIME SETUP)
+HOW TO UPDATE & PUSH THIS FILE
 ────────────────────────────────────────────────────────────────────────────────
-1. Go to your GitHub repository → Settings → Pages
-2. Under "Build and deployment" → Source:
-   - Select "Deploy from a branch"
-   - Branch: main (or master)
-   - Folder: / (root)
-3. Click Save.
-4. Wait 30–60 seconds. Your live site will be available at:
-   https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/
-   Example: https://arvihab.github.io/portfolio/
+1. Save this file as: index.html (lowercase)
+2. Put it in the root of your local "Portfolio" folder
+3. Open Git Bash in that folder (right-click → Open Git Bash here)
+4. Run these commands:
 
-Once live, all relative links below will work automatically.
+   git add index.html
+   git commit -m "Update Tools Hub index.html"
+   git push
 
-────────────────────────────────────────────────────────────────────────────────
-STEP 3: HOW TO UPDATE BUTTON LINKS (CLEAR EDITING SPOTS)
-────────────────────────────────────────────────────────────────────────────────
-Each tool has TWO buttons: "Open" and "Download".
+5. Wait 60 seconds, then hard refresh your site (Ctrl + Shift + R)
 
-They are located inside each tool-card here:
-
-    <div class="flex gap-3">
-        <a href="FOLDER/FILENAME.html" class="...">Open</a>
-        <a href="FOLDER/FILENAME.html" download class="...">Download</a>
-    </div>
-
-TO CHANGE OR FIX A LINK:
-• Search this file for the tool title (e.g. "Mentor Worksheet" or "NYS Learner’s Permit")
-• Inside the matching <a href="..."> tag, change ONLY the path between the quotes.
-• You can use either:
-    - Relative path (recommended for tools in the same repo): href="job-coaching/YourFile.html"
-    - Absolute GitHub Pages URL (when the tool is hosted in a different repo/path): href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html"
-• Example changes:
-    - Relative: href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html"
-    - Absolute: href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html"
-
-If you add a completely new tool:
-1. Create the folder (e.g. surveys/) if it doesn't exist
-2. Upload the .html file into that folder
-3. Copy one of the existing tool-card blocks
-4. Paste it into the correct section's grid
-5. Update the title, description, icon (if desired), and BOTH href values
-
-────────────────────────────────────────────────────────────────────────────────
-STEP 4: BEST PRACTICES & EDGE CASES
-────────────────────────────────────────────────────────────────────────────────
-• Filenames and folder names are CASE-SENSITIVE on GitHub Pages.
-  Always match the exact spelling and capitalization of your uploaded files.
-• Self-contained HTML tools (Tailwind via CDN + inline JS) work great.
-• If you later move a file to a different folder, you MUST update the href in both buttons.
-• To test locally: Keep this index.html next to the subfolders and open it in any browser.
-  Relative links will resolve correctly.
-• After editing, commit → push → wait for GitHub Pages to redeploy (check the Actions tab if it takes longer).
-• If you want to link directly to the GitHub source code view instead of the live tool, 
-  you can use: https://github.com/YOUR_USERNAME/YOUR_REPO_NAME/blob/main/job-coaching/FILE.html
-  But for users to actually USE the tools, the relative/Pages link is correct.
-
-────────────────────────────────────────────────────────────────────────────────
-ADDING FUTURE TOOLS (Surveys, Assessments, Cognitive Tools, etc.)
-────────────────────────────────────────────────────────────────────────────────
-When you finish new tools (e.g. your feedback questionnaire systems, 
-"Can You Hear Me?" cognitive assessment, or mentor feedback dashboards):
-
-1. Create a logical folder: surveys/, assessments/, cognitive-tools/, etc.
-2. Add a new section in this file if it's a major category, or add cards to existing sections.
-3. Follow the exact card structure used below for consistency.
-4. Update this comment block if you add many new categories.
-
-This file is now self-documenting. You (or future collaborators) can open it 
-and immediately know exactly where every button points and how to change it.
-
-Last updated for GitHub: June 2026
 ================================================================================
 -->
 
@@ -160,17 +81,18 @@ Last updated for GitHub: June 2026
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK LOCATION (Mentor Worksheet)
-                            Open & Download both point to: job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html
-                            To change: edit the href value in BOTH <a> tags below.
-                            Make sure the file exists at that exact path in your GitHub repo.
+                            BUTTON LINK (Mentor Worksheet)
+                            Relative path: job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html
+                            
+                            IMPORTANT: You must create a folder literally named "job-coaching"
+                            (all lowercase, with hyphen). Do NOT use "Job Coaching" or "Job-coaching".
                         -->
                         <a href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="job-coaching/Queens_Public_Library_Worksheet_Tutorial_v2.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
                     </div>
                 </div>
 
-                <!-- Intern / Quick Session Tracker -->
+                <!-- Quick Session Tracker -->
                 <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
                     <div class="mb-5">
                         <h3 class="font-semibold text-xl text-slate-900">Quick Session Tracker</h3>
@@ -178,14 +100,14 @@ Last updated for GitHub: June 2026
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK LOCATION (Intern / Quick Session Tracker)
-                            This tool is hosted on GitHub Pages at:
+                            BUTTON LINK (Quick Session Tracker / Intern Session Tracker)
+                            
+                            This tool is hosted at a different path, so we use the absolute URL
+                            that is confirmed working:
                             https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html
                             
-                            Both "Open" and "Download" buttons now use the absolute URL so it works
-                            even if this index is hosted in a different repository or subfolder.
-                            
-                            To change: edit the href value in BOTH <a> tags below.
+                            Do NOT change this to relative unless you move the file into 
+                            a "job-coaching" folder in this repo.
                         -->
                         <a href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="https://raimpstage.github.io/Job-Coaching/Mobile_Session_Tracker.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
@@ -211,9 +133,11 @@ Last updated for GitHub: June 2026
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK LOCATION (NYS Learner’s Permit Practice Test)
-                            Open & Download both point to: dmv/nys_learners_permit_practice_test_v2_balanced.html
-                            To change: edit the href value in BOTH <a> tags below.
+                            BUTTON LINK (DMV Test)
+                            Relative path: dmv/nys_learners_permit_practice_test_v2_balanced.html
+                            
+                            You must create a folder literally named "dmv" (all lowercase).
+                            Push the folder + file to GitHub for this link to work.
                         -->
                         <a href="dmv/nys_learners_permit_practice_test_v2_balanced.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="dmv/nys_learners_permit_practice_test_v2_balanced.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
@@ -239,9 +163,10 @@ Last updated for GitHub: June 2026
                     </div>
                     <div class="flex gap-3">
                         <!-- 
-                            BUTTON LINK LOCATION (GED Science Practice Test)
-                            Open & Download both point to: ged/GED_Science_Practice_Test_Population_Limiting_Factors.html
-                            To change: edit the href value in BOTH <a> tags below.
+                            BUTTON LINK (GED Test)
+                            Relative path: ged/GED_Science_Practice_Test_Population_Limiting_Factors.html
+                            
+                            Create folder literally named "ged" (lowercase).
                         -->
                         <a href="ged/GED_Science_Practice_Test_Population_Limiting_Factors.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
                         <a href="ged/GED_Science_Practice_Test_Population_Limiting_Factors.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
@@ -260,9 +185,7 @@ Last updated for GitHub: June 2026
             </div>
             <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
                 <p class="mb-2">No survey tools added yet.</p>
-                <p class="text-xs max-w-md mx-auto">To add new tools (e.g. resident/staff feedback questionnaires or mentor evaluation systems): 
-                Create a <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">surveys/</code> folder, upload your HTML file, 
-                then copy a tool-card block into this section and update the two href paths. See the big comment block at the top of this file for exact instructions.</p>
+                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">surveys</code> (lowercase), add your HTML file, then add a new tool card in this section with the correct relative path.</p>
             </div>
         </div>
 
@@ -276,15 +199,13 @@ Last updated for GitHub: June 2026
             </div>
             <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
                 <p class="mb-2">No assessment tools added yet.</p>
-                <p class="text-xs max-w-md mx-auto">To add new tools (e.g. cognitive assessments, learning profile generators, or career alignment reports): 
-                Create an <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">assessments/</code> folder, upload your HTML file, 
-                then copy a tool-card block into this section and update the two href paths. See the big comment block at the top of this file for exact instructions.</p>
+                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">assessments</code> (lowercase), add your HTML file, then add a new tool card in this section.</p>
             </div>
         </div>
 
         <div class="text-center text-xs text-slate-400 mt-8">
-            To add new tools, upload the HTML file into the correct folder and update the links in this page.<br>
-            <span class="text-[10px]">This page is self-documented — open it in any editor to see exactly where each button points.</span>
+            Last revised: June 2026 &nbsp;•&nbsp; 
+            Push this file as <strong>index.html</strong> (lowercase) to update your live Tools Hub.
         </div>
     </div>
 </body>
