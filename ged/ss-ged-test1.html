@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GED Social Studies Practice Test • New York State Edition (v4.2)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Georgia:wght@400;600&display=swap');
+        
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .passage { font-family: Georgia, serif; line-height: 1.75; font-size: 15.2px; }
+        .question-block { page-break-inside: avoid; margin-bottom: 1.85rem; }
+        .section-header { page-break-after: avoid; }
+        .answer-line { border-bottom: 2px solid #64748b; min-width: 42px; display: inline-block; margin-left: 8px; height: 22px; vertical-align: middle; }
+        
+        @media print {
+            body { margin: 0.45in 0.5in; font-size: 10.6pt; line-height: 1.48; }
+            .no-print { display: none !important; }
+            .question-block, .passage, .graph-container, .writing-section, .table-container { page-break-inside: avoid; }
+            h2, h3, .section-header { page-break-after: avoid; }
+            .graph-container { max-width: 620px; margin: 12px auto; }
+            .answer-line { border-bottom: 2px solid #334155; }
+            .instructor-key, .mentor-guide { page-break-before: always; margin-top: 0; }
+            .lined-paper { background-image: linear-gradient(#94a3b8 1px, transparent 1px); background-size: 100% 26px; }
+        }
+        
+        .ged-header { background: linear-gradient(to right, #1e3a8a, #1e40af); }
+        .stimulus-label { font-size: 0.72rem; letter-spacing: 0.5px; }
+        .option-text { font-size: 0.95rem; line-height: 1.42; margin-top: 6px; }
+        .lined-paper {
+            background-image: linear-gradient(#94a3b8 1px, transparent 1px);
+            background-size: 100% 26px;
+            line-height: 26px;
+            padding-top: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    
+    <!-- Sticky Print Bar -->
+    <div class="no-print fixed bottom-0 left-0 right-0 bg-white border-t border-slate-300 shadow-xl z-50">
+        <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="text-sm text-slate-600 flex items-center gap-x-2">
+                <span class="font-medium">Student Copy • Printable • Hand-Write Answers</span>
+            </div>
+            <button onclick="window.print()" 
+                    class="px-5 py-2 text-sm font-semibold bg-blue-700 hover:bg-blue-800 text-white rounded-xl flex items-center gap-x-2 shadow transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H3a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                <span>Print Worksheet</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-20">
+        
+        <!-- Header -->
+        <div class="ged-header text-white rounded-2xl p-8 mb-8 shadow-xl">
+            <div class="flex items-start justify-between">
+                <div>
+                    <div class="flex items-center gap-x-3 mb-2">
+                        <div class="w-11 h-11 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+                            <span class="text-3xl">🏛️</span>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-semibold tracking-tight">GED® Social Studies</h1>
+                            <p class="text-blue-200 text-lg">Practice Test • New York State Edition (v4.2)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-4 text-sm mt-3">
+                        <div class="bg-white/20 px-3.5 py-1 rounded-full text-xs font-medium tracking-wider">24 MULTIPLE CHOICE + 1 EXTENDED RESPONSE</div>
+                        <div class="text-blue-200 text-xs">Recommended time: 60 minutes</div>
+                    </div>
+                </div>
+                <div class="text-right text-sm hidden md:block">
+                    <div class="font-medium">Student Copy • Write Answers by Hand</div>
+                    <div class="text-blue-200 text-xs mt-0.5">Civics & Government • U.S. History • Economics • Geography</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Info -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5 tracking-wider">STUDENT NAME</label>
+                <div class="border border-slate-300 rounded-lg h-11 px-4 flex items-center text-sm text-slate-400">________________________________</div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5 tracking-wider">DATE</label>
+                <div class="border border-slate-300 rounded-lg h-11 px-4 flex items-center text-sm text-slate-400">____________________</div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 mb-1.5 tracking-wider">CLASS / PROGRAM</label>
+                <div class="border border-slate-300 rounded-lg h-11 px-4 flex items-center text-sm text-slate-400">________________________________</div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 mb-8">
+            <h2 class="font-semibold text-lg mb-3 flex items-center gap-x-2">
+                <span>📋</span> 
+                <span>Directions for Students</span>
+            </h2>
+            <div class="text-sm text-slate-600 space-y-2.5">
+                <p>This printable practice test closely mirrors the official GED Social Studies exam. Passages are intentionally longer to match real test conditions. Focus on analyzing sources, interpreting data, and using evidence to support conclusions.</p>
+                <ul class="list-disc pl-5 space-y-1 text-[13.5px]">
+                    <li>Read each stimulus (long passages, graph, or document) carefully before answering the questions that follow it.</li>
+                    <li>For multiple-choice questions, write the letter of the best answer (A, B, C, or D) on the line provided after the options.</li>
+                    <li>For the Extended Response, write a well-developed answer in the lined space. Use specific evidence from the sources.</li>
+                    <li>Work carefully. No calculator is needed for this test.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- STIMULUS 1 -->
+        <div class="mb-2 mt-8">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-blue-100 text-blue-700 font-semibold rounded-full">STIMULUS 1</span>
+                <span class="text-sm font-medium text-slate-500">Primary Source • Civics & Government</span>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">Excerpt from Federalist Paper No. 51 (1788)</h3>
+            
+            <div class="passage bg-slate-50 border-l-4 border-blue-700 p-6 rounded-r-2xl text-[15px] leading-relaxed">
+                <p class="mb-4">TO WHAT expedient, then, shall we finally resort, for maintaining in practice the necessary partition of power among the several departments, as laid down in the Constitution? The only answer that can be given is, that as all these exterior provisions are found to be inadequate, the defect must be supplied, by so contriving the interior structure of the government as that its several constituent parts may, by their mutual relations, be the means of keeping each other in their proper places. Without presuming to undertake a full development of this important idea, I will hazard a few general observations, which may perhaps place it in a clearer light, and enable us to form a more correct judgment of the principles and structure of the government planned by the convention.</p>
+                <p class="mb-4">The great security against a gradual concentration of the several powers in the same department, consists in giving to those who administer each department the necessary constitutional means and personal motives to resist encroachments of the others. The provision for defense must in this, as in all other cases, be made commensurate to the danger of attack. Ambition must be made to counteract ambition. The interest of the man must be connected with the constitutional rights of the place. It may be a reflection on human nature, that such devices should be necessary to control the abuses of government. But what is government itself, but the greatest of all reflections on human nature? If men were angels, no government would be necessary. If angels were to govern men, neither external nor internal controls on government would be necessary. In framing a government which is to be administered by men over men, the great difficulty lies in this: you must first enable the government to control the governed; and in the next place oblige it to control itself. A dependence on the people is, no doubt, the primary control on the government; but experience has taught mankind the necessity of auxiliary precautions.</p>
+                <p class="mb-4">This policy of supplying, by opposite and rival interests, the defect of better motives, might be traced through the whole system of human affairs, private as well as public. We see it particularly displayed in all the subordinate distributions of power, where the constant aim is to divide and arrange the several offices in such a manner as that each may be a check on the other that the private interest of every individual may be a sentinel over the public rights. These inventions of prudence cannot be less requisite in the distribution of the supreme powers of the State.</p>
+                <p class="text-xs text-slate-500 font-sans">— James Madison, The Federalist Papers, No. 51. Public domain.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">1. What is the central argument presented in this passage?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Governments are unnecessary because people are naturally good and trustworthy.</div>
+                    <div class="option-text">B. A well-designed government must include mechanisms for self-control to prevent abuse of power.</div>
+                    <div class="option-text">C. Only leaders with religious or moral perfection should be allowed to govern.</div>
+                    <div class="option-text">D. The main purpose of government is to expand its authority over citizens.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">2. What does Madison mean by "Ambition must be made to counteract ambition"?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Politicians should be encouraged to be as greedy as possible to boost the economy.</div>
+                    <div class="option-text">B. Citizens should aggressively protest whenever the government passes a new law.</div>
+                    <div class="option-text">C. The branches of government should use their competing powers to check one another.</div>
+                    <div class="option-text">D. Only ambitious individuals should be allowed to vote in federal elections.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">3. According to Madison, what is the "primary control on the government"?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. A dependence on the people.</div>
+                    <div class="option-text">B. A strong military force.</div>
+                    <div class="option-text">C. A wealthy upper class.</div>
+                    <div class="option-text">D. A king or monarch.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">4. Madison states, "If men were angels, no government would be necessary." What point is he making?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Religion should be the foundation of all government laws.</div>
+                    <div class="option-text">B. Only religious leaders should hold political office.</div>
+                    <div class="option-text">C. Governments exist solely to promote religious freedom.</div>
+                    <div class="option-text">D. Human nature is flawed and therefore requires external governance.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">5. What is the "great difficulty" in framing a government administered by men over men?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Enabling the government to control the governed, while also obliging it to control itself.</div>
+                    <div class="option-text">B. Ensuring that all citizens have completely equal financial resources.</div>
+                    <div class="option-text">C. Writing laws that are universally understood by every single citizen.</div>
+                    <div class="option-text">D. Preventing foreign nations from influencing domestic elections.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">6. Which constitutional principle is most directly supported by this passage?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Universal Suffrage</div>
+                    <div class="option-text">B. Freedom of Speech</div>
+                    <div class="option-text">C. Separation of Powers</div>
+                    <div class="option-text">D. Right to Bear Arms</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">7. What does Madison imply by "the defect of better motives"?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Politicians are generally better people than average citizens.</div>
+                    <div class="option-text">B. People often act out of self-interest rather than a desire for the public good.</div>
+                    <div class="option-text">C. Laws should be written without considering human motivation.</div>
+                    <div class="option-text">D. A strong government can easily force citizens to have good motives.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">8. How does the Constitution fulfill Madison's requirement to keep the departments in their "proper places"?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. By allowing the President to dissolve Congress at any time.</div>
+                    <div class="option-text">B. By giving the military total control over the court system.</div>
+                    <div class="option-text">C. By ensuring that all politicians belong to the same political party.</div>
+                    <div class="option-text">D. By establishing distinct branches with the ability to check or override one another.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+        </div>
+
+        <hr class="my-10 border-slate-200">
+
+        <!-- STIMULUS 2 -->
+        <div class="mb-2">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-emerald-100 text-emerald-700 font-semibold rounded-full">STIMULUS 2</span>
+                <span class="text-sm font-medium text-slate-500">Data Interpretation • Civics & Economics</span>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">Voter Turnout by Age Group in U.S. Presidential Elections (2000–2020)</h3>
+            
+            <div class="graph-container bg-white border border-slate-200 p-6 rounded-2xl shadow-sm mb-6">
+                <canvas id="voterChart" width="600" height="300"></canvas>
+                <p class="text-xs text-slate-500 text-center mt-4">Data Source: Simulated U.S. Census Bureau voting data.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">9. Based on the graph, which age group consistently had the highest voter turnout across all the elections shown?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. 18-29</div>
+                    <div class="option-text">B. 30-44</div>
+                    <div class="option-text">C. 60+</div>
+                    <div class="option-text">D. 45-59</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">10. In which year did the 18-29 age group experience the sharpest increase in voter turnout compared to the previous election?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. 2004</div>
+                    <div class="option-text">B. 2008</div>
+                    <div class="option-text">C. 2012</div>
+                    <div class="option-text">D. 2020</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">11. Which statement represents a valid conclusion drawn directly from this graph?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Older age groups are historically more likely to vote than younger age groups.</div>
+                    <div class="option-text">B. Younger voters do not care about political issues.</div>
+                    <div class="option-text">C. The 30-44 age group is the largest population demographic in the United States.</div>
+                    <div class="option-text">D. Presidential campaigns spend more money advertising to voters over 60.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">12. If the general trend seen from 2016 to 2020 continues, what is the most likely outcome for the 18-29 age group in 2024?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Their turnout will drop to 0%.</div>
+                    <div class="option-text">B. Their turnout will surpass the 60+ age group.</div>
+                    <div class="option-text">C. Their turnout will decrease significantly.</div>
+                    <div class="option-text">D. Their turnout percentage will increase.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">13. What was the approximate difference in voter turnout percentage between the 60+ group and the 18-29 group in the year 2000?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. 10%</div>
+                    <div class="option-text">B. 20%</div>
+                    <div class="option-text">C. 30%</div>
+                    <div class="option-text">D. 40%</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">14. Which of the following best defines the concept of "civic duty" as it relates to the behavior measured in this graph?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. The legal requirement to pay federal income taxes.</div>
+                    <div class="option-text">B. The obligation of the government to provide free education.</div>
+                    <div class="option-text">C. The power of the judicial branch to declare laws unconstitutional.</div>
+                    <div class="option-text">D. The responsibility of citizens to participate in the democratic process by voting.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">15. Which of the following factors is the primary demographic variable represented on the lines in this data chart?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Income Level</div>
+                    <div class="option-text">B. Age</div>
+                    <div class="option-text">C. Education Level</div>
+                    <div class="option-text">D. Geographic Region</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">16. According to the data, how did overall voter participation change between the years 2012 and 2016 for the 45-59 age group?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. It remained relatively stable, showing no significant increase or decrease.</div>
+                    <div class="option-text">B. It dropped by more than 10 percentage points.</div>
+                    <div class="option-text">C. It increased sharply, mirroring the 2008 trend.</div>
+                    <div class="option-text">D. It fell below the turnout of the 18-29 age group.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+        </div>
+
+        <hr class="my-10 border-slate-200">
+
+        <!-- STIMULUS 3 -->
+        <div class="mb-2">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-amber-100 text-amber-800 font-semibold rounded-full">STIMULUS 3</span>
+                <span class="text-sm font-medium text-slate-500">Historical Text • U.S. History & Geography</span>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">The Dust Bowl and the Great Migration</h3>
+            
+            <div class="passage bg-slate-50 border-l-4 border-amber-500 p-6 rounded-r-2xl text-[15px] leading-relaxed">
+                <p class="mb-4">During the 1930s, the United States faced an unprecedented ecological and economic disaster known as the Dust Bowl. For decades, farmers on the Great Plains had engaged in extensive deep plowing of the virgin topsoil—the nutrient-rich upper layer of dirt essential for growing crops. This aggressive farming practice systematically destroyed the native, deep-rooted grasses that normally trapped moisture and held the soil in place during periods of dry weather.</p>
+                <p class="mb-4">When a severe, multi-year drought struck the region beginning in 1931, the over-plowed, unanchored soil turned to dust. Fierce winds swept across the plains, picking up the dry soil and creating massive "black blizzards" that darkened the sky, choked livestock, and buried entire farms. The environmental catastrophe occurred simultaneously with the economic collapse of the Great Depression. Plunging crop prices meant that even farmers who managed to grow crops could not sell them for enough money to pay their debts or sustain their families.</p>
+                <p>Facing starvation, bank foreclosures, and an unlivable environment, hundreds of thousands of families abandoned their homes. Many of these migrants, broadly referred to as "Okies" (though they came from various states, not just Oklahoma), packed their meager belongings into jalopies and headed west along Route 66 toward California. They were lured by handbills promising plentiful agricultural jobs in the fertile Central Valley. However, upon arriving, the migrants discovered that the supply of labor far exceeded the demand for workers. This massive surplus of desperate workers drove wages down to starvation levels, leading to widespread poverty, discrimination, and the establishment of squalid squatter settlements known as "Hoovervilles." In response to the crisis, the federal government eventually established the Soil Conservation Service to teach sustainable farming methods and prevent future ecological collapses.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">17. Which combination of factors directly caused the environmental disaster known as the Dust Bowl?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. A stock market crash combined with government taxes.</div>
+                    <div class="option-text">B. Flooding in the Central Valley and overpopulation.</div>
+                    <div class="option-text">C. The invention of the tractor and the spread of crop diseases.</div>
+                    <div class="option-text">D. Severe drought and poor agricultural practices that depleted the topsoil.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">18. How did the Dust Bowl affect migration patterns in the United States during the 1930s?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. It caused a mass migration of farmers from the Great Plains to western states like California.</div>
+                    <div class="option-text">B. It forced eastern factory workers to move into the Great Plains to find cheap land.</div>
+                    <div class="option-text">C. It caused people to move from California back to Oklahoma.</div>
+                    <div class="option-text">D. It prevented any migration, forcing people to remain permanently on their destroyed farms.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">19. From an economic perspective, what happened when the migrants arrived in California looking for agricultural work?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Demand for labor exceeded the supply, causing wages to rise rapidly.</div>
+                    <div class="option-text">B. The supply of labor far exceeded the demand for workers, driving down wages.</div>
+                    <div class="option-text">C. Supply and demand remained perfectly balanced, allowing everyone to find good jobs.</div>
+                    <div class="option-text">D. The government guaranteed high-paying jobs for all arriving migrants.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">20. What does the term "Okies" refer to in the context of this passage?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Bankers who foreclosed on farms during the Depression.</div>
+                    <div class="option-text">B. Government agents working for the Soil Conservation Service.</div>
+                    <div class="option-text">C. Migrants from the Great Plains seeking agricultural work in the West.</div>
+                    <div class="option-text">D. Native Californian farmers who owned the fertile Central Valley land.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">21. Which government action described in the passage was intended to address the specific environmental issues of the Dust Bowl?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. The creation of "Hoovervilles" to house the homeless migrants.</div>
+                    <div class="option-text">B. The establishment of the Soil Conservation Service to teach sustainable farming methods.</div>
+                    <div class="option-text">C. The distribution of handbills promising jobs in California.</div>
+                    <div class="option-text">D. The deliberate manipulation of crop prices to help farmers pay off debt.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">22. The events of the Dust Bowl best illustrate the relationship between:</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. Human interaction with the environment and resulting economic impacts.</div>
+                    <div class="option-text">B. Constitutional amendments and civil rights.</div>
+                    <div class="option-text">C. Foreign policy treaties and international trade.</div>
+                    <div class="option-text">D. Industrial manufacturing and urban development.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">23. Why did the economic collapse of the Great Depression make the Dust Bowl worse for farmers?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. It caused the drought to last much longer than it naturally would have.</div>
+                    <div class="option-text">B. It forced the government to ban all farming in the Great Plains.</div>
+                    <div class="option-text">C. It led to the destruction of the deep-rooted native grasses.</div>
+                    <div class="option-text">D. Plunging crop prices meant farmers could not afford to sustain their farms or families during the drought.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question text-[15px] font-medium mb-2">24. Based on the passage, what is the definition of "topsoil"?</div>
+                <div class="pl-1 space-y-1.5 text-[14.2px]">
+                    <div class="option-text">A. A type of deep-rooted native grass.</div>
+                    <div class="option-text">B. A squatter settlement created by migrants.</div>
+                    <div class="option-text">C. The nutrient-rich upper layer of dirt essential for growing crops.</div>
+                    <div class="option-text">D. A fierce storm created by high winds and dry dirt.</div>
+                </div>
+                <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+            </div>
+        </div>
+
+        <hr class="my-10 border-slate-200">
+
+        <!-- EXTENDED RESPONSE -->
+        <div class="mb-8 page-break-before">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-purple-100 text-purple-800 font-semibold rounded-full">EXTENDED RESPONSE</span>
+                <span class="text-sm font-medium text-slate-500">Writing Task</span>
+            </div>
+            
+            <div class="bg-white border-2 border-slate-300 rounded-2xl p-6">
+                <h3 class="font-bold text-lg mb-2">Essay Prompt</h3>
+                <p class="text-sm text-slate-700 mb-4">In <em>Federalist Paper No. 51</em> (Stimulus 1), James Madison discusses the necessity of structuring the government to prevent the abuse of power. Write an essay explaining how Madison argues that the structure of the U.S. government attempts to balance power and prevent tyranny. Use specific evidence and quotes from the passage to support your explanation.</p>
+                <div class="bg-slate-50 p-3 text-xs text-slate-600 rounded mb-4 border border-slate-200">
+                    <strong>Your essay should include:</strong>
+                    <ul class="list-disc pl-5 mt-1">
+                        <li>A clear introduction stating your main point.</li>
+                        <li>Body paragraphs that use specific evidence/quotes from the text.</li>
+                        <li>A conclusion that summarizes your ideas.</li>
+                    </ul>
+                </div>
+                <div class="lined-paper min-h-[350px] w-full rounded border border-slate-300"></div>
+            </div>
+        </div>
+
+        <!-- ANSWER KEY & INSTRUCTOR GUIDE -->
+        <div class="instructor-key">
+            <div class="bg-slate-800 text-white rounded-t-2xl p-6">
+                <h2 class="text-2xl font-bold tracking-tight">Instructor Answer Key & Guide</h2>
+                <p class="text-slate-300 text-sm mt-1">Verified Balanced Distribution (A:6, B:6, C:6, D:6)</p>
+            </div>
+            <div class="bg-white border-b border-l border-r border-slate-300 rounded-b-2xl p-8">
+                
+                <h3 class="font-bold text-lg text-slate-800 border-b border-slate-200 pb-2 mb-4">Quick Key</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 font-mono text-sm">
+                    <div>1. B</div><div>2. C</div><div>3. A</div><div>4. D</div>
+                    <div>5. A</div><div>6. C</div><div>7. B</div><div>8. D</div>
+                    <div>9. C</div><div>10. B</div><div>11. A</div><div>12. D</div>
+                    <div>13. C</div><div>14. D</div><div>15. B</div><div>16. A</div>
+                    <div>17. D</div><div>18. A</div><div>19. B</div><div>20. C</div>
+                    <div>21. B</div><div>22. A</div><div>23. D</div><div>24. C</div>
+                </div>
+
+                <h3 class="font-bold text-lg text-slate-800 border-b border-slate-200 pb-2 mb-4">Detailed Explanations</h3>
+                <div class="space-y-4 text-sm text-slate-700">
+                    <p><strong>1. B</strong> - The passage explicitly discusses the need to "contrive the interior structure" of government to keep parts in their proper places and control abuses.</p>
+                    <p><strong>2. C</strong> - "Ambition must be made to counteract ambition" refers to the system of checks and balances, where the competing powers of different branches keep any single branch from dominating.</p>
+                    <p><strong>3. A</strong> - Madison explicitly states, "A dependence on the people is, no doubt, the primary control on the government."</p>
+                    <p><strong>4. D</strong> - The quote highlights that humans are not perfect ("angels"), which is why external laws and government frameworks are required to maintain order.</p>
+                    <p><strong>5. A</strong> - The text clearly states the great difficulty lies in two parts: "first enable the government to control the governed; and in the next place oblige it to control itself."</p>
+                    <p><strong>6. C</strong> - The entire passage is a defense of dividing power among different departments (Separation of Powers) to prevent tyranny.</p>
+                    <p><strong>7. B</strong> - The "defect of better motives" refers to human nature's tendency to act selfishly. Madison argues the system must use "opposite and rival interests" to make up for this lack of virtue.</p>
+                    <p><strong>8. D</strong> - Establishing distinct branches that can check each other is how the Constitution puts these theoretical protections into practice.</p>
+                    <p><strong>9. C</strong> - The line for the 60+ age group remains at the top of the chart (highest percentage) for every year recorded.</p>
+                    <p><strong>10. B</strong> - The line for the 18-29 age group shows the steepest upward slope between 2004 and 2008.</p>
+                    <p><strong>11. A</strong> - The graph shows a clear, consistent stratification where older age brackets have higher turnout percentages than younger brackets in every election.</p>
+                    <p><strong>12. D</strong> - The trend line from 2016 to 2020 for the 18-29 group is pointing upward. Continuing this trend implies an increase.</p>
+                    <p><strong>13. C</strong> - In 2000, the 60+ group was at 70% and the 18-29 group was at 40%. The difference is exactly 30%.</p>
+                    <p><strong>14. D</strong> - "Civic duty" in the context of voter turnout graphs refers to the responsibility of participating in democratic elections.</p>
+                    <p><strong>15. B</strong> - The legend of the graph separates the data lines based on Age brackets (18-29, 30-44, etc.).</p>
+                    <p><strong>16. A</strong> - The line for the 45-59 age group remains flat (horizontal) between 2012 and 2016, indicating stability.</p>
+                    <p><strong>17. D</strong> - The text states the disaster was caused by "a severe, multi-year drought" striking soil that had been compromised by "aggressive farming practice[s]."</p>
+                    <p><strong>18. A</strong> - The passage details how hundreds of thousands of people abandoned the Great Plains and "headed west along Route 66 toward California."</p>
+                    <p><strong>19. B</strong> - The text states, "the supply of labor far exceeded the demand for workers. This massive surplus... drove wages down to starvation levels."</p>
+                    <p><strong>20. C</strong> - The passage defines "Okies" as migrants from various states who headed west to California seeking jobs.</p>
+                    <p><strong>21. B</strong> - The federal government established the Soil Conservation Service "to teach sustainable farming methods and prevent future ecological collapses."</p>
+                    <p><strong>22. A</strong> - The narrative shows how poor farming (human interaction with environment) created a disaster that led to foreclosure, migration, and collapsed wages (economic impacts).</p>
+                    <p><strong>23. D</strong> - The passage explains that plunging crop prices from the Depression meant farmers could not afford to pay debts or sustain their families during the drought.</p>
+                    <p><strong>24. C</strong> - The first paragraph explicitly defines topsoil as "the nutrient-rich upper layer of dirt essential for growing crops."</p>
+                </div>
+
+                <h3 class="font-bold text-lg text-slate-800 border-b border-slate-200 pb-2 mt-8 mb-4">Extended Response Rubric Guide</h3>
+                <div class="text-sm text-slate-700">
+                    <p><strong>High-Scoring Responses Will:</strong></p>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>Clearly state that Madison advocates for dividing power and creating checks and balances because humans are inherently flawed.</li>
+                        <li>Quote or paraphrase the "If men were angels" line to explain Madison's view on human nature.</li>
+                        <li>Explain the concept of "Ambition must be made to counteract ambition" (the branches checking each other).</li>
+                        <li>Maintain a formal, objective tone and organize thoughts into distinct introduction, body, and conclusion paragraphs.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Chart.js for voter turnout graph (Stimulus 2)
+        function initializeChart() {
+            const ctx = document.getElementById('voterChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2000', '2004', '2008', '2012', '2016', '2020'],
+                    datasets: [
+                        {
+                            label: '18-29 Years',
+                            data: [40, 43, 51, 45, 46, 50],
+                            borderColor: '#3b82f6',
+                            backgroundColor: '#3b82f6',
+                            borderWidth: 3,
+                            tension: 0.1
+                        },
+                        {
+                            label: '30-44 Years',
+                            data: [55, 58, 60, 58, 59, 62],
+                            borderColor: '#10b981',
+                            backgroundColor: '#10b981',
+                            borderWidth: 3,
+                            tension: 0.1
+                        },
+                        {
+                            label: '45-59 Years',
+                            data: [65, 68, 69, 68, 68, 71],
+                            borderColor: '#f59e0b',
+                            backgroundColor: '#f59e0b',
+                            borderWidth: 3,
+                            tension: 0.1
+                        },
+                        {
+                            label: '60+ Years',
+                            data: [70, 73, 72, 72, 73, 76],
+                            borderColor: '#8b5cf6',
+                            backgroundColor: '#8b5cf6',
+                            borderWidth: 3,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: 'Inter', size: 13 } }
+                        },
+                        title: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            min: 30,
+                            max: 80,
+                            title: { display: true, text: 'Voter Turnout (%)', font: { weight: 'bold' } },
+                            ticks: { callback: function(value) { return value + '%'; } }
+                        },
+                        x: {
+                            title: { display: true, text: 'Election Year', font: { weight: 'bold' } }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Initialize chart when window loads
+        window.onload = initializeChart;
+    </script>
+</body>
+</html>
