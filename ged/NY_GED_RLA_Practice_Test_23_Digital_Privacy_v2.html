@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York GED RLA Practice Test 23 – Digital Privacy</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.5; max-width: 1000px; margin: 40px auto; padding: 20px; color: #333; }
+        .container { background: white; padding: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; }
+        h1 { text-align: center; color: #1a365d; border-bottom: 3px solid #2c5282; padding-bottom: 10px; }
+        h2 { color: #2c5282; border-bottom: 2px solid #bee3f8; padding-bottom: 6px; margin-top: 28px; }
+        .header-info { display: flex; flex-wrap: wrap; gap: 15px; margin: 15px 0; font-size: 16px; }
+        .instructions { background: #ebf8ff; padding: 15px; border-left: 5px solid #3182ce; margin: 15px 0; }
+        .passage { background: #f7fafc; padding: 20px; border: 1px solid #e2e8f0; margin: 20px 0; border-radius: 6px; }
+        .question-block { margin: 20px 0; padding: 12px 0; border-bottom: 1px solid #e2e8f0; }
+        .question { font-weight: 600; margin-bottom: 12px; font-size: 16px; }
+        .options { margin-left: 20px; margin-bottom: 12px; }
+        .options div { margin: 8px 0; padding: 4px; }
+        .answer-line { margin-top: 10px; font-weight: bold; }
+        .section-header { background: #2c5282; color: white; padding: 10px 15px; margin: 28px 0 15px; border-radius: 5px; font-weight: 600; }
+        .writing-section { border: 2px solid #2c5282; padding: 20px; margin: 22px 0; background: #f8fafc; border-radius: 6px; }
+        .paragraph-header { font-weight: 700; color: #2c5282; margin-bottom: 12px; padding: 8px 12px; border-radius: 4px; }
+        .intro { background: #ebf8ff; }
+        .body1 { background: #fefcbf; }
+        .body2 { background: #c6f6d5; }
+        .body3 { background: #fed7d7; }
+        .conclusion { background: #e9d8fd; }
+        .reflection { background: #fffaf0; padding: 20px; border: 1px solid #ed8936; margin-top: 35px; border-radius: 6px; }
+        @media print {
+            body { margin: 0.4in; font-size: 11pt; line-height: 1.45; }
+            p { margin-bottom: 12px; }
+            .passage p { margin-bottom: 16px; }
+            .question-block { margin-bottom: 22px; padding-bottom: 16px; page-break-inside: avoid; }
+            .options { margin-bottom: 16px; }
+            .passage, .writing-section, .reflection { page-break-inside: avoid; }
+            h2, h3, .section-header { page-break-after: avoid; }
+            .mentor-guide-container { page-break-before: always; }
+            .answer-key-container { page-break-before: always; }
+            .explanation { margin-bottom: 14px; }
+            .options div { margin: 10px 0; }
+            .answer-line { margin-top: 12px; margin-bottom: 18px; }
+            .section-header + div { page-break-inside: avoid; }
+            textarea { display: none; }
+        }
+        .top-bar { position: sticky; top: 0; background: white; padding: 10px 0; border-bottom: 2px solid #e2e8f0; z-index: 100; margin-bottom: 22px; }
+        .btn { background: #2c5282; color: white; padding: 10px 18px; border: none; border-radius: 6px; font-size: 15px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #1a365d; }
+        textarea { width: 100%; font-family: inherit; padding: 10px; box-sizing: border-box; border-radius: 4px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New York GED Reasoning Through Language Arts Practice Test <span style="font-size: 0.7em; color: #718096;">(RLA-v3.2-Digital-Privacy-2026-06)</span></h1>
+        <h2>Focus: The Importance of Digital Privacy and Data Protection</h2>
+        
+        <div class="top-bar no-print">
+            <button onclick="window.print()" class="btn">🖨️ Print Test</button>
+            <button onclick="saveAnswers()" class="btn">💾 Save My Answers</button>
+            <button onclick="loadAnswers()" class="btn">📂 Load Saved Answers</button>
+            <button onclick="clearAllAnswers()" class="btn" style="background:#c53030;">Clear All</button>
+        </div>
+        
+        <div class="header-info">
+            <div><strong>Student Name:</strong> _______________________________</div>
+            <div><strong>Date:</strong> _______________</div>
+        </div>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> This practice test closely follows the structure and difficulty of the official GED Reasoning Through Language Arts exam. Read each passage carefully. Answer all multiple-choice questions. For the Extended Response, use specific evidence from both passages. Take your time and do your best work.
+        </div>
+        
+        <h2>Passage 1</h2>
+        <div class="passage">
+            <strong>The Growing Need for Digital Privacy Protection</strong>
+            <p>In today’s digital world, people share large amounts of personal information online every day. From social media posts to online shopping and banking, much of this data is collected, stored, and sometimes shared by companies. While technology has made life more convenient, it has also created serious concerns about how personal information is used and protected.</p>
+            <p>Many companies collect data about users’ habits, preferences, and locations. This information can be used to improve services, but it can also be sold to third parties or used for targeted advertising without users’ full knowledge. In some cases, data breaches have exposed sensitive information such as Social Security numbers, medical records, and financial details. These incidents can lead to identity theft and long-term financial harm.</p>
+            <p>Supporters of stronger privacy laws argue that individuals should have more control over their personal data. They believe companies should be required to clearly explain what data they collect and how it will be used. Others worry that too many regulations could slow down innovation and make it harder for small businesses to compete. Finding the right balance between protecting privacy and supporting technological progress remains an ongoing challenge for lawmakers and society.</p>
+        </div>
+        
+        <h3>Questions 1–10 are based on Passage 1.</h3>
+        
+        <div class="question-block">
+            <div class="question">1. What is the central idea of Passage 1?</div>
+            <div class="options">
+                A. The widespread collection of personal data online creates serious privacy risks that require stronger protections and clearer regulations.<br>
+                B. Most companies already do an excellent job of protecting user data, so privacy laws are unnecessary.<br>
+                C. People should completely stop using the internet to protect their personal information.<br>
+                D. Technology companies should be allowed to use personal data however they want without restrictions.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">2. According to the passage, what is one significant risk of companies collecting large amounts of user data?</div>
+            <div class="options">
+                A. It always improves services and has no negative consequences.<br>
+                B. Personal data can be sold to third parties or exposed in breaches, leading to identity theft and financial harm.<br>
+                C. It helps small businesses compete more effectively with large corporations.<br>
+                D. It reduces the need for any government oversight of technology companies.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">3. Which detail from the passage best supports the idea that stronger privacy protections may be needed?</div>
+            <div class="options">
+                A. "Technology has made life more convenient for many people."<br>
+                B. "Many companies collect data about users’ habits, preferences, and locations."<br>
+                C. "In some cases, data breaches have exposed sensitive information such as Social Security numbers, medical records, and financial details."<br>
+                D. "Finding the right balance between protecting privacy and supporting technological progress remains an ongoing challenge."
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">4. The author’s primary purpose in Passage 1 is to:</div>
+            <div class="options">
+                A. Strongly argue that all data collection by companies should be banned immediately.<br>
+                B. Prove that current privacy laws are already strong enough to protect everyone.<br>
+                C. Describe the technical methods companies use to track user behavior online.<br>
+                D. Explain the privacy risks created by widespread data collection while presenting the ongoing debate about regulation.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">5. Which sentence contains a grammar or usage error?</div>
+            <div class="options">
+                A. Many companies collects data about users’ habits and preferences without clear consent.<br>
+                B. In today’s digital world, people share large amounts of personal information online every day.<br>
+                C. This information can be used to improve services, but it can also be sold to third parties.<br>
+                D. Finding the right balance between privacy and innovation remains an ongoing challenge.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">6. Which revision best corrects the error in Question 5?</div>
+            <div class="options">
+                A. Many companies collects data about users’ habits and preferences without clear consent.<br>
+                B. Many companies collect data about users’ habits and preferences without clear consent.<br>
+                C. Many company collects data about users’ habits and preferences without clear consent.<br>
+                D. Many companies collecting data about users’ habits and preferences without clear consent.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">7. Which transition word or phrase best fits in the blank?</div>
+            <div class="options">
+                "Stronger privacy laws could give individuals more control over their data. _____, some people worry that too many regulations might slow down innovation and hurt small businesses."<br>
+                A. For example<br>
+                B. Therefore<br>
+                C. However<br>
+                D. In addition
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">8. What can the reader reasonably infer from Passage 1?</div>
+            <div class="options">
+                A. All data collection by companies is harmful and should be completely banned.<br>
+                B. Data breaches no longer happen because companies have greatly improved their security systems.<br>
+                C. Most people are not concerned about how their personal information is used online.<br>
+                D. There is an ongoing debate about how to protect personal data while still allowing technological progress and innovation.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">9. The tone of Passage 1 can best be described as:</div>
+            <div class="options">
+                A. Balanced and informative, presenting both the risks of data collection and differing viewpoints on regulation.<br>
+                B. Strongly alarmist and completely opposed to all forms of online technology.<br>
+                C. Casual and humorous when discussing serious privacy concerns.<br>
+                D. Highly technical and focused only on the details of computer security systems.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">10. Which statement best summarizes the author’s overall view on digital privacy?</div>
+            <div class="options">
+                A. Privacy concerns are no longer important in today’s modern digital world.<br>
+                B. The widespread collection of personal data creates real risks, and society must find a balanced way to protect privacy while still supporting technological innovation.<br>
+                C. Companies should never be allowed to collect any personal data from users under any circumstances.<br>
+                D. Current privacy laws already provide complete and sufficient protection for everyone.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <h2>Passage 2</h2>
+        <div class="passage">
+            <strong>Protecting Personal Data in the Digital Age</strong>
+            <p>As concerns about data privacy grow, many experts believe that stronger protections are needed. One common proposal is to give individuals more rights over their personal information, such as the right to know what data companies have collected and the right to request that it be deleted. These ideas are already part of privacy laws in some countries and are being considered in others.</p>
+            <p>Another important step is requiring companies to be more transparent about how they use personal data. Many users do not fully understand what happens to their information after they click “agree” to a company’s terms of service. Clearer explanations and simpler privacy policies could help people make more informed choices about sharing their data.</p>
+            <p>However, creating effective privacy protections also involves challenges. Some businesses argue that strict rules could increase costs and make it harder to develop new technologies. Others point out that different countries have different privacy standards, which can create confusion for global companies. Despite these difficulties, many agree that protecting personal data is becoming increasingly important as more of daily life moves online. Finding practical solutions that work for both individuals and businesses will likely require ongoing discussion and cooperation.</p>
+        </div>
+        
+        <h3>Questions 11–20 are based on Passage 2.</h3>
+        
+        <div class="question-block">
+            <div class="question">11. What is the central theme of Passage 2?</div>
+            <div class="options">
+                A. Privacy laws are no longer necessary in the modern digital world and should be removed.<br>
+                B. All privacy regulations should be eliminated immediately to help small businesses grow.<br>
+                C. Stronger privacy protections are needed, but creating effective rules involves both important benefits and practical challenges for businesses and global companies.<br>
+                D. Companies should be allowed to use personal data however they want without any restrictions.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">12. According to the passage, what is one proposed way to give individuals more control over their personal data?</div>
+            <div class="options">
+                A. Allowing companies to sell user data to anyone without restrictions.<br>
+                B. Making all privacy policies longer and more complicated so users read them carefully.<br>
+                C. Removing all existing privacy laws to encourage faster technological development.<br>
+                D. Giving people the right to know what data companies have collected about them and the right to request that it be deleted.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">13. The author’s primary purpose in Passage 2 is to:</div>
+            <div class="options">
+                A. Discuss the need for stronger privacy protections while also recognizing the practical challenges involved in creating effective and balanced rules.<br>
+                B. Prove that current privacy laws are already perfect and need no changes.<br>
+                C. Argue that privacy protections are harmful to businesses and should be removed.<br>
+                D. Describe the technical process of how companies collect and store user data.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">14. Which sentence contains a grammar or usage error?</div>
+            <div class="options">
+                A. Many experts believe that stronger protections are needed to protect personal data.<br>
+                B. Some businesses argues that strict privacy rules could increase costs and slow innovation.<br>
+                C. Clearer explanations and simpler privacy policies could help people make more informed choices.<br>
+                D. Protecting personal data is becoming increasingly important as more of daily life moves online.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">15. Which revision best corrects the error in Question 14?</div>
+            <div class="options">
+                A. Some businesses argues that strict privacy rules could increase costs and slow innovation.<br>
+                B. Some business argues that strict privacy rules could increase costs and slow innovation.<br>
+                C. Some businesses argue that strict privacy rules could increase costs and slow innovation.<br>
+                D. Some businesses arguing that strict privacy rules could increase costs and slow innovation.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">16. What can the reader reasonably infer from Passage 2?</div>
+            <div class="options">
+                A. All privacy regulations should be removed immediately to support innovation.<br>
+                B. Most people already fully understand how their personal data is being used by companies.<br>
+                C. Privacy concerns will completely disappear as technology continues to improve.<br>
+                D. Creating effective privacy protections requires balancing individual rights with practical challenges for businesses and companies operating in multiple countries.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">17. The author mentions that different countries have different privacy standards primarily to show that:</div>
+            <div class="options">
+                A. Global companies may face confusion and complexity when trying to follow multiple different sets of privacy rules across countries.<br>
+                B. Privacy protection is not considered important in most countries around the world.<br>
+                C. All countries should immediately adopt identical privacy laws with no exceptions.<br>
+                D. Privacy regulations are very easy to create and enforce everywhere without any difficulties.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">18. Which revision best combines these two sentences?</div>
+            <div class="options">
+                "Many users do not fully understand what happens to their data after they agree to terms of service. Clearer privacy policies could help them make better choices about sharing information."<br>
+                A. Many users do not fully understand what happens to their data after they agree to terms of service clearer privacy policies could help them make better choices about sharing information.<br>
+                B. Many users do not fully understand what happens to their data after they agree to terms of service, so clearer privacy policies could help them make better choices about sharing information.<br>
+                C. Many users do not fully understand what happens to their data after they agree to terms of service, clearer privacy policies could help them make better choices about sharing information.<br>
+                D. Many users do not fully understand what happens to their data after they agree to terms of service but clearer privacy policies could help them make better choices about sharing information.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">19. The tone of Passage 2 can best be described as:</div>
+            <div class="options">
+                A. Hopeless and completely negative about the future of digital privacy protection.<br>
+                B. Dismissive of privacy concerns as unimportant or overblown.<br>
+                C. Thoughtful and balanced, recognizing both the need for stronger privacy protections and the practical challenges involved in creating effective rules.<br>
+                D. Highly technical and focused only on the legal details of privacy regulations.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">20. What does Passage 2 suggest about the future of digital privacy protection?</div>
+            <div class="options">
+                A. Privacy will no longer matter as technology continues to advance rapidly.<br>
+                B. All existing privacy laws should be eliminated immediately to help small businesses compete.<br>
+                C. Current privacy protections are already complete and sufficient for everyone.<br>
+                D. Effective solutions will likely require ongoing discussion and cooperation between individuals, businesses, and policymakers to balance rights and practical needs.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="section-header">Editing Task</div>
+        <div class="question">21. Read the paragraph below. Rewrite it correctly in the box. Fix any grammar, punctuation, spelling, or sentence structure errors.</div>
+        <div style="background:#f5f5f5; padding:14px; border-radius:4px; margin:12px 0; font-style:italic;">
+            "Digital privacy have become an important issue in recent years. Many people does not realize how much personal data is collected online every day. Companies should be more transparent about their data practices. Without clearer rules, users may continue to face serious risks to their personal information and security."
+        </div>
+        <div style="margin-bottom:12px;">
+            <strong>Corrected paragraph:</strong>
+            <textarea id="q21" style="height:120px; border:1px solid #ccc; margin-top:10px;"></textarea>
+        </div>
+        
+        <div class="section-header">Extended Response Writing Task</div>
+        <div class="question">22. In a well-organized essay of 4–7 paragraphs, discuss the importance of protecting digital privacy in today’s world. Use specific ideas and evidence from both Passage 1 and Passage 2 to support your response. In your conclusion, suggest one practical step that could help improve digital privacy protection for individuals.</div>
+        
+        <p><strong>Your essay should include:</strong></p>
+        <ul>
+            <li>A clear introduction with a thesis statement</li>
+            <li>Body paragraphs that use relevant evidence from both passages</li>
+            <li>A conclusion that summarizes your main points and includes one practical suggestion</li>
+        </ul>
+        <p>Write your essay in the sections below.</p>
+        
+        <div class="writing-section">
+            <div class="paragraph-header intro">Paragraph 1 – Introduction (Include your thesis statement)</div>
+            <textarea id="para1" style="height:150px; border:1px solid #a0aec0; margin-top:5px;"></textarea>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header body1">Paragraph 2 – Body Paragraph (Risks of data collection – Use evidence from Passage 1)</div>
+            <textarea id="para2" style="height:150px; border:1px solid #a0aec0; margin-top:5px;"></textarea>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header body2">Paragraph 3 – Body Paragraph (Proposed solutions – Use evidence from Passage 2)</div>
+            <textarea id="para3" style="height:150px; border:1px solid #a0aec0; margin-top:5px;"></textarea>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header body3">Paragraph 4 – Body Paragraph (Challenges and balance – Use evidence from both passages)</div>
+            <textarea id="para4" style="height:150px; border:1px solid #a0aec0; margin-top:5px;"></textarea>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header conclusion">Paragraph 5, 6, or 7 – Conclusion (Summarize and suggest one practical step to improve privacy protection)</div>
+            <textarea id="para5" style="height:150px; border:1px solid #a0aec0; margin-top:5px;"></textarea>
+        </div>
+        
+        <div class="reflection">
+            <h2>Reflection / Self-Assessment</h2>
+            <p>Which part of this practice test was most challenging for you (close reading and inference, analyzing arguments and evidence, grammar/editing in context, or the extended response)? What specific skills do you want to practice more before taking the real GED test?</p>
+            <div style="margin-top:12px;">
+                <textarea id="reflection" style="height:120px; border:1px solid #ed8936; background-color:#fffaf0;"></textarea>
+            </div>
+        </div>
+        
+        <p style="text-align:center; margin-top:35px; color:#718096; font-style:italic;">
+            — End of Practice Test —<br>
+            You did a great job practicing these important skills!
+        </p>
+    </div>
+    
+    <div class="mentor-guide-container" style="page-break-before: always; padding: 32px; background: #fffaf0; border: 2px solid #ed8936; border-radius: 8px; margin-top: 45px;">
+        <h1 style="text-align: center; color: #c2410f;">Mentor Guide <span style="font-size: 0.75em;">(RLA-v3.2-Digital-Privacy-2026-06)</span></h1>
+        <h2>Effective Grading and Teaching Techniques</h2>
+
+        <h3>Effective Grading</h3>
+        <ul>
+            <li><strong>Start with positives:</strong> Begin feedback with what the student did well. This builds confidence.</li>
+            <li><strong>Use simple rubrics:</strong> Focus on 2–3 key skills with clear criteria.</li>
+            <li><strong>Give credit for effort:</strong> Reward good reasoning and trying hard, even if the answer isn’t perfect.</li>
+            <li><strong>Be specific:</strong> Tell students exactly what was good and what to improve.</li>
+            <li><strong>Allow flexibility:</strong> Accept oral responses or other formats when writing is difficult.</li>
+            <li><strong>Focus on growth:</strong> Compare current work to the student’s own previous work.</li>
+        </ul>
+
+        <h3>Teaching Missed Concepts</h3>
+        <ul>
+            <li><strong>Break it down:</strong> Teach one small step at a time.</li>
+            <li><strong>Use multi-sensory methods:</strong> Combine reading, highlighting, drawing, and discussion.</li>
+            <li><strong>Model → Guide → Practice:</strong> Show it, do it together, then let the student try.</li>
+            <li><strong>Use visual supports:</strong> Graphic organizers, checklists, and highlighted text.</li>
+            <li><strong>Connect to real life:</strong> Link concepts to the student’s daily experiences.</li>
+            <li><strong>Review often:</strong> Check understanding frequently and revisit key ideas.</li>
+            <li><strong>Reduce anxiety:</strong> Allow breaks and create a supportive environment.</li>
+            <li><strong>Support writing:</strong> Use sentence starters, word banks, or structured outlines.</li>
+        </ul>
+
+        <h3>General Tips for Mentors</h3>
+        <ul>
+            <li>Be patient and encouraging — celebrate small successes.</li>
+            <li>Adapt materials when helpful (larger font, highlighters, audio, etc.).</li>
+            <li>Build student confidence and self-advocacy.</li>
+            <li>Make learning relevant to the student’s goals and life.</li>
+        </ul>
+
+        <p style="text-align: center; margin-top: 22px; font-weight: bold; color: #c2410f;">
+            Remember: Every student can learn and grow with the right support. Focus on progress, not perfection.
+        </p>
+    </div>
+    
+    <div class="answer-key-container" style="page-break-before: always; padding: 32px; background: #f8fafc; border: 2px solid #2c5282; border-radius: 8px; margin-top: 45px;">
+        <h2 style="color: #c53030; text-align: center;">FOR INSTRUCTORS ONLY — DO NOT DISTRIBUTE TO STUDENTS</h2>
+        <h1 style="text-align: center; color: #1a365d;">Answer Key <span style="font-size: 0.75em;">(RLA-v3.2-Digital-Privacy-2026-06)</span></h1>
+        
+        <h2>Quick Answer Key</h2>
+        <p><strong>Passage 1 (1–10):</strong> 1.A | 2.B | 3.C | 4.D | 5.A | 6.B | 7.C | 8.D | 9.A | 10.B</p>
+        <p><strong>Passage 2 (11–20):</strong> 11.C | 12.D | 13.A | 14.B | 15.C | 16.D | 17.A | 18.B | 19.C | 20.D</p>
+        
+        <h2>Detailed Explanations</h2>
+        
+        <h3>Passage 1</h3>
+        <div class="explanation"><strong>1. A – Correct</strong><br>The central idea is that the widespread collection of personal data online creates serious privacy risks that require stronger protections and clearer regulations.</div>
+        
+        <div class="explanation"><strong>2. B – Correct</strong><br>The passage states that personal data can be sold to third parties or exposed in breaches, which can lead to identity theft and long-term financial harm.</div>
+        
+        <div class="explanation"><strong>3. C – Correct</strong><br>This detail supports the need for stronger protections by showing real examples of data breaches exposing highly sensitive information like Social Security numbers and medical records.</div>
+        
+        <div class="explanation"><strong>4. D – Correct</strong><br>The author explains the privacy risks created by data collection while also presenting the ongoing debate about how to regulate it responsibly without harming innovation.</div>
+        
+        <div class="explanation"><strong>5. A – Correct</strong><br>Subject-verb agreement error: "Many companies collects" should be "Many companies collect."</div>
+        
+        <div class="explanation"><strong>6. B – Correct</strong><br>This is the grammatically correct version of the sentence with proper subject-verb agreement.</div>
+        
+        <div class="explanation"><strong>7. C – Correct</strong><br>"However" correctly shows the contrast between the potential benefits of stronger privacy laws and the concern that too many regulations might slow innovation.</div>
+        
+        <div class="explanation"><strong>8. D – Correct</strong><br>The passage supports this inference by presenting both the risks of data collection and the ongoing debate about balancing privacy protection with technological progress.</div>
+        
+        <div class="explanation"><strong>9. A – Correct</strong><br>The tone is balanced and informative. The author presents both the risks and differing viewpoints without being overly alarmist or dismissive.</div>
+        
+        <div class="explanation"><strong>10. B – Correct</strong><br>The author’s overall view is that widespread data collection creates real risks, and society must find a balanced way to protect privacy while still supporting technological innovation.</div>
+        
+        <h3>Passage 2</h3>
+        <div class="explanation"><strong>11. C – Correct</strong><br>The central theme is that stronger privacy protections are needed, but creating effective rules involves both important benefits and practical challenges for businesses and global companies.</div>
+        
+        <div class="explanation"><strong>12. D – Correct</strong><br>The passage mentions giving individuals the right to know what data has been collected and the right to request its deletion as concrete ways to give people more control over their personal information.</div>
+        
+        <div class="explanation"><strong>13. A – Correct</strong><br>The author discusses the need for stronger privacy protections while also recognizing the practical challenges involved in creating effective and balanced rules that work for businesses.</div>
+        
+        <div class="explanation"><strong>14. B – Correct</strong><br>Subject-verb agreement error: "Some businesses argues" should be "Some businesses argue."</div>
+        
+        <div class="explanation"><strong>15. C – Correct</strong><br>This is the grammatically correct version of the sentence with proper subject-verb agreement.</div>
+        
+        <div class="explanation"><strong>16. D – Correct</strong><br>The passage supports this inference by discussing both the need for protection and the practical challenges of creating rules that work across different countries and for different types of businesses.</div>
+        
+        <div class="explanation"><strong>17. A – Correct</strong><br>This detail shows that global companies may face confusion and complexity when trying to follow multiple different sets of privacy rules from different countries.</div>
+        
+        <div class="explanation"><strong>18. B – Correct</strong><br>This combines the sentences smoothly using a comma and the coordinating conjunction "so" to show cause and effect between lack of understanding and the benefit of clearer policies.</div>
+        
+        <div class="explanation"><strong>19. C – Correct</strong><br>The tone is thoughtful and balanced. The author recognizes both the need for stronger privacy protections and the practical challenges involved in creating effective rules.</div>
+        
+        <div class="explanation"><strong>20. D – Correct</strong><br>The passage suggests that effective solutions will likely require ongoing discussion and cooperation between individuals, businesses, and policymakers to balance rights and practical needs.</div>
+        
+        <h2>Editing Task (Question 21) – Model Corrected Paragraph</h2>
+        <div class="section">
+            Digital privacy has become an important issue in recent years. Many people do not realize how much personal data is collected online every day. Companies should be more transparent about their data practices. Without clearer rules, users may continue to face serious risks to their personal information and security.
+        </div>
+        
+        <h2>Extended Response (Question 22) – Scoring Guidance</h2>
+        <p>Use a rubric focused on these key GED skills:</p>
+        <ul>
+            <li><strong>Thesis &amp; Organization:</strong> Clear thesis and logical organization with a beginning, middle, and end.</li>
+            <li><strong>Use of Evidence:</strong> Specific, relevant evidence from both passages to support ideas.</li>
+            <li><strong>Analysis &amp; Synthesis:</strong> Thoughtful explanation of how evidence from both passages supports the thesis.</li>
+            <li><strong>Conclusion with Suggestion:</strong> Summarizes main points and offers one practical step to improve digital privacy protection.</li>
+        </ul>
+        <p>Give partial credit for strong reasoning and use of evidence even if the writing contains some grammar errors. Focus first on the quality of ideas and how well the student connected information from both passages.</p>
+    </div>
+</body>
+<script>
+// Save/Load functions
+function saveAnswers() {
+    const data = { answers: {} };
+    for (let i = 1; i <= 20; i++) {
+        const input = document.getElementById('ans' + i);
+        if (input) data.answers['q' + i] = input.value;
+    }
+    const textAreas = ['q21', 'para1', 'para2', 'para3', 'para4', 'para5', 'reflection'];
+    textAreas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) data.answers[id] = el.value;
+    });
+    localStorage.setItem('gedRLATest23Answers', JSON.stringify(data));
+    alert('Answers saved!');
+}
+function loadAnswers() {
+    const saved = localStorage.getItem('gedRLATest23Answers');
+    if (!saved) { alert('No saved answers found.'); return; }
+    const data = JSON.parse(saved);
+    for (let i = 1; i <= 20; i++) {
+        const input = document.getElementById('ans' + i);
+        if (input && data.answers['q' + i]) input.value = data.answers['q' + i];
+    }
+    const textAreas = ['q21', 'para1', 'para2', 'para3', 'para4', 'para5', 'reflection'];
+    textAreas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && data.answers[id]) el.value = data.answers[id];
+    });
+    alert('Answers loaded!');
+}
+function clearAllAnswers() {
+    if (!confirm('Clear all answers?')) return;
+    localStorage.removeItem('gedRLATest23Answers');
+    for (let i = 1; i <= 20; i++) {
+        const input = document.getElementById('ans' + i);
+        if (input) input.value = '';
+    }
+    const textAreas = ['q21', 'para1', 'para2', 'para3', 'para4', 'para5', 'reflection'];
+    textAreas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    alert('All answers cleared.');
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const answerLines = document.querySelectorAll('.answer-line');
+    answerLines.forEach((line, index) => {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'ans' + (index + 1);
+        input.style.width = '40px';
+        input.style.fontSize = '16px';
+        input.style.textAlign = 'center';
+        line.innerHTML = 'My answer: ';
+        line.appendChild(input);
+    });
+});
+</script>
+</html>

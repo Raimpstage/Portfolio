@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York GED RLA Practice Test 22 – AI and the Future of Work</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            border-bottom: 3px solid #2c5282;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c5282;
+            border-bottom: 2px solid #bee3f8;
+            padding-bottom: 6px;
+            margin-top: 28px;
+        }
+        .header-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        .instructions {
+            background-color: #ebf8ff;
+            padding: 15px;
+            border-left: 5px solid #3182ce;
+            margin: 15px 0;
+        }
+        .passage {
+            background-color: #f7fafc;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .question-block {
+            margin: 20px 0;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .question {
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .options {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        .options div {
+            margin: 8px 0;
+            padding: 4px;
+        }
+        .answer-line {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .section-header {
+            background-color: #2c5282;
+            color: white;
+            padding: 10px 15px;
+            margin: 28px 0 15px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        .writing-section {
+            border: 2px solid #2c5282;
+            padding: 20px;
+            margin: 22px 0;
+            background-color: #f8fafc;
+            border-radius: 6px;
+        }
+        .paragraph-header {
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+        .intro { background-color: #ebf8ff; }
+        .body1 { background-color: #fefcbf; }
+        .body2 { background-color: #c6f6d5; }
+        .body3 { background-color: #fed7d7; }
+        .conclusion { background-color: #e9d8fd; }
+        .reflection {
+            background-color: #fffaf0;
+            padding: 20px;
+            border: 1px solid #ed8936;
+            margin-top: 35px;
+            border-radius: 6px;
+        }
+        @media print {
+            body { margin: 0.4in; font-size: 11pt; line-height: 1.45; }
+            p { margin-bottom: 12px; }
+            .passage p { margin-bottom: 16px; }
+            .question-block { margin-bottom: 22px; padding-bottom: 16px; page-break-inside: avoid; }
+            .options { margin-bottom: 16px; }
+            .passage, .writing-section, .reflection { page-break-inside: avoid; }
+            h2, h3, .section-header { page-break-after: avoid; }
+            .mentor-guide-container { page-break-before: always; }
+            .answer-key-container { page-break-before: always; }
+            .explanation { margin-bottom: 14px; }
+            .options div { margin: 10px 0; }
+            .answer-line { margin-top: 12px; margin-bottom: 18px; }
+            .section-header + div { page-break-inside: avoid; }
+        }
+        .top-bar {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 10px 0;
+            border-bottom: 2px solid #e2e8f0;
+            z-index: 100;
+            margin-bottom: 22px;
+        }
+        .btn {
+            background: #2c5282;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #1a365d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New York GED Reasoning Through Language Arts Practice Test <span style="font-size: 0.7em; color: #718096;">(RLA-v3.1-AI-Workforce-2026-06)</span></h1>
+        <h2>Focus: The Impact of Artificial Intelligence on the Future of Work</h2>
+        
+        <div class="top-bar no-print">
+            <button onclick="window.print()" class="btn">🖨️ Print Test</button>
+            <button onclick="saveAnswers()" class="btn">💾 Save My Answers</button>
+            <button onclick="loadAnswers()" class="btn">📂 Load Saved Answers</button>
+            <button onclick="clearAllAnswers()" class="btn" style="background:#c53030;">Clear All</button>
+        </div>
+        
+        <div class="header-info">
+            <div><strong>Student Name:</strong> _______________________________</div>
+            <div><strong>Date:</strong> _______________</div>
+        </div>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong> This practice test is designed to closely mirror the structure, difficulty, and skill focus of the official GED Reasoning Through Language Arts exam. Read each passage carefully. Answer all multiple-choice questions. For the Extended Response, use specific evidence from both passages to support your ideas. Take your time.
+        </div>
+        
+        <!-- Passage 1 -->
+        <h2>Passage 1</h2>
+        <div class="passage">
+            <strong>How Artificial Intelligence Is Reshaping the Workplace</strong>
+            <p>Artificial intelligence (AI) is rapidly transforming industries around the world. From automated customer service chatbots to advanced data analysis tools, AI systems are taking over tasks that were once performed exclusively by humans. While some experts warn that AI could lead to widespread job losses, others argue that it will create new opportunities and increase overall productivity.</p>
+            <p>One of the most significant impacts of AI is its ability to handle repetitive and data-heavy tasks with greater speed and accuracy than humans. For example, in the healthcare industry, AI can analyze medical images to detect diseases earlier than traditional methods. In finance, AI algorithms can detect fraudulent transactions in real time. These advancements allow human workers to focus on more complex, creative, and interpersonal aspects of their jobs.</p>
+            <p>However, the rise of AI also raises important concerns. Many routine jobs in manufacturing, transportation, and administrative support are at high risk of automation. Workers in these fields may need to acquire new skills to remain employable. Additionally, there are ethical questions about bias in AI decision-making and the lack of transparency in how some AI systems reach their conclusions. As AI becomes more integrated into daily work life, both employers and policymakers will need to address these challenges thoughtfully to ensure that the benefits of technology are shared broadly across society.</p>
+        </div>
+        
+        <h3>Questions 1–10 are based on Passage 1.</h3>
+        
+        <div class="question-block">
+            <div class="question">1. What is the central idea of Passage 1?</div>
+            <div class="options">
+                A. AI's primary impact is limited to the healthcare and finance sectors, where it handles data.<br>
+                B. The rapid growth of artificial intelligence is causing widespread job losses that cannot be recovered.<br>
+                C. AI is transforming the workplace by automating routine tasks while also creating new challenges related to job displacement, ethics, and the need for reskilling.<br>
+                D. Automation is mainly beneficial for employers, but it offers little to no advantage for human workers.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">2. According to the passage, how can AI benefit human workers?</div>
+            <div class="options">
+                A. By taking over repetitive and data-heavy tasks, allowing humans to focus on more complex and creative work.<br>
+                B. By independently making all ethical and financial decisions for large corporations.<br>
+                C. By simplifying complex interpersonal tasks so workers need less specialized training.<br>
+                D. By reducing the overall number of hours employees must work each week.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">3. Which detail from the passage best supports the idea that AI raises ethical concerns?</div>
+            <div class="options">
+                A. "AI systems are taking over tasks that were once performed exclusively by humans."<br>
+                B. "In the healthcare industry, AI can analyze medical images to detect diseases earlier than traditional methods."<br>
+                C. "Workers in these fields may need to acquire new skills to remain employable."<br>
+                D. "There are ethical questions about bias in AI decision-making and the lack of transparency in how some AI systems reach their conclusions."
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">4. The author’s primary purpose in Passage 1 is to:</div>
+            <div class="options">
+                A. Persuade employers to immediately halt the integration of AI systems.<br>
+                B. Present a balanced overview of how AI is changing work, including both its potential benefits and significant challenges.<br>
+                C. Explain the technical mechanisms behind machine learning algorithms in healthcare.<br>
+                D. Argue that human workers are no longer necessary in manufacturing and transportation.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">5. Which sentence contains a grammar or usage error?</div>
+            <div class="options">
+                A. Artificial intelligence is rapidly transforming industries around the world.<br>
+                B. AI can analyze medical images to detect diseases earlier than traditional methods.<br>
+                C. Both employers and policymakers will need to address these challenges thoughtfully.<br>
+                D. Many routine jobs in manufacturing and transportation is at high risk of automation.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">6. Which revision best corrects the error in Question 5?</div>
+            <div class="options">
+                A. Many routine job in manufacturing and transportation is at high risk of automation.<br>
+                B. Many routine jobs in manufacturing and transportation being at high risk of automation.<br>
+                C. Many routine jobs in manufacturing and transportation are at high risk of automation.<br>
+                D. Many routine jobs in manufacturing and transportation was at high risk of automation.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">7. Which transition word or phrase best fits in the blank?</div>
+            <div class="options">
+                "AI can perform many tasks with greater speed and accuracy. _____, it also raises important ethical questions about bias and transparency."<br>
+                A. However<br>
+                B. For example<br>
+                C. Consequently<br>
+                D. In addition
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">8. What can the reader reasonably infer from Passage 1?</div>
+            <div class="options">
+                A. AI implementation has been flawlessly executed by most major corporations.<br>
+                B. Workers whose jobs are at risk of automation will likely need to develop new skills to remain employable.<br>
+                C. Administrative support roles are the only jobs that will be affected by AI.<br>
+                D. Transparency issues in AI are primarily caused by a lack of government funding.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">9. The tone of Passage 1 can best be described as:</div>
+            <div class="options">
+                A. Strongly alarmist and highly critical.<br>
+                B. Enthusiastic and overwhelmingly positive.<br>
+                C. Casual and slightly humorous.<br>
+                D. Balanced and analytical, presenting both opportunities and concerns.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">10. Which statement best summarizes the author’s overall view on AI in the workplace?</div>
+            <div class="options">
+                A. AI offers valuable benefits but also creates challenges that society must address responsibly.<br>
+                B. The disadvantages of AI integration far outweigh any potential improvements in efficiency.<br>
+                C. Policymakers should leave AI regulation entirely up to the tech companies.<br>
+                D. Only workers in creative fields will survive the upcoming transition to an AI workforce.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <!-- Passage 2 -->
+        <h2>Passage 2</h2>
+        <div class="passage">
+            <strong>Preparing the Workforce for an AI-Driven Future</strong>
+            <p>As artificial intelligence continues to advance, education and workforce development systems must adapt. Many traditional jobs are being redefined or eliminated, while entirely new roles are emerging in areas such as AI ethics, data analysis, machine learning maintenance, and human-AI collaboration. This shift requires a fundamental rethinking of what skills workers will need in the coming decades.</p>
+            <p>Experts emphasize that technical skills alone will not be enough. Workers will increasingly need strong critical thinking, problem-solving, creativity, and emotional intelligence — abilities that AI currently struggles to replicate. Education systems are therefore being encouraged to move beyond rote memorization and focus more on teaching students how to learn, adapt, and apply knowledge in new situations.</p>
+            <p>Companies also have a role to play. Many forward-thinking organizations are investing in continuous learning programs for their employees and partnering with educational institutions to develop relevant training. Some are even creating internal "AI academies" to help workers understand and work alongside new technologies. Without such proactive efforts, there is a real risk that the benefits of AI will be concentrated among a small group of highly skilled workers, while others are left behind.</p>
+            <p>Ultimately, the future of work in an AI-driven world will depend not only on technological innovation but also on thoughtful policies and educational strategies that prepare all members of society to participate meaningfully in the economy of the future.</p>
+        </div>
+        
+        <h3>Questions 11–20 are based on Passage 2.</h3>
+        
+        <div class="question-block">
+            <div class="question">11. What is the central theme of Passage 2?</div>
+            <div class="options">
+                A. Companies should focus exclusively on technical training to prepare their employees.<br>
+                B. Preparing the workforce for an AI-driven future requires changes in education, continuous learning, and proactive policies to ensure broad participation.<br>
+                C. Traditional education systems are fully equipped to handle the transition to an AI economy.<br>
+                D. Human-AI collaboration will eventually phase out the need for emotional intelligence in the workplace.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">12. According to the passage, which skills will become increasingly important as AI advances?</div>
+            <div class="options">
+                A. Rote memorization and swift manual dexterity.<br>
+                B. Advanced computer programming and software engineering.<br>
+                C. Critical thinking, problem-solving, creativity, and emotional intelligence.<br>
+                D. Data entry and basic administrative support.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">13. The author’s primary purpose in Passage 2 is to:</div>
+            <div class="options">
+                A. Outline the specific curriculum changes needed in high school math classes.<br>
+                B. Compare the effectiveness of internal AI academies versus university degrees.<br>
+                C. Highlight the risk of relying too heavily on automated teaching tools.<br>
+                D. Argue that education systems, companies, and policymakers must take proactive steps to prepare workers for an AI-driven economy.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">14. Which sentence contains a grammar or usage error?</div>
+            <div class="options">
+                A. Some companies is creating internal "AI academies" to help workers.<br>
+                B. Many traditional jobs are being redefined or eliminated by advancing technology.<br>
+                C. Education systems are being encouraged to focus more on teaching students how to learn and adapt.<br>
+                D. Without proactive efforts, there is a real risk that the benefits of AI will be concentrated among a small group.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">15. Which revision best corrects the error in Question 14?</div>
+            <div class="options">
+                A. Some company is creating internal "AI academies" to help workers.<br>
+                B. Some companies creating internal "AI academies" to help workers.<br>
+                C. Some companies has created internal "AI academies" to help workers.<br>
+                D. Some companies are creating internal "AI academies" to help workers.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">16. What can the reader reasonably infer from Passage 2?</div>
+            <div class="options">
+                A. Educational institutions are currently resisting changes to their traditional teaching methods.<br>
+                B. Without investment in education and training, the benefits of AI may be concentrated among a small, highly skilled group of workers.<br>
+                C. AI technologies will soon be able to replicate human emotional intelligence perfectly.<br>
+                D. Most companies have already established internal AI academies for their staff.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">17. The author includes the idea of companies creating internal "AI academies" primarily to:</div>
+            <div class="options">
+                A. Suggest that formal university education is no longer relevant.<br>
+                B. Criticize companies that do not offer sufficient on-the-job training.<br>
+                C. Provide an example of how forward-thinking organizations are helping employees adapt to AI.<br>
+                D. Demonstrate the financial cost of training employees in new technologies.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">18. Which revision best combines these two sentences?</div>
+            <div class="options">
+                "AI is advancing quickly. Education systems must adapt to prepare workers for new roles."<br>
+                A. AI is advancing quickly education systems must adapt to prepare workers for new roles.<br>
+                B. AI is advancing quickly, so education systems must adapt to prepare workers for new roles.<br>
+                C. AI is advancing quickly, education systems must adapt to prepare workers for new roles.<br>
+                D. Because AI is advancing quickly, and education systems must adapt to prepare workers for new roles.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">19. The tone of Passage 2 can best be described as:</div>
+            <div class="options">
+                A. Urgent but constructive, emphasizing the need for proactive solutions.<br>
+                B. Nostalgic for traditional methods of working and learning.<br>
+                C. Cynical about the motivations of large corporations.<br>
+                D. Detached and purely informative without any call to action.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">20. What does Passage 2 suggest about the relationship between technological progress and education?</div>
+            <div class="options">
+                A. Technological progress generally occurs independently of educational strategies.<br>
+                B. Education systems should focus heavily on hard technical skills to the exclusion of soft skills.<br>
+                C. Education systems must evolve to emphasize adaptability, critical thinking, and continuous learning to keep pace with AI-driven changes in the job market.<br>
+                D. Advances in AI will ultimately make formal education redundant for most workers.
+            </div>
+            <div class="answer-line">My answer: ______</div>
+        </div>
+        
+        <!-- Editing Task -->
+        <div class="section-header">Editing Task</div>
+        <div class="question">21. Read the paragraph below. Rewrite it correctly on the lines. Fix any grammar, punctuation, spelling, or sentence structure errors.</div>
+        <div style="background:#f5f5f5; padding:14px; border-radius:4px; margin:12px 0; font-style:italic;">
+            "Artificial intelligence are changing the way people work. Many worker will need to learn new skills to stay employable. Education systems and companies must work together to provide training. Without these efforts, the benefits of AI may only reach a small group of people."
+        </div>
+        <div style="margin-bottom:12px;">
+            <strong>Corrected paragraph:</strong>
+            <div style="border-bottom: 1px solid #ccc; height: 30px; margin: 14px 0;"></div>
+            <div style="border-bottom: 1px solid #ccc; height: 30px; margin: 14px 0;"></div>
+            <div style="border-bottom: 1px solid #ccc; height: 30px; margin: 14px 0;"></div>
+            <div style="border-bottom: 1px solid #ccc; height: 30px; margin: 14px 0;"></div>
+        </div>
+        
+        <!-- Extended Response -->
+        <div class="section-header">Extended Response Writing Task</div>
+        <div class="question">22. In a well-organized essay of 4–7 paragraphs, discuss both the opportunities and the challenges that artificial intelligence presents for the future of work. Use specific ideas and evidence from both Passage 1 and Passage 2 to support your response. In your conclusion, suggest one way society can help ensure that the benefits of AI are shared more broadly.</div>
+        
+        <p><strong>Your essay should include:</strong></p>
+        <ul>
+            <li>A clear introduction with a thesis statement</li>
+            <li>Body paragraphs that use relevant evidence from both passages</li>
+            <li>A conclusion that summarizes your main points and includes a practical suggestion</li>
+        </ul>
+        <p>Write your essay in the sections below.</p>
+        
+        <div class="writing-section">
+            <div class="paragraph-header intro">Paragraph 1 – Introduction (Include your thesis statement)</div>
+            <div style="margin-bottom:10px;">
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+            </div>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header body1">Paragraph 2 – Body Paragraph (Opportunities – Use evidence from Passage 1)</div>
+            <div style="margin-bottom:10px;">
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+            </div>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header body2">Paragraph 3 – Body Paragraph (Challenges – Use evidence from both passages)</div>
+            <div style="margin-bottom:10px;">
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+            </div>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header body3">Paragraph 4 – Body Paragraph (Preparing the workforce – Use evidence from Passage 2)</div>
+            <div style="margin-bottom:10px;">
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+            </div>
+        </div>
+        
+        <div class="writing-section">
+            <div class="paragraph-header conclusion">Paragraph 5, 6, or 7 – Conclusion (Summarize and suggest how to share benefits broadly)</div>
+            <div style="margin-bottom:10px;">
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #a0aec0; height: 28px; margin: 10px 0;"></div>
+            </div>
+        </div>
+        
+        <!-- Reflection -->
+        <div class="reflection">
+            <h2>Reflection / Self-Assessment</h2>
+            <p>Which part of this practice test was most challenging for you (close reading and inference, analyzing arguments and evidence, grammar/editing in context, or the extended response)? What specific skills do you want to practice more before taking the real GED test?</p>
+            <div style="margin-top:12px;">
+                <div style="border-bottom: 1px solid #ed8936; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #ed8936; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #ed8936; height: 28px; margin: 10px 0;"></div>
+                <div style="border-bottom: 1px solid #ed8936; height: 28px; margin: 10px 0;"></div>
+            </div>
+        </div>
+        
+        <p style="text-align:center; margin-top:35px; color:#718096; font-style:italic;">
+            — End of Practice Test —<br>
+            You did a great job practicing these important skills!
+        </p>
+    </div>
+    
+    <!-- MENTOR GUIDE (Before Answer Key) -->
+    <div class="mentor-guide-container" style="page-break-before: always; padding: 32px; background: #fffaf0; border: 2px solid #ed8936; border-radius: 8px; margin-top: 45px;">
+        <h1 style="text-align: center; color: #c2410f;">Mentor Guide <span style="font-size: 0.75em;">(RLA-v3.1-AI-Workforce-2026-06)</span></h1>
+        <h2>Effective Grading and Teaching Techniques</h2>
+
+        <h3>Effective Grading</h3>
+        <ul>
+            <li><strong>Start with positives:</strong> Begin feedback with what the student did well. This builds confidence.</li>
+            <li><strong>Use simple rubrics:</strong> Focus on 2–3 key skills with clear criteria.</li>
+            <li><strong>Give credit for effort:</strong> Reward good reasoning and trying hard, even if the answer isn’t perfect.</li>
+            <li><strong>Be specific:</strong> Tell students exactly what was good and what to improve.</li>
+            <li><strong>Allow flexibility:</strong> Accept oral responses or other formats when writing is difficult.</li>
+            <li><strong>Focus on growth:</strong> Compare current work to the student’s own previous work.</li>
+        </ul>
+
+        <h3>Teaching Missed Concepts</h3>
+        <ul>
+            <li><strong>Break it down:</strong> Teach one small step at a time.</li>
+            <li><strong>Use multi-sensory methods:</strong> Combine reading, highlighting, drawing, and discussion.</li>
+            <li><strong>Model → Guide → Practice:</strong> Show it, do it together, then let the student try.</li>
+            <li><strong>Use visual supports:</strong> Graphic organizers, checklists, and highlighted text.</li>
+            <li><strong>Connect to real life:</strong> Link concepts to the student’s daily experiences.</li>
+            <li><strong>Review often:</strong> Check understanding frequently and revisit key ideas.</li>
+            <li><strong>Reduce anxiety:</strong> Allow breaks and create a supportive environment.</li>
+            <li><strong>Support writing:</strong> Use sentence starters, word banks, or structured outlines.</li>
+        </ul>
+
+        <h3>General Tips for Mentors</h3>
+        <ul>
+            <li>Be patient and encouraging — celebrate small successes.</li>
+            <li>Adapt materials when helpful (larger font, highlighters, audio, etc.).</li>
+            <li>Build student confidence and self-advocacy.</li>
+            <li>Make learning relevant to the student’s goals and life.</li>
+        </ul>
+
+        <p style="text-align: center; margin-top: 22px; font-weight: bold; color: #c2410f;">
+            Remember: Every student can learn and grow with the right support. Focus on progress, not perfection.
+        </p>
+    </div>
+    
+    <!-- ANSWER KEY (After Mentor Guide) -->
+    <div class="answer-key-container" style="page-break-before: always; padding: 32px; background: #f8fafc; border: 2px solid #2c5282; border-radius: 8px; margin-top: 45px;">
+        <h2 style="color: #c53030; text-align: center;">FOR INSTRUCTORS ONLY — DO NOT DISTRIBUTE TO STUDENTS</h2>
+        <h1 style="text-align: center; color: #1a365d;">Answer Key <span style="font-size: 0.75em;">(RLA-v3.1-AI-Workforce-2026-06)</span></h1>
+        
+        <h2>Quick Answer Key</h2>
+        <p><strong>Passage 1 (1–10):</strong> 1.C | 2.A | 3.D | 4.B | 5.D | 6.C | 7.A | 8.B | 9.D | 10.A</p>
+        <p><strong>Passage 2 (11–20):</strong> 11.B | 12.C | 13.D | 14.A | 15.D | 16.B | 17.C | 18.B | 19.A | 20.C</p>
+        
+        <h2>Detailed Explanations</h2>
+        
+        <h3>Passage 1</h3>
+        <div class="explanation"><strong>1. C – Correct</strong><br>The central idea is that AI is transforming the workplace by automating routine tasks (creating opportunities for humans to do more complex work) while also creating significant challenges around job displacement, ethics, and the need for reskilling. This balanced view runs throughout the passage.</div>
+        
+        <div class="explanation"><strong>2. A – Correct</strong><br>The passage states that AI can take over repetitive and data-heavy tasks, allowing human workers to focus on more complex, creative, and interpersonal aspects of their jobs.</div>
+        
+        <div class="explanation"><strong>3. D – Correct</strong><br>This sentence directly supports the idea that AI raises ethical concerns by mentioning bias in AI decision-making and lack of transparency.</div>
+        
+        <div class="explanation"><strong>4. B – Correct</strong><br>The author presents a balanced overview, discussing both the potential benefits of AI (speed, accuracy, freeing humans for higher-level work) and the significant challenges (job risk, ethical concerns, need for reskilling).</div>
+        
+        <div class="explanation"><strong>5. D – Correct</strong><br>Subject-verb agreement error: "Many routine jobs ... is at high risk" should be "Many routine jobs ... are at high risk."</div>
+        
+        <div class="explanation"><strong>6. C – Correct</strong><br>This is the grammatically correct version of the sentence.</div>
+        
+        <div class="explanation"><strong>7. A – Correct</strong><br>"However" correctly signals the contrast between the benefits of AI described earlier and the ethical concerns that follow.</div>
+        
+        <div class="explanation"><strong>8. B – Correct</strong><br>The passage supports this inference by stating that workers in fields at high risk of automation may need to acquire new skills to remain employable.</div>
+        
+        <div class="explanation"><strong>9. D – Correct</strong><br>The tone is balanced and analytical. The author presents both opportunities and concerns without being overly alarmist or dismissive.</div>
+        
+        <div class="explanation"><strong>10. A – Correct</strong><br>The author’s overall view is that AI offers valuable benefits but also creates challenges that society must address responsibly through education, policy, and thoughtful implementation.</div>
+        
+        <h3>Passage 2</h3>
+        <div class="explanation"><strong>11. B – Correct</strong><br>The central theme is that preparing the workforce for an AI-driven future requires changes in education (emphasizing adaptability and critical thinking), continuous learning programs, and proactive policies to ensure broad participation in the future economy.</div>
+        
+        <div class="explanation"><strong>12. C – Correct</strong><br>The passage states that workers will increasingly need strong critical thinking, problem-solving, creativity, and emotional intelligence — abilities that AI currently struggles to replicate.</div>
+        
+        <div class="explanation"><strong>13. D – Correct</strong><br>The author argues that education systems, companies, and policymakers must take proactive steps (curriculum changes, continuous learning programs, and thoughtful policies) to prepare workers for an AI-driven economy.</div>
+        
+        <div class="explanation"><strong>14. A – Correct</strong><br>Subject-verb agreement error: "Some companies is creating" should be "Some companies are creating."</div>
+        
+        <div class="explanation"><strong>15. D – Correct</strong><br>This is the grammatically correct version of the sentence.</div>
+        
+        <div class="explanation"><strong>16. B – Correct</strong><br>The passage supports this inference by warning that without proactive efforts in education and training, the benefits of AI may be concentrated among a small group of highly skilled workers.</div>
+        
+        <div class="explanation"><strong>17. C – Correct</strong><br>The author includes this example to show one concrete way forward-thinking organizations are helping employees adapt to AI through internal training programs.</div>
+        
+        <div class="explanation"><strong>18. B – Correct</strong><br>This combines the sentences smoothly using a comma and the coordinating conjunction "so" to show cause and effect.</div>
+        
+        <div class="explanation"><strong>19. A – Correct</strong><br>The tone is urgent but constructive. The author emphasizes the need for proactive solutions in education and policy without being hopeless or overly negative.</div>
+        
+        <div class="explanation"><strong>20. C – Correct</strong><br>The passage suggests that education systems must evolve to emphasize adaptability, critical thinking, and continuous learning to keep pace with AI-driven changes in the job market.</div>
+        
+        <h2>Editing Task (Question 21) – Model Corrected Paragraph</h2>
+        <div class="section">
+            Artificial intelligence is changing the way people work. Many workers will need to learn new skills to stay employable. Education systems and companies must work together to provide training. Without these efforts, the benefits of AI may only reach a small group of people.
+        </div>
+        
+        <h2>Extended Response (Question 22) – Scoring Guidance</h2>
+        <p>Use a rubric focused on these key GED skills:</p>
+        <ul>
+            <li><strong>Thesis &amp; Organization:</strong> Clear thesis and logical organization with a beginning, middle, and end.</li>
+            <li><strong>Use of Evidence:</strong> Specific, relevant evidence from both passages to support ideas.</li>
+            <li><strong>Analysis &amp; Synthesis:</strong> Thoughtful explanation of how evidence from both passages supports the thesis.</li>
+            <li><strong>Conclusion with Suggestion:</strong> Summarizes main points and offers one practical way to share AI benefits more broadly.</li>
+        </ul>
+        <p>Give partial credit for strong reasoning and use of evidence even if the writing contains some grammar errors. Focus first on the quality of ideas and how well the student connected information from both passages.</p>
+    </div>
+</body>
+<script>
+// Save/Load functions
+function saveAnswers() {
+    const data = { answers: {} };
+    for (let i = 1; i <= 20; i++) {
+        const input = document.getElementById('ans' + i);
+        if (input) data.answers['q' + i] = input.value;
+    }
+    const textAreas = ['q21', 'para1', 'para2', 'para3', 'para4', 'para5', 'reflection'];
+    textAreas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) data.answers[id] = el.value;
+    });
+    localStorage.setItem('gedRLATest22Answers', JSON.stringify(data));
+    alert('Answers saved!');
+}
+function loadAnswers() {
+    const saved = localStorage.getItem('gedRLATest22Answers');
+    if (!saved) { alert('No saved answers found.'); return; }
+    const data = JSON.parse(saved);
+    for (let i = 1; i <= 20; i++) {
+        const input = document.getElementById('ans' + i);
+        if (input && data.answers['q' + i]) input.value = data.answers['q' + i];
+    }
+    const textAreas = ['q21', 'para1', 'para2', 'para3', 'para4', 'para5', 'reflection'];
+    textAreas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && data.answers[id]) el.value = data.answers[id];
+    });
+    alert('Answers loaded!');
+}
+function clearAllAnswers() {
+    if (!confirm('Clear all answers?')) return;
+    localStorage.removeItem('gedRLATest22Answers');
+    for (let i = 1; i <= 20; i++) {
+        const input = document.getElementById('ans' + i);
+        if (input) input.value = '';
+    }
+    const textAreas = ['q21', 'para1', 'para2', 'para3', 'para4', 'para5', 'reflection'];
+    textAreas.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    alert('All answers cleared.');
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const answerLines = document.querySelectorAll('.answer-line');
+    answerLines.forEach((line, index) => {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'ans' + (index + 1);
+        input.style.width = '40px';
+        input.style.fontSize = '16px';
+        input.style.textAlign = 'center';
+        line.innerHTML = 'My answer: ';
+        line.appendChild(input);
+    });
+});
+</script>
+</html>
