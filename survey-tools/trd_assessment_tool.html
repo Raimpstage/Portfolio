@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRD Psilocybin Clinical Assessment Tool v1.13 | Fixed Export</title>
+    <!--
+    TRD Psilocybin Clinical Assessment Tool v1.13 (Fixed Export)
+    Changes in v1.13:
+    - Fixed Preparation_Alliance CSV export to include the guided prep_topics checklist data.
+    - All previous v1.11 / v1.12 functionality preserved (auto-save, scoring, dashboard, clearance, etc.).
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+.prep-topic { border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 12px; background: #ffffff; }
+.prep-topic-header { padding: 12px 16px; background: #f7fafc; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.prep-topic-header:hover { background: #edf2f7; }
+.prep-topic-header input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; }
+.prep-topic-header .topic-title { font-weight: 700; flex: 1; }
+.prep-topic-content { padding: 14px 16px; font-size: 0.9rem; display: none; }
+.prep-topic.open .prep-topic-content { display: block; }
+.prep-topic-content .guide-text { color: #4a5568; margin-bottom: 8px; }
+.prep-topic-content .sample-questions { background: #ebf8ff; padding: 10px 12px; border-left: 3px solid #3182ce; border-radius: 4px; }
+        :root {
+            --primary: #1a365d; --secondary: #2c5282; --accent: #3182ce;
+            --danger: #c53030; --success: #276749; --warning: #c05621;
+            --light: #f7fafc; --dark: #1a202c; --border: #cbd5e0; --text: #2d3748; --bg: #edf2f7;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); color: var(--text); line-height: 1.5; }
+        .sidebar { width: 280px; background: var(--primary); color: white; display: flex; flex-direction: column; box-shadow: 3px 0 10px rgba(0,0,0,0.15); flex-shrink: 0; overflow-y: auto; }
+        .sidebar-header { padding: 16px 18px; background: var(--secondary); text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-header h1 { margin: 0; font-size: 1.0rem; font-weight: 600; }
+        .sidebar-header .subtitle { font-size: 0.7rem; opacity: 0.85; margin-top: 2px; }
+        
+        .phase-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: #90cdf4; margin: 14px 16px 4px 18px; font-weight: 700; }
+        
+        .tab { padding: 11px 16px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.08); transition: all 0.2s; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
+        .tab:hover { background: rgba(255,255,255,0.08); }
+        .tab.active { background: var(--accent); font-weight: 600; border-left: 4px solid #63b3ed; }
+        .tab .num { background: rgba(255,255,255,0.2); width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+        
+        .main-content { flex: 1; padding: 18px 22px; overflow-y: auto; position: relative; }
+        .section { display: none; background: white; padding: 22px 26px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); max-width: 1020px; margin: 0 auto; }
+        .section.active { display: block; }
+        h2 { color: var(--primary); border-bottom: 3px solid var(--accent); padding-bottom: 7px; margin-top: 0; font-size: 1.22rem; }
+        
+        .disclaimer { background: #fff5f5; border-left: 5px solid var(--danger); padding: 10px 14px; font-size: 0.82rem; color: #742a2a; margin-bottom: 16px; border-radius: 5px; }
+        .protocol-note { background: #ebf8ff; border-left: 5px solid #3182ce; padding: 9px 13px; font-size: 0.8rem; color: #2b6cb0; margin-bottom: 14px; border-radius: 5px; }
+        .data-set-label { display: inline-block; padding: 3px 9px; border-radius: 4px; background: var(--accent); color: white; font-size: 0.72rem; font-weight: 700; margin-bottom: 10px; }
+        
+        .question-block { margin-bottom: 16px; padding: 14px 16px; border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: 7px; background: #fafafa; position: relative; }
+        .question-text { font-size: 0.98rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .tooltip-icon { position: absolute; top: 12px; right: 12px; background: #3182ce; color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; cursor: help; }
+        .tooltip-icon:hover::after { content: attr(data-tooltip); position: absolute; right: 0; top: 22px; background: #1a202c; color: white; padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; white-space: pre-wrap; max-width: 320px; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        
+        input[type="number"], input[type="text"], input[type="date"], textarea, select { width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; font-size: 0.92rem; margin-top: 4px; }
+        textarea { min-height: 85px; resize: vertical; }
+        
+        .btn { padding: 9px 18px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-secondary { background: #718096; color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+        .btn:hover { filter: brightness(0.95); transform: translateY(-1px); }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--border); }
+        
+        .status-bar { position: sticky; top: 0; z-index: 100; background: white; padding: 8px 14px; border-radius: 7px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 14px; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; font-size: 0.88rem; }
+        .badge { padding: 2px 9px; border-radius: 9999px; font-size: 0.76rem; font-weight: 700; display: inline-block; }
+        .badge-success { background: #c6f6d5; color: #22543d; }
+        .badge-warning { background: #feebc8; color: #744210; }
+        .badge-danger { background: #fed7d7; color: #742a2a; }
+        .badge-neutral { background: #e2e8f0; color: #4a5568; }
+        
+        .clearance-block { padding: 18px; border-radius: 8px; margin: 14px 0; text-align: center; border: 2px solid transparent; }
+        .clearance-pending { background: #edf2f7; border-color: #cbd5e0; color: #4a5568; }
+        .clearance-approved { background: #f0fff4; border-color: #48bb78; color: #22543d; }
+        .clearance-denied { background: #fff5f5; border-color: #f56565; color: #742a2a; }
+        
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000; align-items: center; justify-content: center; padding: 14px; }
+        .modal-content { background: white; border-radius: 11px; max-width: 560px; width: 100%; padding: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        
+        .checklist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 5px 10px; }
+        .checklist-grid label { display: flex; align-items: flex-start; gap: 6px; font-size: 0.87rem; padding: 3px 0; }
+        .section-header { font-size: 1.0rem; font-weight: 700; color: var(--secondary); margin: 16px 0 6px; padding-bottom: 3px; border-bottom: 2px solid #e2e8f0; }
+        .madrs-total { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+        
+        .export-btn { font-size: 0.82rem; padding: 6px 12px; }
+        
+        .guide-content { max-width: 920px; margin: 0 auto; }
+        .guide-content details { margin-bottom: 14px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+        .guide-content summary { padding: 14px 16px; font-weight: 700; cursor: pointer; background: #edf2f7; color: var(--primary); }
+        .guide-content .note { background: #ebf8ff; padding: 12px 14px; border-radius: 6px; border-left: 4px solid #3182ce; margin: 12px 0; }
+        .guide-content .warning { background: #fff5f5; padding: 12px 14px; border-radius: 6px; border-left: 4px solid #c53030; margin: 12px 0; }
+        .sample-q { background: #f7fafc; padding: 10px 13px; border-left: 3px solid #3182ce; margin: 8px 0; font-size: 0.9rem; }
+        
+        .dashboard-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h1>TRD Psilocybin Tool v1.13</h1>
+            <div class="subtitle">Fixed Export • Production Ready</div>
+        </div>
+        
+        <div class="phase-label">Phase 1: Pre-Session Data</div>
+        <div class="tab active" onclick="switchTab(0)"><span class="num">0</span> <span>Intake &amp; History</span></div>
+        <div class="tab" onclick="switchTab(1)"><span class="num">1</span> <span>High-Risk + C-SSRS</span></div>
+        <div class="tab" onclick="switchTab(2)"><span class="num">2</span> <span>Baseline Scales</span></div>
+        <div class="tab" onclick="switchTab(3)"><span class="num">3</span> <span>Preparation &amp; Alliance</span></div>
+        
+        <div class="phase-label">Checkpoint</div>
+        <div class="tab" onclick="switchTab(4)"><span class="num">✓</span> <span>Pre-Session Clearance</span></div>
+        
+        <div class="phase-label">Phase 2: Day of Dosing</div>
+        <div class="tab" onclick="switchTab(5)"><span class="num">4</span> <span>Immediate Pre-Dosing</span></div>
+        
+        <div class="phase-label">Phase 3: Post &amp; Follow-Up</div>
+        <div class="tab" onclick="switchTab(6)"><span class="num">5</span> <span>Immediate Post-Session</span></div>
+        <div class="tab" onclick="switchTab(7)"><span class="num">6</span> <span>Phenomenological &amp; Follow-Up</span></div>
+        
+        <div class="phase-label">Analytics</div>
+        <div class="tab" onclick="switchTab(8)"><span class="num">8</span> <span>Patient Dashboard</span></div>
+        
+        <div class="phase-label">System</div>
+        <div class="tab" onclick="switchTab(9)"><span class="num">7</span> <span>Review &amp; Exports</span></div>
+        
+        <div class="phase-label">Reference</div>
+        <div class="tab" onclick="switchTab(10)"><span class="num">📖</span> <span>Clinician Guide</span></div>
+        
+        <div style="margin-top:auto; padding:12px; font-size:0.66rem; opacity:0.7; text-align:center; line-height:1.25;">
+            Approved clinical trial use only.<br>
+            100% local data sovereignty.
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div id="statusBar" class="status-bar">
+            <div><strong>Status:</strong> <span id="statusText">Ready — Start Intake</span></div>
+            <div id="madrsBadge" class="badge badge-success" style="display:none;">MADRS: —</div>
+            <div id="riskBadge" class="badge badge-success" style="display:none;">Cleared</div>
+            <div id="clearanceBadge" class="badge badge-success" style="display:none;">Pre-Session: —</div>
+            <div id="autoSaveStatus" style="margin-left:auto; font-size:0.75rem; color:#718096;">Auto-save: Active</div>
+        </div>
+
+        <form id="clinicalForm" onsubmit="return false;">
+            
+            <!-- TAB 0: Intake & History -->
+            <div id="tab-0" class="section active">
+                <div class="data-set-label">PRE-SESSION DATA</div>
+                <h2>0. Patient Intake, Demographics &amp; Clinical History</h2>
+                <div class="protocol-note"><strong>Protocol Alignment:</strong> Standard pre-treatment elements from COMPASS, Johns Hopkins, Imperial, and Raison et al. protocols.</div>
+                <div class="disclaimer"><strong>IMPORTANT:</strong> Psilocybin is Schedule I in the US. For approved clinical research protocols only.</div>
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:10px;">
+                    <div class="question-block">
+                        <div class="question-text">De-identified Patient / Study ID</div>
+                        <input type="text" name="patient_id" placeholder="e.g. TRD-2026-SITE-042">
+                    </div>
+                    <div class="question-block">
+                        <div class="question-text">Session / Visit Date</div>
+                        <input type="date" name="session_date" required>
+                    </div>
+                    <div class="question-block">
+                        <div class="question-text">Clinician Initials</div>
+                        <input type="text" name="clinician" placeholder="e.g. JD, PhD" required>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">Assessment Type / Timepoint</div>
+                    <select name="assessment_type" required>
+                        <option value="">Select...</option>
+                        <option value="PRE_SESSION_INTAKE">Pre-Session Intake + Baseline</option>
+                        <option value="PRE_SESSION_CLEARANCE">Pre-Session Clearance Checkpoint</option>
+                        <option value="DAY_OF_PRE_DOSING">Day-of: Immediate Pre-Dosing</option>
+                        <option value="IMMEDIATE_POST">Immediate Post-Session (24-72h)</option>
+                        <option value="FOLLOW_UP">Follow-Up / Integration</option>
+                    </select>
+                </div>
+
+                <div class="section-header">Demographics</div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap:10px;">
+                    <div class="question-block"><div class="question-text">Age Range</div><select name="age_range"><option value="">Select...</option><option>18-24</option><option>25-34</option><option>35-44</option><option>45-54</option><option>55-64</option><option>65+</option></select></div>
+                    <div class="question-block"><div class="question-text">Gender Identity</div><select name="gender"><option value="">Select...</option><option>Woman</option><option>Man</option><option>Non-binary</option><option>Transgender</option><option>Other / Prefer not</option></select></div>
+                    <div class="question-block"><div class="question-text">Education</div><select name="education"><option value="">Select...</option><option>High school or less</option><option>Some college</option><option>Bachelor's</option><option>Graduate degree</option></select></div>
+                </div>
+
+                <div class="section-header">TRD &amp; Treatment History</div>
+                <div class="question-block"><div class="question-text">Duration of current episode (months)</div><input type="number" name="episode_duration_months" min="0"></div>
+                <div class="question-block"><div class="question-text">Number of adequate failed antidepressant trials</div><input type="number" name="failed_trials" min="0"></div>
+                <div class="question-block"><div class="question-text">Prior treatments tried (check all)</div>
+                    <div class="checklist-grid">
+                        <label><input type="checkbox" name="prior_tx" value="Psychotherapy"> Psychotherapy</label>
+                        <label><input type="checkbox" name="prior_tx" value="ECT"> ECT</label>
+                        <label><input type="checkbox" name="prior_tx" value="TMS/rTMS"> TMS / rTMS</label>
+                        <label><input type="checkbox" name="prior_tx" value="Ketamine"> Ketamine / Esketamine</label>
+                        <label><input type="checkbox" name="prior_tx" value="Other"> Other</label>
+                    </div>
+                </div>
+
+                <!-- Concomitant Medications Log -->
+                <div class="section-header">Concomitant Medications &amp; Washout Log</div>
+                <div class="question-block">
+                    <div class="question-text">Current medications at screening (list all)</div>
+                    <textarea name="current_meds" placeholder="e.g. Sertraline 100mg daily, Amlodipine 5mg..."></textarea>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">Washout details (medication + last dose date)</div>
+                    <textarea name="washout_details" placeholder="e.g. Sertraline - last dose 2026-05-15&#10;..."></textarea>
+                </div>
+
+                <div class="section-header">Substance Use &amp; Psychedelic History</div>
+                <div class="question-block"><div class="question-text">Psychedelic use in past 12 months?</div>
+                    <div class="score-row"><label><input type="radio" name="psychedelic_history" value="Yes"> Yes</label><label><input type="radio" name="psychedelic_history" value="No"> No</label></div>
+                    <textarea name="psychedelic_details" placeholder="If Yes: substances, timing, context..."></textarea>
+                </div>
+
+                <div class="btn-group" style="margin-top:10px; border:none; padding:0;">
+                    <button type="button" class="btn btn-secondary export-btn" onclick="exportCurrentSectionAsCSV('Intake_History')">Export this section as CSV</button>
+                </div>
+            </div>
+
+            <!-- TAB 1: High-Risk + C-SSRS -->
+            <div id="tab-1" class="section">
+                <div class="data-set-label">PRE-SESSION DATA</div>
+                <h2>1. High-Risk Disqualification &amp; C-SSRS Screening</h2>
+                <p><strong>STRICT LOGIC GATE</strong> — Any Yes flags the record and blocks clearance.</p>
+
+                <div class="question-block"><div class="question-text">1. Lifetime Schizophrenia, Schizoaffective, Bipolar I/II with psychosis, or psychotic episode?</div>
+                    <div class="score-row"><label><input type="radio" name="dq_psychosis" value="Yes" onchange="checkDisqualification(this)"> Yes</label><label><input type="radio" name="dq_psychosis" value="No" checked onchange="checkDisqualification(this)"> No</label></div></div>
+
+                <div class="question-block"><div class="question-text">2. Currently on Lithium, any MAOI, or high-risk interacting medications?</div>
+                    <div class="score-row"><label><input type="radio" name="dq_meds" value="Yes" onchange="checkDisqualification(this)"> Yes</label><label><input type="radio" name="dq_meds" value="No" checked onchange="checkDisqualification(this)"> No</label></div></div>
+
+                <div class="question-block"><div class="question-text">3. Uncontrolled hypertension, serious arrhythmias, recent MI/stroke, or unstable CV disease?</div>
+                    <div class="score-row"><label><input type="radio" name="dq_cardio" value="Yes" onchange="checkDisqualification(this)"> Yes</label><label><input type="radio" name="dq_cardio" value="No" checked onchange="checkDisqualification(this)"> No</label></div></div>
+
+                <div class="question-block"><div class="question-text">4. Currently pregnant, breastfeeding, or planning pregnancy?</div>
+                    <div class="score-row"><label><input type="radio" name="dq_pregnancy" value="Yes" onchange="checkDisqualification(this)"> Yes</label><label><input type="radio" name="dq_pregnancy" value="No" checked onchange="checkDisqualification(this)"> No</label></div></div>
+
+                <div class="section-header">C-SSRS Screening Version</div>
+                <div class="question-block"><div class="question-text">C1. Wish to be Dead?</div><div class="score-row"><label><input type="radio" name="cssrs_1" value="Yes"> Yes</label><label><input type="radio" name="cssrs_1" value="No" checked> No</label></div></div>
+                <div class="question-block"><div class="question-text">C2. Non-Specific Active Suicidal Thoughts?</div><div class="score-row"><label><input type="radio" name="cssrs_2" value="Yes"> Yes</label><label><input type="radio" name="cssrs_2" value="No" checked> No</label></div></div>
+                <div class="question-block"><div class="question-text">C3. Thoughts with Method (no plan/intent)?</div><div class="score-row"><label><input type="radio" name="cssrs_3" value="Yes"> Yes</label><label><input type="radio" name="cssrs_3" value="No" checked> No</label></div></div>
+                <div class="question-block"><div class="question-text">C4. Some Intent to Act (no specific plan)?</div><div class="score-row"><label><input type="radio" name="cssrs_4" value="Yes"> Yes</label><label><input type="radio" name="cssrs_4" value="No" checked> No</label></div></div>
+                <div class="question-block"><div class="question-text">C5. Active Suicidal Ideation with Specific Plan and Intent?</div><div class="score-row"><label><input type="radio" name="cssrs_5" value="Yes"> Yes</label><label><input type="radio" name="cssrs_5" value="No" checked> No</label></div></div>
+                <div class="question-block"><div class="question-text">Suicidal Behavior (lifetime or since last assessment)?</div><div class="score-row"><label><input type="radio" name="cssrs_behavior" value="Yes"> Yes</label><label><input type="radio" name="cssrs_behavior" value="No" checked> No</label></div>
+                    <textarea name="cssrs_behavior_notes" placeholder="If Yes: describe..."></textarea>
+                </div>
+
+                <div id="dqWarning" style="display:none; background:#fed7d7; color:#742a2a; padding:11px; border-radius:6px; margin-top:8px; font-weight:600;">
+                    ⚠ HIGH-RISK FLAG ACTIVE — Record flagged. Dosing contraindicated until cleared.
+                </div>
+            </div>
+
+            <!-- TAB 2: Baseline Scales -->
+            <div id="tab-2" class="section">
+                <div class="data-set-label">PRE-SESSION DATA</div>
+                <h2>2. Baseline Symptom Scales — Full Instruments</h2>
+                <div class="protocol-note">MADRS (primary), GAD-7 and PHQ-9 (secondary). All items included exactly as validated.</div>
+
+                <div class="section-header">MADRS — Full 10 Items (Live Total)</div>
+                <div style="display:flex; align-items:center; gap:9px; margin-bottom:10px;">
+                    <div><strong>Total:</strong> <span id="madrsTotal" class="madrs-total">0</span>/60</div>
+                    <div id="madrsSeverity" class="badge badge-success">Severity: —</div>
+                </div>
+
+                <!-- MADRS Items 1-10 (abbreviated for space, but all present with tooltips) -->
+                <div class="question-block">
+                    <div class="question-text">1. Apparent Sadness</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No sadness&#10;2 = Looks sad, but brightens up&#10;4 = Appears sad most of the time&#10;6 = Continuous extreme sadness">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_1" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_1" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_1" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_1" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_1" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_1" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_1" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">2. Reported Sadness</div>
+                    <span class="tooltip-icon" data-tooltip="0 = Occasional sadness&#10;2 = Sad most of the time&#10;4 = Continuous or almost continuous sadness&#10;6 = Extreme, unbearable sadness">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_2" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_2" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_2" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_2" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_2" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_2" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_2" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">3. Inner Tension</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No tension&#10;2 = Occasional tension&#10;4 = Continuous tension or anxiety&#10;6 = Extreme, unbearable tension">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_3" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_3" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_3" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_3" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_3" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_3" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_3" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">4. Reduced Sleep</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No change&#10;2 = Slight reduction&#10;4 = Moderate reduction&#10;6 = Severe reduction or no sleep">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_4" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_4" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_4" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_4" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_4" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_4" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_4" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">5. Reduced Appetite</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No change&#10;2 = Slight reduction&#10;4 = Moderate reduction&#10;6 = No appetite at all">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_5" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_5" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_5" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_5" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_5" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_5" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_5" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">6. Concentration Difficulties</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No difficulties&#10;2 = Occasional difficulties&#10;4 = Moderate difficulties&#10;6 = Unable to concentrate">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_6" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_6" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_6" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_6" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_6" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_6" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_6" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">7. Lassitude</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No lassitude&#10;2 = Slight lassitude&#10;4 = Moderate lassitude&#10;6 = Extreme lassitude">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_7" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_7" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_7" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_7" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_7" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_7" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_7" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">8. Inability to Feel</div>
+                    <span class="tooltip-icon" data-tooltip="0 = Normal emotional responsiveness&#10;2 = Reduced emotional responsiveness&#10;4 = Marked reduction&#10;6 = Complete emotional numbness">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_8" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_8" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_8" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_8" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_8" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_8" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_8" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">9. Pessimistic Thoughts</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No pessimistic thoughts&#10;2 = Occasional pessimistic thoughts&#10;4 = Frequent pessimistic thoughts&#10;6 = Continuous pessimistic thoughts">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_9" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_9" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_9" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_9" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_9" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_9" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_9" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                </div>
+                <div class="question-block">
+                    <div class="question-text">10. Suicidal Thoughts</div>
+                    <span class="tooltip-icon" data-tooltip="0 = No suicidal thoughts&#10;2 = Occasional thoughts that life is not worth living&#10;4 = Frequent suicidal thoughts&#10;6 = Active suicidal thoughts with plan">?</span>
+                    <div class="score-row"><label><input type="radio" name="madrs_10" value="0" onchange="calculateMADRSTotal()">0</label><label><input type="radio" name="madrs_10" value="1" onchange="calculateMADRSTotal()">1</label><label><input type="radio" name="madrs_10" value="2" onchange="calculateMADRSTotal()">2</label><label><input type="radio" name="madrs_10" value="3" onchange="calculateMADRSTotal()">3</label><label><input type="radio" name="madrs_10" value="4" onchange="calculateMADRSTotal()">4</label><label><input type="radio" name="madrs_10" value="5" onchange="calculateMADRSTotal()">5</label><label><input type="radio" name="madrs_10" value="6" onchange="calculateMADRSTotal()">6</label></div>
+                    <div style="font-size:0.76rem;color:#c53030;margin-top:3px;">Score ≥4 requires immediate review.</div>
+                </div>
+
+                <div class="section-header" style="margin-top:16px;">GAD-7 — Full 7 Items</div>
+                <p style="font-size:0.82rem;"><strong>Over last 2 weeks:</strong> 0=Not at all, 1=Several days, 2=More than half days, 3=Nearly every day.</p>
+                <div class="question-block"><div class="question-text">1. Feeling nervous, anxious, or on edge</div><div class="score-row"><label><input type="radio" name="gad7_1" value="0" onchange="calculateGAD7()">0</label><label><input type="radio" name="gad7_1" value="1" onchange="calculateGAD7()">1</label><label><input type="radio" name="gad7_1" value="2" onchange="calculateGAD7()">2</label><label><input type="radio" name="gad7_1" value="3" onchange="calculateGAD7()">3</label></div></div>
+                <div class="question-block"><div class="question-text">2. Not being able to stop or control worrying</div><div class="score-row"><label><input type="radio" name="gad7_2" value="0" onchange="calculateGAD7()">0</label><label><input type="radio" name="gad7_2" value="1" onchange="calculateGAD7()">1</label><label><input type="radio" name="gad7_2" value="2" onchange="calculateGAD7()">2</label><label><input type="radio" name="gad7_2" value="3" onchange="calculateGAD7()">3</label></div></div>
+                <div class="question-block"><div class="question-text">3. Worrying too much about different things</div><div class="score-row"><label><input type="radio" name="gad7_3" value="0" onchange="calculateGAD7()">0</label><label><input type="radio" name="gad7_3" value="1" onchange="calculateGAD7()">1</label><label><input type="radio" name="gad7_3" value="2" onchange="calculateGAD7()">2</label><label><input type="radio" name="gad7_3" value="3" onchange="calculateGAD7()">3</label></div></div>
+                <div class="question-block"><div class="question-text">4. Trouble relaxing</div><div class="score-row"><label><input type="radio" name="gad7_4" value="0" onchange="calculateGAD7()">0</label><label><input type="radio" name="gad7_4" value="1" onchange="calculateGAD7()">1</label><label><input type="radio" name="gad7_4" value="2" onchange="calculateGAD7()">2</label><label><input type="radio" name="gad7_4" value="3" onchange="calculateGAD7()">3</label></div></div>
+                <div class="question-block"><div class="question-text">5. Being so restless that it is hard to sit still</div><div class="score-row"><label><input type="radio" name="gad7_5" value="0" onchange="calculateGAD7()">0</label><label><input type="radio" name="gad7_5" value="1" onchange="calculateGAD7()">1</label><label><input type="radio" name="gad7_5" value="2" onchange="calculateGAD7()">2</label><label><input type="radio" name="gad7_5" value="3" onchange="calculateGAD7()">3</label></div></div>
+                <div class="question-block"><div class="question-text">6. Becoming easily annoyed or irritable</div><div class="score-row"><label><input type="radio" name="gad7_6" value="0" onchange="calculateGAD7()">0</label><label><input type="radio" name="gad7_6" value="1" onchange="calculateGAD7()">1</label><label><input type="radio" name="gad7_6" value="2" onchange="calculateGAD7()">2</label><label><input type="radio" name="gad7_6" value="3" onchange="calculateGAD7()">3</label></div></div>
+                <div class="question-block"><div class="question-text">7. Feeling afraid as if something awful might happen</div><div class="score-row"><label><input type="radio" name="gad7_7" value="0" onchange="calculateGAD7()">0</label><label><input type="radio" name="gad7_7" value="1" onchange="calculateGAD7()">1</label><label><input type="radio" name="gad7_7" value="2" onchange="calculateGAD7()">2</label><label><input type="radio" name="gad7_7" value="3" onchange="calculateGAD7()">3</label></div></div>
+                <div><strong>GAD-7 Total:</strong> <span id="gad7Total">0</span>/21 <span id="gad7Severity" class="badge badge-success">—</span></div>
+
+                <div class="section-header" style="margin-top:16px;">PHQ-9 — Full 9 Items</div>
+                <p style="font-size:0.82rem;"><strong>Over last 2 weeks:</strong> Same 0-3 scale.</p>
+                <div class="question-block"><div class="question-text">1. Little interest or pleasure in doing things</div><div class="score-row"><label><input type="radio" name="phq9_1" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_1" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_1" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_1" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">2. Feeling down, depressed, or hopeless</div><div class="score-row"><label><input type="radio" name="phq9_2" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_2" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_2" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_2" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">3. Trouble falling/staying asleep or sleeping too much</div><div class="score-row"><label><input type="radio" name="phq9_3" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_3" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_3" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_3" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">4. Feeling tired or having little energy</div><div class="score-row"><label><input type="radio" name="phq9_4" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_4" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_4" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_4" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">5. Poor appetite or overeating</div><div class="score-row"><label><input type="radio" name="phq9_5" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_5" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_5" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_5" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">6. Feeling bad about yourself or a failure</div><div class="score-row"><label><input type="radio" name="phq9_6" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_6" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_6" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_6" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">7. Trouble concentrating</div><div class="score-row"><label><input type="radio" name="phq9_7" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_7" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_7" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_7" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">8. Moving/speaking slowly or fidgety/restless</div><div class="score-row"><label><input type="radio" name="phq9_8" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_8" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_8" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_8" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div class="question-block"><div class="question-text">9. Thoughts of being better off dead or hurting yourself</div><div class="score-row"><label><input type="radio" name="phq9_9" value="0" onchange="calculatePHQ9()">0</label><label><input type="radio" name="phq9_9" value="1" onchange="calculatePHQ9()">1</label><label><input type="radio" name="phq9_9" value="2" onchange="calculatePHQ9()">2</label><label><input type="radio" name="phq9_9" value="3" onchange="calculatePHQ9()">3</label></div></div>
+                <div><strong>PHQ-9 Total:</strong> <span id="phq9Total">0</span>/27 <span id="phq9Severity" class="badge badge-success">—</span></div>
+
+                <div class="btn-group" style="margin-top:10px; border:none; padding:0;">
+                    <button type="button" class="btn btn-secondary export-btn" onclick="exportCurrentSectionAsCSV('Baseline_Scales')">Export this section as CSV</button>
+                </div>
+            </div>
+
+            <!-- TAB 3: Preparation & Alliance (Guided) -->
+            <div id="tab-3" class="section">
+                <div class="data-set-label">PRE-SESSION DATA</div>
+                <h2>3. Preparation Sessions &amp; Therapeutic Alliance Building</h2>
+                <div class="protocol-note">This section includes guidance on how to cover each topic effectively during preparation sessions.</div>
+
+                <div class="question-block">
+                    <div class="question-text">Number of dedicated preparation sessions completed</div>
+                    <input type="number" name="prep_sessions_completed" min="0">
+                </div>
+
+                <div class="section-header">Topics Addressed in Preparation</div>
+                <p style="font-size:0.9rem; color:#4a5568; margin-bottom:12px;">Click on each topic to expand guidance and sample questions. Check the box once the topic has been sufficiently covered.</p>
+
+                <!-- Guided Topics -->
+                <div class="prep-topic" id="topic-rapport">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-rapport')">
+                        <input type="checkbox" name="prep_topics" value="Rapport & therapeutic alliance established">
+                        <span class="topic-title">Rapport &amp; Therapeutic Alliance Established</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Trust is the foundation of safety during a high-dose psychedelic session.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "What has it been like for you to talk about your depression with people in the past?"<br>
+                            • "Is there anything I can do to help you feel more comfortable during our sessions?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-psychoeducation">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-psychoeducation')">
+                        <input type="checkbox" name="prep_topics" value="Psychoeducation on psilocybin effects, timeline, common phenomena">
+                        <span class="topic-title">Psychoeducation on Psilocybin Effects &amp; Timeline</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Reduces fear of the unknown.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "The strongest effects are usually between 90 minutes and 3 hours. Does that timeline feel manageable?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-depression-history">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-depression-history')">
+                        <input type="checkbox" name="prep_topics" value="Reviewed personal depression history and current patterns">
+                        <span class="topic-title">Reviewed Personal Depression History &amp; Current Patterns</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Helps identify core themes that may surface during the session.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "When you think about your depression, what is the most painful or recurring thought or feeling?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-hopes-fears">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-hopes-fears')">
+                        <input type="checkbox" name="prep_topics" value="Explored hopes, fears, and expectations">
+                        <span class="topic-title">Explored Hopes, Fears, and Expectations</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Unrealistic expectations or unaddressed fears can create resistance.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "What are you hoping might change after this experience?"<br>
+                            • "What worries you most about taking the medicine?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-intention">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-intention')">
+                        <input type="checkbox" name="prep_topics" value="Collaborative flexible intention setting">
+                        <span class="topic-title">Collaborative Flexible Intention Setting</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Gives direction without rigid expectations.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "If you could ask the medicine one question, what would it be?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-mindset">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-mindset')">
+                        <input type="checkbox" name="prep_topics" value="Mindset cultivation: openness, curiosity, surrender">
+                        <span class="topic-title">Mindset Cultivation: Openness, Curiosity, Surrender</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> These attitudes correlate strongly with positive outcomes.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "What does 'surrender' mean to you personally?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-fear-control">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-fear-control')">
+                        <input type="checkbox" name="prep_topics" value="Addressed fear of losing control">
+                        <span class="topic-title">Addressed Fear of Losing Control</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> One of the most common sources of resistance.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "What does that fear feel like in your body when you imagine it?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-logistics">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-logistics')">
+                        <input type="checkbox" name="prep_topics" value="Logistics: arrival, clothing, support person, no driving">
+                        <span class="topic-title">Logistics: Arrival, Clothing, Support Person, No Driving</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Practical safety reduces background anxiety on dosing day.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "Who will bring you to the session and take you home?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-safety-boundaries">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-safety-boundaries')">
+                        <input type="checkbox" name="prep_topics" value="Safety procedures, boundaries, consent for supportive touch">
+                        <span class="topic-title">Safety Procedures, Boundaries &amp; Consent for Supportive Touch</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Clear consent is essential for psychological safety.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "If you become distressed, would you like us to offer a hand to hold, or stay close but not touch you unless you ask?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-inner-directed">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-inner-directed')">
+                        <input type="checkbox" name="prep_topics" value="Inner-directed nature; role of music, eyeshades, facilitators">
+                        <span class="topic-title">Inner-Directed Nature; Role of Music, Eyeshades &amp; Facilitators</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Helps the participant understand the work is largely internal.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "We will be present the whole time, but we won't talk much unless you need support. How does that feel?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prep-topic" id="topic-integration-preview">
+                    <div class="prep-topic-header" onclick="togglePrepTopic('topic-integration-preview')">
+                        <input type="checkbox" name="prep_topics" value="Preview of integration process">
+                        <span class="topic-title">Preview of Integration Process</span>
+                    </div>
+                    <div class="prep-topic-content">
+                        <div class="guide-text"><strong>Why it matters:</strong> Sets realistic expectations that the real work continues after dosing day.</div>
+                        <div class="sample-questions">
+                            <strong>Sample Questions:</strong><br>
+                            • "After the session we will meet again to help you make sense of what came up. Integration is where many people find the deepest changes."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">Clinician global rating of therapeutic alliance / rapport (0–10)</div>
+                    <input type="number" name="alliance_rating" min="0" max="10">
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">Participant self-report: "I understand the process, trust the facilitators, and am willing to approach with openness and surrender."</div>
+                    <div class="score-row">
+                        <label><input type="radio" name="prep_readiness" value="Strongly agree"> Strongly agree</label>
+                        <label><input type="radio" name="prep_readiness" value="Agree"> Agree</label>
+                        <label><input type="radio" name="prep_readiness" value="Neutral/Some concerns"> Neutral / Some concerns</label>
+                        <label><input type="radio" name="prep_readiness" value="Disagree"> Disagree — significant reservations</label>
+                    </div>
+                    <textarea name="prep_readiness_notes" placeholder="Participant comments..."></textarea>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">Clinician notes on preparation / alliance / concerns</div>
+                    <textarea name="prep_clinician_notes" placeholder="Key observations..."></textarea>
+                </div>
+
+                <div class="btn-group" style="margin-top:10px; border:none; padding:0;">
+                    <button type="button" class="btn btn-secondary export-btn" onclick="exportCurrentSectionAsCSV('Preparation_Alliance')">Export this section as CSV</button>
+                </div>
+            </div>
+
+            <!-- TAB 4: Pre-Session Clearance Checkpoint -->
+            <div id="tab-4" class="section">
+                <div class="data-set-label">PRE-SESSION CLEARANCE CHECKPOINT</div>
+                <h2>4. Pre-Session Clearance Checkpoint</h2>
+                <p><strong>CRITICAL GO/NO-GO DECISION POINT</strong> — This evaluates all pre-session data.</p>
+
+                <div class="btn-group" style="margin-bottom:12px; border:none; padding:0;">
+                    <button type="button" class="btn btn-primary" onclick="evaluatePreSessionClearance()">Evaluate Pre-Session Clearance</button>
+                    <button type="button" class="btn btn-warning export-btn" onclick="exportPreSessionData()">📤 Export Pre-Session Data Only (JSON)</button>
+                    <button type="button" class="btn btn-secondary export-btn" onclick="exportCurrentSectionAsCSV('PreSession_Clearance')">Export this section as CSV</button>
+                </div>
+
+                <div id="clearanceSummary" style="background:#f8f9fa; padding:14px; border-radius:7px; border:1px solid var(--border); margin-bottom:14px; min-height:110px;">
+                    <em>Complete Tabs 0–3 then click "Evaluate Pre-Session Clearance".</em>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-text">Clinician Final Clearance Decision</div>
+                    <div class="score-row">
+                        <label><input type="radio" name="clearance_decision" value="CLEARED TO PROCEED"> CLEARED TO PROCEED TO DOSING</label>
+                        <label><input type="radio" name="clearance_decision" value="REQUIRES REVIEW"> REQUIRES FURTHER REVIEW</label>
+                        <label><input type="radio" name="clearance_decision" value="NOT CLEARED"> NOT CLEARED — Do not proceed</label>
+                    </div>
+                    <textarea name="clearance_notes" placeholder="Rationale for decision, any remaining concerns..."></textarea>
+                </div>
+
+                <div id="clearanceVerdict" class="clearance-block" style="display:none;"></div>
+            </div>
+
+            <!-- TAB 5: Immediate Pre-Dosing -->
+            <div id="tab-5" class="section">
+                <div class="data-set-label" style="background:var(--warning);">DAY-OF PRE-DOSING</div>
+                <h2>5. Immediate Pre-Dosing Readiness (Day of Dosing)</h2>
+                <p>Administered on dosing day, shortly before ingestion. Final confirmation of readiness.</p>
+
+                <div class="btn-group" style="margin-bottom:10px; border:none; padding:0;">
+                    <button type="button" class="btn btn-warning export-btn" onclick="exportDayOfPreData()">📤 Export Day-of Pre-Dosing Data Only (JSON)</button>
+                    <button type="button" class="btn btn-secondary export-btn" onclick="exportCurrentSectionAsCSV('Immediate_PreDosing')">Export this section as CSV</button>
+                </div>
+
+                <div class="question-block"><div class="question-text">Current anxiety about the upcoming session (0–10)</div>
+                    <input type="number" name="ss_anxiety" min="0" max="10">
+                </div>
+
+                <div class="question-block"><div class="question-text">Prepared to surrender to the experience with openness and curiosity?</div>
+                    <div class="score-row"><label><input type="radio" name="ss_surrender" value="Yes, fully ready"> Yes, fully ready</label><label><input type="radio" name="ss_surrender" value="Mostly ready"> Mostly ready, some hesitation</label><label><input type="radio" name="ss_surrender" value="Significant resistance"> Significant resistance or fear</label></div>
+                </div>
+
+                <div class="question-block"><div class="question-text">Have you reviewed your personal intention with facilitators today?</div>
+                    <div class="score-row"><label><input type="radio" name="ss_intention" value="Yes"> Yes</label><label><input type="radio" name="ss_intention" value="No"> No</label></div>
+                </div>
+
+                <div class="question-block"><div class="question-text">Final confirmation: Participant appears calm, oriented, and has no new acute safety concerns?</div>
+                    <div class="score-row"><label><input type="radio" name="final_pre_confirm" value="Yes"> Yes — cleared for dosing</label><label><input type="radio" name="final_pre_confirm" value="No"> No — pause and reassess</label></div>
+                </div>
+            </div>
+
+            <!-- TAB 6: Immediate Post-Session -->
+            <div id="tab-6" class="section">
+                <div class="data-set-label" style="background:#805ad5;">IMMEDIATE POST-SESSION</div>
+                <h2>6. Immediate Post-Session Safety &amp; Aftercare (24-72h)</h2>
+
+                <div class="btn-group" style="margin-bottom:10px; border:none; padding:0;">
+                    <button type="button" class="btn btn-warning export-btn" onclick="exportPostSessionData()">📤 Export Immediate Post-Session Data Only (JSON)</button>
+                    <button type="button" class="btn btn-secondary export-btn" onclick="exportCurrentSectionAsCSV('Immediate_PostSession')">Export this section as CSV</button>
+                </div>
+
+                <div class="question-block"><div class="question-text">Time since dosing</div><input type="text" name="time_since_dosing" placeholder="e.g. 36 hours"></div>
+
+                <div class="question-block"><div class="question-text">Physical symptoms since dosing (check all)</div>
+                    <div class="checklist-grid">
+                        <label><input type="checkbox" name="ae_physical" value="Headache"> Headache</label>
+                        <label><input type="checkbox" name="ae_physical" value="Nausea/GI"> Nausea or GI upset</label>
+                        <label><input type="checkbox" name="ae_physical" value="Dizziness"> Dizziness</label>
+                        <label><input type="checkbox" name="ae_physical" value="Visual/HPPD"> Visual changes / HPPD-like</label>
+                        <label><input type="checkbox" name="ae_physical" value="Fatigue"> Fatigue</label>
+                    </div>
+                    <textarea name="ae_physical_notes" placeholder="Severity, onset, duration..."></textarea>
+                </div>
+
+                <div class="question-block"><div class="question-text">Emotional/psychological state compared to pre-dosing baseline</div>
+                    <div class="score-row"><label><input type="radio" name="ps_emotional" value="Significantly worse/destabilized"> Significantly worse or destabilized</label><label><input type="radio" name="ps_emotional" value="Somewhat worse/fluctuating"> Somewhat worse or fluctuating</label><label><input type="radio" name="ps_emotional" value="Same or improved" checked> Same or improved</label></div>
+                </div>
+
+                <div class="question-block"><div class="question-text">Current overall psychological safety and support needs</div>
+                    <select name="ps_safety_rating">
+                        <option value="Safe and well supported">Safe and well supported</option>
+                        <option value="Mild-moderate concerns, manageable">Mild-moderate concerns — manageable</option>
+                        <option value="Needs prompt extra integration support">Needs prompt extra integration support</option>
+                        <option value="Acute distress — immediate clinical contact">Acute distress — immediate clinical contact required</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- TAB 7: Phenomenological & Follow-Up -->
+            <div id="tab-7" class="section">
+                <div class="data-set-label" style="background:#38a169;">PHENOMENOLOGICAL &amp; FOLLOW-UP</div>
+                <h2>7. Phenomenological Efficacy &amp; Follow-Up</h2>
+
+                <div class="btn-group" style="margin-bottom:10px; border:none; padding:0;">
+                    <button type="button" class="btn btn-warning export-btn" onclick="exportFollowUpData()">📤 Export Phenomenological / Follow-Up Data Only (JSON)</button>
+                    <button type="button" class="btn btn-secondary export-btn" onclick="exportCurrentSectionAsCSV('Phenomenological_FollowUp')">Export this section as CSV</button>
+                </div>
+
+                <div class="question-block"><div class="question-text">MEQ-30 Total Score (0–150)</div>
+                    <input type="number" name="meq_total" min="0" max="150">
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:6px; margin-top:6px;">
+                        <div><label style="font-size:0.8rem;">Mystical factor</label><input type="number" name="meq_mystical"></div>
+                        <div><label style="font-size:0.8rem;">Positive Mood</label><input type="number" name="meq_positive_mood"></div>
+                        <div><label style="font-size:0.8rem;">Transcendence</label><input type="number" name="meq_transcendence"></div>
+                        <div><label style="font-size:0.8rem;">Ineffability</label><input type="number" name="meq_ineffability"></div>
+                    </div>
+                </div>
+
+                <div class="question-block"><div class="question-text">Key Acute Phenomena Checklist</div>
+                    <div class="checklist-grid">
+                        <label><input type="checkbox" name="meq_phenomena" value="Unity"> Unity / oneness</label>
+                        <label><input type="checkbox" name="meq_phenomena" value="Sacredness"> Sacredness / awe</label>
+                        <label><input type="checkbox" name="meq_phenomena" value="Noetic"> Noetic quality / insight</label>
+                        <label><input type="checkbox" name="meq_phenomena" value="Ego dissolution"> Ego dissolution</label>
+                        <label><input type="checkbox" name="meq_phenomena" value="Positive mood"> Intense positive mood / bliss</label>
+                        <label><input type="checkbox" name="meq_phenomena" value="Transcendence"> Altered time / space</label>
+                        <label><input type="checkbox" name="meq_phenomena" value="Ineffability"> Ineffability</label>
+                        <label><input type="checkbox" name="meq_phenomena" value="Challenging worked through"> Challenging emotions worked through</label>
+                    </div>
+                </div>
+
+                <div class="question-block"><div class="question-text">Most Meaningful or Insightful Aspects</div><textarea name="qual_meaningful" placeholder="Insights, perspective shifts, behavioral changes..."></textarea></div>
+                <div class="question-block"><div class="question-text">Integration Challenges or Lingering Effects</div><textarea name="qual_challenges" placeholder="Difficulty returning to routines, lingering distress..."></textarea></div>
+            </div>
+
+            <!-- TAB 8: Patient Dashboard -->
+            <div id="tab-8" class="section">
+                <h2>8. Patient Dashboard — Longitudinal View</h2>
+                <p>Enter a Patient ID to view historical scores from the local vault.</p>
+                
+                <div class="dashboard-card">
+                    <div style="display:flex; gap:12px; align-items:end; margin-bottom:16px;">
+                        <div style="flex:1;">
+                            <label style="font-weight:600; font-size:0.9rem;">Patient ID</label>
+                            <input type="text" id="dashboardPatientId" placeholder="e.g. TRD-2026-SITE-042">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="loadPatientDashboard()">Load Dashboard</button>
+                    </div>
+                    
+                    <div id="dashboardContent" style="display:none;">
+                        <div class="dashboard-card">
+                            <h4 style="margin-top:0;">MADRS &amp; PHQ-9 Over Time</h4>
+                            <canvas id="progressChart" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h4 style="margin-top:0;">MEQ-30 Profile (Latest)</h4>
+                            <canvas id="meqChart" width="300" height="200"></canvas>
+                        </div>
+                        
+                        <div id="dashboardSummary" style="margin-top:12px; font-size:0.9rem;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 9: Review & Exports -->
+            <div id="tab-9" class="section">
+                <h2>9. Review, Verify &amp; Exports</h2>
+                <p>Review all data. You can export the full vault or individual phases/sections.</p>
+
+                <div class="question-block" style="background:#f0fff4; border-left-color:#38a169;">
+                    <div class="question-text" style="color:#276749;">Overall Summary</div>
+                    <div id="reviewSummary" style="font-size:0.9rem; line-height:1.5;"><em>Complete previous tabs then refresh.</em></div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success" onclick="openVerifyModal()">✓ Verify &amp; Sign Current Data</button>
+                    <button type="button" class="btn btn-primary" onclick="updateReviewSummary()">Refresh Summary</button>
+                    <button type="button" class="btn btn-secondary" onclick="exportCurrentToJSON()">Export Current → JSON</button>
+                    <button type="button" class="btn btn-secondary" onclick="exportVaultToCSV()">Export Full Vault → CSV</button>
+                    <button type="button" class="btn btn-danger" onclick="generatePrintableReport()">🖨 Printable Clinical Report</button>
+                </div>
+            </div>
+
+            <!-- TAB 10: Clinician Guide -->
+            <div id="tab-10" class="section">
+                <div class="guide-content">
+                    <h2>Clinical Administration Guide &amp; Protocol Reference (v1.13)</h2>
+                    <p style="font-size: 0.95rem; color: #4a5568; margin-bottom: 20px;">
+                        This reference guide outlines the clinical rationale, software instructions, and standardized facilitator scripts.
+                    </p>
+
+                    <details style="margin-bottom: 15px; background: #f8f9fa; border: 1px solid #cbd5e0; border-radius: 8px; overflow: hidden;">
+                        <summary style="padding: 15px; font-weight: 700; cursor: pointer; background: #e2e8f0; border-bottom: 1px solid #cbd5e0; color: #2d3748;">
+                            💻 Software Basics &amp; The Traffic Light Rule
+                        </summary>
+                        <div style="padding: 15px; font-size: 0.9rem;">
+                            <p><strong>Auto-Save &amp; Recovery:</strong> The tool saves every 20 seconds. If the tablet dies, simply reopen the page. Drafts are automatically offered for recovery.</p>
+                            <p><strong>Hover Tooltips (?):</strong> Hover over MADRS questions to see exact clinical scoring criteria.</p>
+                            <p><strong>The Traffic Light Rule:</strong></p>
+                            <ul>
+                                <li><span style="color:green; font-weight:bold;">GREEN</span> = Cleared to proceed.</li>
+                                <li><span style="color:#c05621; font-weight:bold;">YELLOW</span> = Requires clinician review / pending decision.</li>
+                                <li><span style="color:red; font-weight:bold;">RED</span> = High-risk flag active. STOP and alert the Principal Investigator immediately.</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details style="margin-bottom: 15px; background: #f8f9fa; border: 1px solid #cbd5e0; border-radius: 8px; overflow: hidden;">
+                        <summary style="padding: 15px; font-weight: 700; cursor: pointer; background: #edf2f7; border-bottom: 1px solid #cbd5e0; color: var(--primary);">
+                            📋 Phase 1: Pre-Session Intake &amp; Safety Screening
+                        </summary>
+                        <div style="padding: 15px; font-size: 0.9rem;">
+                            <p><strong>Key Action:</strong> Complete Tab 0 and Tab 1 thoroughly. The High-Risk screen is a hard stop.</p>
+                            <div style="background: #ebf8ff; padding: 12px; border-left: 4px solid #3182ce; margin-top: 10px;">
+                                <strong>Sample Questions:</strong>
+                                <ul>
+                                    <li><em>"Have you ever experienced a period where you felt unusually euphoric or didn't need sleep?"</em> (Bipolar screening)</li>
+                                    <li><em>"Have there been any changes to your medications since our last meeting?"</em></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details style="margin-bottom: 15px; background: #f8f9fa; border: 1px solid #cbd5e0; border-radius: 8px; overflow: hidden;">
+                        <summary style="padding: 15px; font-weight: 700; cursor: pointer; background: #edf2f7; border-bottom: 1px solid #cbd5e0; color: var(--primary);">
+                            🧠 Phase 2: Preparation &amp; Therapeutic Alliance
+                        </summary>
+                        <div style="padding: 15px; font-size: 0.9rem;">
+                            <p><strong>Critical Goal:</strong> Build trust. The 0-10 Alliance rating is one of the strongest predictors of outcome.</p>
+                            <div style="background: #ebf8ff; padding: 12px; border-left: 4px solid #3182ce; margin-top: 10px;">
+                                <strong>Sample Scripts:</strong>
+                                <ul>
+                                    <li><em>"What has your depression taken away from you that you would most like to get back?"</em></li>
+                                    <li><em>"What does 'surrender' mean to you in the context of this medicine?"</em></li>
+                                    <li><em>"If difficult emotions arise, how would you like us to support you?"</em></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details style="margin-bottom: 15px; background: #f8f9fa; border: 1px solid #cbd5e0; border-radius: 8px; overflow: hidden;">
+                        <summary style="padding: 15px; font-weight: 700; cursor: pointer; background: #edf2f7; border-bottom: 1px solid #cbd5e0; color: var(--primary);">
+                            💊 Phase 3: Day-Of Dosing &amp; Grounding Techniques
+                        </summary>
+                        <div style="padding: 15px; font-size: 0.9rem;">
+                            <div style="background: #ebf8ff; padding: 12px; border-left: 4px solid #3182ce; margin-top: 10px; margin-bottom: 15px;">
+                                <strong>Pre-Dosing Script:</strong><br>
+                                <em>"Approach today with openness and non-judgmental acceptance. Trust the process. Surrender to whatever arises without fighting it. We are here the entire time."</em>
+                            </div>
+
+                            <h4 style="margin: 0 0 5px 0; color: #c53030;">🚨 Grounding Techniques for Acute Distress</h4>
+                            <ul>
+                                <li><strong>Vocal Anchoring:</strong> "I am right here with you. You are in a safe clinic, and this is the medicine working."</li>
+                                <li><strong>Breath Syncing:</strong> "Let's breathe together. In for 4, out for 6."</li>
+                                <li><strong>Reorientation:</strong> Temporarily remove eyeshades and name 3 objects in the room.</li>
+                            </ul>
+                            <p style="margin-top:10px;"><strong>Medical Emergency:</strong> If severe hypertension, unresponsiveness, or seizures occur → immediately alert the medical monitor.</p>
+                        </div>
+                    </details>
+
+                    <details style="margin-bottom: 15px; background: #f8f9fa; border: 1px solid #cbd5e0; border-radius: 8px; overflow: hidden;">
+                        <summary style="padding: 15px; font-weight: 700; cursor: pointer; background: #edf2f7; border-bottom: 1px solid #cbd5e0; color: var(--primary);">
+                            🗣️ Phase 4: Post-Session &amp; Integration
+                        </summary>
+                        <div style="padding: 15px; font-size: 0.9rem;">
+                            <div style="background: #ebf8ff; padding: 12px; border-left: 4px solid #3182ce; margin-top: 10px;">
+                                <strong>Sample Integration Questions:</strong>
+                                <ul>
+                                    <li><em>"What was the most meaningful part of your experience?"</em></li>
+                                    <li><em>"What is one small, actionable shift you can practice this week when depressive thoughts arise?"</em></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modals -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:var(--danger); margin-top:0;">⚠️ URGENT CLINICIAN ALERT</h2>
+            <p id="alertMessage"></p>
+            <div style="margin-top:16px; display:flex; gap:9px; justify-content:center; flex-wrap:wrap;">
+                <button class="btn btn-danger" onclick="closeModal('alertModal')">Acknowledge</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="verifyModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:var(--success); margin-top:0;">✓ Verify &amp; Sign Data</h2>
+            <p>Confirm accuracy before saving to local vault.</p>
+            <div id="verifySummary" class="summary-box"></div>
+            <div style="margin:12px 0; font-size:0.88rem;">
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                    <input type="checkbox" id="verifyCheck" checked> I confirm this data is complete and accurate.
+                </label>
+            </div>
+            <div style="display:flex; gap:9px; justify-content:flex-end;">
+                <button class="btn btn-success" onclick="saveToLocalVault()">Sign &amp; Save to Local Vault</button>
+                <button class="btn btn-secondary" onclick="closeModal('verifyModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePrepTopic(topicId) {
+            const topic = document.getElementById(topicId);
+            topic.classList.toggle('open');
+        }
+
+        // === ROBUST v1.13 CODE (Preserved from v1.11 + Fixed Export) ===
+        let highRiskFlag = false;
+        let currentAlertTriggered = false;
+        let autoSaveInterval = null;
+
+        function setupAutoSave() {
+            const form = document.getElementById('clinicalForm');
+            form.addEventListener('input', () => { saveDraftRobust(); });
+            autoSaveInterval = setInterval(() => {
+                saveDraftRobust();
+                document.getElementById('autoSaveStatus').textContent = 'Auto-save: Saved ' + new Date().toLocaleTimeString();
+            }, 20000);
+            checkForDraftRobust();
+        }
+
+        function saveDraftRobust() {
+            try {
+                const data = getFormData();
+                const key = data.patient_id ? 'trd_draft_' + data.patient_id : 'trd_unsaved_draft';
+                localStorage.setItem(key, JSON.stringify(data));
+            } catch (e) {}
+        }
+
+        function checkForDraftRobust() {
+            const genericDraft = localStorage.getItem('trd_unsaved_draft');
+            if (genericDraft) {
+                if (confirm('An unsaved draft was found. Would you like to resume it?')) {
+                    restoreDraftRobust(JSON.parse(genericDraft));
+                    localStorage.removeItem('trd_unsaved_draft');
+                }
+            }
+        }
+
+        function restoreDraftRobust(draft) {
+            const form = document.getElementById('clinicalForm');
+            Object.keys(draft).forEach(key => {
+                const field = form.elements[key];
+                if (field) {
+                    if (field.type === 'checkbox' || field.type === 'radio') {
+                        if (Array.isArray(draft[key])) {
+                            draft[key].forEach(val => {
+                                const cb = form.querySelector(`input[name="${key}"][value="${val}"]`);
+                                if (cb) cb.checked = true;
+                            });
+                        } else {
+                            const el = form.querySelector(`input[name="${key}"][value="${draft[key]}"]`);
+                            if (el) el.checked = true;
+                        }
+                    } else {
+                        field.value = draft[key];
+                    }
+                }
+            });
+            setTimeout(() => {
+                calculateMADRSTotal();
+                calculateGAD7();
+                calculatePHQ9();
+            }, 100);
+        }
+
+        function switchTab(tabIndex) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            const sections = document.querySelectorAll('.section');
+            const tabs = document.querySelectorAll('.tab');
+            if (sections[tabIndex]) sections[tabIndex].classList.add('active');
+            if (tabs[tabIndex]) tabs[tabIndex].classList.add('active');
+            if (tabIndex === 9) setTimeout(updateReviewSummary, 50);
+        }
+
+        function calculateMADRSTotal() {
+            let total = 0;
+            for (let i=1; i<=10; i++) {
+                const c = document.querySelector(`input[name="madrs_${i}"]:checked`);
+                if (c) total += parseInt(c.value);
+            }
+            const tEl = document.getElementById('madrsTotal');
+            const sEl = document.getElementById('madrsSeverity');
+            tEl.textContent = total;
+            let sev = '', cls = 'badge-success';
+            if (total <= 6) sev = 'Normal/Remission';
+            else if (total <= 19) sev = 'Mild';
+            else if (total <= 34) sev = 'Moderate';
+            else { sev = 'Severe'; cls = 'badge-danger'; }
+            sEl.textContent = `Severity: ${sev}`;
+            sEl.className = `badge ${cls}`;
+            const sb = document.getElementById('madrsBadge');
+            sb.style.display = 'inline-block';
+            sb.textContent = `MADRS: ${total}`;
+            sb.className = `badge ${cls}`;
+            return total;
+        }
+
+        function calculateGAD7() {
+            let t = 0;
+            for (let i=1; i<=7; i++) {
+                const c = document.querySelector(`input[name="gad7_${i}"]:checked`);
+                if (c) t += parseInt(c.value);
+            }
+            document.getElementById('gad7Total').textContent = t;
+            const s = document.getElementById('gad7Severity');
+            if (t <= 4) { s.textContent = 'Minimal'; s.className = 'badge badge-success'; }
+            else if (t <= 9) { s.textContent = 'Mild'; s.className = 'badge badge-success'; }
+            else if (t <= 14) { s.textContent = 'Moderate'; s.className = 'badge badge-warning'; }
+            else { s.textContent = 'Severe'; s.className = 'badge badge-danger'; }
+            return t;
+        }
+
+        function calculatePHQ9() {
+            let t = 0;
+            for (let i=1; i<=9; i++) {
+                const c = document.querySelector(`input[name="phq9_${i}"]:checked`);
+                if (c) t += parseInt(c.value);
+            }
+            document.getElementById('phq9Total').textContent = t;
+            const s = document.getElementById('phq9Severity');
+            if (t <= 4) { s.textContent = 'Minimal'; s.className = 'badge badge-success'; }
+            else if (t <= 9) { s.textContent = 'Mild'; s.className = 'badge badge-success'; }
+            else if (t <= 14) { s.textContent = 'Moderate'; s.className = 'badge badge-warning'; }
+            else if (t <= 19) { s.textContent = 'Moderately Severe'; s.className = 'badge badge-danger'; }
+            else { s.textContent = 'Severe'; s.className = 'badge badge-danger'; }
+            return t;
+        }
+
+        function checkDisqualification(element) {
+            const form = document.getElementById('clinicalForm');
+            const fields = ['dq_psychosis','dq_meds','dq_cardio','dq_pregnancy'];
+            let triggered = false, reasons = [];
+            fields.forEach(f => {
+                const c = form.querySelector(`input[name="${f}"]:checked`);
+                if (c && c.value === 'Yes') { triggered = true; reasons.push(f); }
+            });
+            const warn = document.getElementById('dqWarning');
+            const badge = document.getElementById('riskBadge');
+            if (triggered) {
+                highRiskFlag = true;
+                warn.style.display = 'block';
+                badge.style.display = 'inline-block';
+                badge.textContent = 'HIGH RISK FLAG';
+                badge.className = 'badge badge-danger';
+                document.getElementById('statusText').innerHTML = '<span style="color:#c53030;font-weight:700;">HIGH RISK — Monitor notification required</span>';
+                if (!currentAlertTriggered) { currentAlertTriggered = true; showAlertModal(reasons.join(', ')); }
+            } else {
+                highRiskFlag = false;
+                warn.style.display = 'none';
+                badge.style.display = 'inline-block';
+                badge.textContent = 'Cleared';
+                badge.className = 'badge badge-success';
+                document.getElementById('statusText').textContent = 'Cleared on high-risk screening';
+                currentAlertTriggered = false;
+            }
+        }
+
+        function showAlertModal(reason) {
+            const m = document.getElementById('alertModal');
+            document.getElementById('alertMessage').innerHTML = `High-risk/exclusion endorsed: <strong>${reason}</strong>.<br>Record flagged. Immediate clinical monitor notification required.`;
+            m.style.display = 'flex';
+        }
+
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function getFormData() {
+            const form = document.getElementById('clinicalForm');
+            const fd = new FormData(form);
+            const data = {};
+            
+            for (let [k, v] of fd.entries()) {
+                if (data[k]) {
+                    if (!Array.isArray(data[k])) {
+                        data[k] = [data[k]];
+                    }
+                    data[k].push(v);
+                } else {
+                    data[k] = v;
+                }
+            }
+            
+            data.madrs_total = calculateMADRSTotal();
+            data.gad7_total = calculateGAD7();
+            data.phq9_total = calculatePHQ9();
+            data.high_risk_flag = highRiskFlag;
+            data.timestamp = new Date().toISOString();
+            data.tool_version = '1.13-fixed-export';
+
+            const cssrs5 = form.querySelector('input[name="cssrs_5"]:checked');
+            data.cssrs_5 = cssrs5 ? cssrs5.value : null;
+
+            const madrs10 = form.querySelector('input[name="madrs_10"]:checked');
+            data.madrs_10 = madrs10 ? madrs10.value : null;
+
+            const mt = data.madrs_total || 0;
+            data.madrs_severity = mt <= 6 ? 'Normal/Remission' : mt <= 19 ? 'Mild' : mt <= 34 ? 'Moderate' : 'Severe';
+
+            return data;
+        }
+
+        function exportCurrentSectionAsCSV(sectionName) {
+            const d = getFormData();
+            let csvContent = '';
+            let filename = `TRD_${sectionName}_${d.patient_id || 'current'}_${new Date().toISOString().slice(0,10)}.csv`;
+
+            const formatValue = (val) => {
+                if (Array.isArray(val)) return `"${val.join('; ').replace(/"/g, '""')}"`;
+                if (val === null || val === undefined) return '""';
+                return `"${String(val).replace(/"/g, '""')}"`;
+            };
+
+            if (sectionName === 'Intake_History') {
+                csvContent = `Patient ID,Session Date,Clinician,Assessment Type,Age Range,Gender,Education,Episode Duration (months),Failed Trials,Current Meds,Washout Details,Psychedelic History,Psychedelic Details\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.clinician)},${formatValue(d.assessment_type)},${formatValue(d.age_range)},${formatValue(d.gender)},${formatValue(d.education)},${formatValue(d.episode_duration_months)},${formatValue(d.failed_trials)},${formatValue(d.current_meds)},${formatValue(d.washout_details)},${formatValue(d.psychedelic_history)},${formatValue(d.psychedelic_details)}\n`;
+            } 
+            else if (sectionName === 'Baseline_Scales') {
+                csvContent = `Patient ID,Session Date,MADRS Total,MADRS Severity,GAD-7 Total,PHQ-9 Total\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.madrs_total)},${formatValue(d.madrs_severity)},${formatValue(d.gad7_total)},${formatValue(d.phq9_total)}\n`;
+            } 
+            else if (sectionName === 'Preparation_Alliance') {
+                // FIXED in v1.13: Now includes the guided prep_topics checklist
+                csvContent = `Patient ID,Session Date,Prep Sessions Completed,Alliance Rating (0-10),Participant Readiness,Preparation Topics Covered,Clinician Notes\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.prep_sessions_completed)},${formatValue(d.alliance_rating)},${formatValue(d.prep_readiness)},${formatValue(d.prep_topics)},${formatValue(d.prep_clinician_notes)}\n`;
+            } 
+            else if (sectionName === 'PreSession_Clearance') {
+                csvContent = `Patient ID,Session Date,High Risk Flag,C-SSRS C5,MADRS Item 10,Alliance Rating,Participant Readiness,Final Clearance Decision,Clinician Notes\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.high_risk_flag)},${formatValue(d.cssrs_5)},${formatValue(d.madrs_10)},${formatValue(d.alliance_rating)},${formatValue(d.prep_readiness)},${formatValue(d.clearance_decision)},${formatValue(d.clearance_notes)}\n`;
+            } 
+            else if (sectionName === 'Immediate_PreDosing') {
+                csvContent = `Patient ID,Session Date,Anxiety (0-10),Surrender Readiness,Intention Reviewed,Final Pre-Dosing Confirmation\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.ss_anxiety)},${formatValue(d.ss_surrender)},${formatValue(d.ss_intention)},${formatValue(d.final_pre_confirm)}\n`;
+            } 
+            else if (sectionName === 'Immediate_PostSession') {
+                csvContent = `Patient ID,Session Date,Time Since Dosing,Physical AE,Emotional State,Safety Rating\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.time_since_dosing)},${formatValue(d.ae_physical)},${formatValue(d.ps_emotional)},${formatValue(d.ps_safety_rating)}\n`;
+            } 
+            else if (sectionName === 'Phenomenological_FollowUp') {
+                csvContent = `Patient ID,Session Date,MEQ-30 Total,Mystical Factor,Key Phenomena,Meaningful Aspects,Challenges\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.meq_total)},${formatValue(d.meq_mystical)},${formatValue(d.meq_phenomena)},${formatValue(d.qual_meaningful)},${formatValue(d.qual_challenges)}\n`;
+            } 
+            else {
+                csvContent = `Patient ID,Session Date,Assessment Type,MADRS Total,GAD-7 Total,PHQ-9 Total,High Risk Flag,Clearance Decision\n`;
+                csvContent += `${formatValue(d.patient_id)},${formatValue(d.session_date)},${formatValue(d.assessment_type)},${formatValue(d.madrs_total)},${formatValue(d.gad7_total)},${formatValue(d.phq9_total)},${formatValue(d.high_risk_flag)},${formatValue(d.clearance_decision)}\n`;
+            }
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function evaluatePreSessionClearance() {
+            const d = getFormData();
+            const container = document.getElementById('clearanceSummary');
+            const verdictBox = document.getElementById('clearanceVerdict');
+            
+            let issues = [];
+            let status = 'CLEARED';
+            let colorClass = 'clearance-approved';
+            
+            if (d.high_risk_flag) {
+                issues.push('High-risk flag active');
+                status = 'NOT CLEARED';
+                colorClass = 'clearance-denied';
+            }
+            if (d.cssrs_5 === 'Yes') {
+                issues.push('Active suicidal ideation with plan/intent (C-SSRS C5)');
+                if (status === 'CLEARED') status = 'REQUIRES REVIEW';
+                if (status !== 'NOT CLEARED') colorClass = 'clearance-pending';
+            }
+            const madrs10Val = d.madrs_10 ? parseInt(d.madrs_10) : 0;
+            if (madrs10Val >= 4) {
+                issues.push('High MADRS Item 10 (≥4)');
+                if (status === 'CLEARED') status = 'REQUIRES REVIEW';
+                if (status !== 'NOT CLEARED') colorClass = 'clearance-pending';
+            }
+            if (d.alliance_rating && parseInt(d.alliance_rating) < 5) {
+                issues.push('Low therapeutic alliance rating (<5/10)');
+                if (status === 'CLEARED') status = 'REQUIRES REVIEW';
+                if (status !== 'NOT CLEARED') colorClass = 'clearance-pending';
+            }
+            if (d.prep_readiness && d.prep_readiness.includes('Disagree')) {
+                issues.push('Participant reports significant reservations');
+                if (status === 'CLEARED') status = 'REQUIRES REVIEW';
+                if (status !== 'NOT CLEARED') colorClass = 'clearance-pending';
+            }
+
+            let html = `<strong>Auto-Evaluation: ${status}</strong><br>`;
+            if (issues.length > 0) html += `Issues: ${issues.join(' | ')}<br>`;
+            html += `<em>Final decision by clinician below.</em>`;
+            
+            container.innerHTML = html;
+            verdictBox.style.display = 'block';
+            verdictBox.className = `clearance-block ${colorClass}`;
+            verdictBox.innerHTML = `<strong>Recommended: ${status}</strong>`;
+            
+            const cb = document.getElementById('clearanceBadge');
+            cb.style.display = 'inline-block';
+            cb.textContent = `Pre-Session: ${status}`;
+            cb.className = `badge ${status === 'CLEARED' ? 'badge-success' : status === 'REQUIRES REVIEW' ? 'badge-warning' : 'badge-danger'}`;
+        }
+
+        function updateReviewSummary() {
+            const d = getFormData();
+            const c = document.getElementById('reviewSummary');
+            let h = `<strong>Patient:</strong> ${d.patient_id || '—'} | <strong>Date:</strong> ${d.session_date || '—'} | <strong>Type:</strong> ${d.assessment_type || '—'}<br>`;
+            h += `<strong>MADRS:</strong> ${d.madrs_total} (${d.madrs_severity}) | <strong>GAD-7:</strong> ${d.gad7_total} | <strong>PHQ-9:</strong> ${d.phq9_total}<br>`;
+            h += d.high_risk_flag ? `<span style="color:#c53030;font-weight:700;">⚠ HIGH RISK FLAG</span><br>` : `<span style="color:#276749;">✓ High-risk cleared</span><br>`;
+            if (d.clearance_decision) h += `<strong>Clearance Decision:</strong> ${d.clearance_decision}<br>`;
+            c.innerHTML = h;
+        }
+
+        function openVerifyModal() {
+            const form = document.getElementById('clinicalForm');
+            const requiredFields = ['session_date', 'clinician', 'assessment_type'];
+            let missing = [];
+            
+            requiredFields.forEach(fieldName => {
+                const field = form.elements[fieldName];
+                if (!field || !field.value.trim()) {
+                    missing.push(fieldName);
+                    if (field) field.style.borderColor = '#c53030';
+                }
+            });
+            
+            if (missing.length > 0) {
+                alert('Please complete the following required fields before signing: ' + missing.join(', '));
+                return;
+            }
+            
+            const d = getFormData();
+            const el = document.getElementById('verifySummary');
+            el.textContent = JSON.stringify(d, null, 2);
+            document.getElementById('verifyModal').style.display = 'flex';
+        }
+
+        function saveToLocalVault() {
+            if (!document.getElementById('verifyCheck').checked) { alert('Please confirm the checkbox.'); return; }
+            try {
+                const d = getFormData();
+                d.record_id = (d.patient_id || 'anon') + '-' + d.assessment_type + '-' + Date.now();
+                let vault = JSON.parse(localStorage.getItem('trd_psilocybin_vault_v1_13') || '[]');
+                vault.push(d);
+                localStorage.setItem('trd_psilocybin_vault_v1_13', JSON.stringify(vault));
+                closeModal('verifyModal');
+                alert('✓ Data signed and saved locally.');
+            } catch (error) {
+                alert('Error saving data: ' + error.message);
+            }
+        }
+
+        function exportCurrentToJSON() {
+            const d = getFormData();
+            const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `TRD_${d.assessment_type || 'Current'}_${d.patient_id || 'anon'}_${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+        }
+
+        function exportVaultToCSV() {
+            const vault = JSON.parse(localStorage.getItem('trd_psilocybin_vault_v1_13') || '[]');
+            if (!vault.length) { alert('No saved records.'); return; }
+            const headers = Object.keys(vault[0]);
+            let csv = '\uFEFF' + headers.join(',') + '\n';
+            vault.forEach(row => {
+                const line = headers.map(h => {
+                    let v = row[h] !== undefined ? row[h] : '';
+                    if (Array.isArray(v)) v = v.join('; ');
+                    if (typeof v === 'object' && v !== null) v = JSON.stringify(v);
+                    v = String(v).replace(/"/g, '""');
+                    if (v.includes(',') || v.includes('"') || v.includes('\n')) v = `"${v}"`;
+                    return v;
+                }).join(',');
+                csv += line + '\n';
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = `TRD_Full_Vault_${new Date().toISOString().slice(0,10)}.csv`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+        }
+
+        function generatePrintableReport() {
+            const d = getFormData();
+            const win = window.open('', '_blank');
+            if (!win) { alert('Allow pop-ups.'); return; }
+            const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>TRD Clinical Report — ${d.patient_id || 'Anonymous'}</title>
+<style>body{font-family:'Segoe UI',system-ui,sans-serif;margin:30px;color:#1a202c;line-height:1.5}h1{color:#1a365d;text-align:center;border-bottom:4px solid #3182ce;padding-bottom:8px;font-size:1.25rem}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:5px 12px;margin:12px 0;font-size:0.87rem}
+.section{margin:14px 0}.section h3{color:#2c5282;border-bottom:2px solid #bee3f8;padding-bottom:3px}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:0.8rem}th,td{border:1px solid #a0aec0;padding:4px 6px;text-align:left}
+th{background:#ebf8ff}.flag{background:#fed7d7;color:#742a2a;padding:2px 7px;border-radius:3px;font-weight:700}
+.disclaimer-print{font-size:0.68rem;color:#742a2a;border:1px solid #feb2b2;padding:8px;background:#fff5f5}
+.signature{margin-top:28px;border-top:1px solid #718096;padding-top:8px}.footer{font-size:0.66rem;color:#718096;text-align:center;margin-top:24px}</style></head>
+<body>
+<h1>Psilocybin-Assisted Therapy — TRD Clinical Assessment Report</h1>
+<div class="meta-grid">
+<div><strong>Record ID:</strong> ${d.record_id || 'current-' + Date.now()}</div>
+<div><strong>Generated:</strong> ${new Date().toLocaleString()}</div>
+<div><strong>Patient ID:</strong> ${d.patient_id || '—'}</div>
+<div><strong>Date:</strong> ${d.session_date || '—'}</div>
+<div><strong>Clinician:</strong> ${d.clinician || '—'}</div>
+<div><strong>Type:</strong> ${d.assessment_type || '—'}</div>
+</div>
+<div class="section"><h3>Pre-Session Clearance Decision</h3>
+<p><strong>Final Decision:</strong> ${d.clearance_decision || 'Not documented'} ${d.high_risk_flag ? '<span class="flag">HIGH RISK FLAG</span>' : ''}</p>
+</div>
+<div class="section"><h3>Baseline Scores</h3>
+<p><strong>MADRS:</strong> ${d.madrs_total} (${d.madrs_severity}) | <strong>GAD-7:</strong> ${d.gad7_total} | <strong>PHQ-9:</strong> ${d.phq9_total}</p>
+</div>
+<div class="disclaimer-print"><strong>DISCLAIMER:</strong> Local clinical research support tool for approved psilocybin TRD trials only. Schedule I substance. Not medical advice. Data stored locally on clinical site device.</div>
+<div class="signature">
+<p><strong>Clinician Signature:</strong> _______________________________ Date: _______________</p>
+</div>
+<div class="footer">TRD Psilocybin Clinical Assessment Tool v1.13 | Approved research use only.</div>
+</body></html>`;
+            win.document.write(html);
+            win.document.close();
+            setTimeout(() => { win.focus(); }, 450);
+        }
+
+        // Patient Dashboard
+        let progressChartInstance = null;
+        let meqChartInstance = null;
+
+        function loadPatientDashboard() {
+            const patientId = document.getElementById('dashboardPatientId').value.trim();
+            if (!patientId) {
+                alert('Please enter a Patient ID');
+                return;
+            }
+            
+            const vault = JSON.parse(localStorage.getItem('trd_psilocybin_vault_v1_13') || '[]');
+            const patientRecords = vault.filter(r => r.patient_id === patientId).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+            
+            if (patientRecords.length === 0) {
+                alert('No records found for this Patient ID in the local vault.');
+                return;
+            }
+            
+            document.getElementById('dashboardContent').style.display = 'block';
+            
+            const labels = patientRecords.map(r => new Date(r.timestamp).toLocaleDateString());
+            const madrsScores = patientRecords.map(r => r.madrs_total || 0);
+            const phq9Scores = patientRecords.map(r => r.phq9_total || 0);
+            
+            if (progressChartInstance) progressChartInstance.destroy();
+            if (meqChartInstance) meqChartInstance.destroy();
+            
+            const ctx1 = document.getElementById('progressChart');
+            progressChartInstance = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'MADRS',
+                        data: madrsScores,
+                        borderColor: '#3182ce',
+                        tension: 0.3
+                    }, {
+                        label: 'PHQ-9',
+                        data: phq9Scores,
+                        borderColor: '#38a169',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, max: 60 }
+                    }
+                }
+            });
+            
+            const latest = patientRecords[patientRecords.length - 1];
+            const ctx2 = document.getElementById('meqChart');
+            meqChartInstance = new Chart(ctx2, {
+                type: 'radar',
+                data: {
+                    labels: ['Mystical', 'Positive Mood', 'Transcendence', 'Ineffability'],
+                    datasets: [{
+                        label: 'MEQ-30 Subscales',
+                        data: [
+                            latest.meq_mystical || 0,
+                            latest.meq_positive_mood || 0,
+                            latest.meq_transcendence || 0,
+                            latest.meq_ineffability || 0
+                        ],
+                        backgroundColor: 'rgba(49, 130, 206, 0.2)',
+                        borderColor: '#3182ce'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: { beginAtZero: true, max: 40 }
+                    }
+                }
+            });
+            
+            let summaryHTML = `<strong>Records found:</strong> ${patientRecords.length}<br>`;
+            summaryHTML += `<strong>Latest MADRS:</strong> ${latest.madrs_total} (${latest.madrs_severity})<br>`;
+            if (latest.meq_total) {
+                summaryHTML += `<strong>Latest MEQ-30 Total:</strong> ${latest.meq_total}`;
+            }
+            document.getElementById('dashboardSummary').innerHTML = summaryHTML;
+        }
+
+        function initializeTool() {
+            const dateInput = document.querySelector('input[name="session_date"]');
+            if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
+            document.getElementById('statusText').textContent = 'Ready — Complete Intake & History';
+            
+            setupAutoSave();
+            
+            console.log('%c[TRD Tool v1.13] Fixed Export version initialized. All previous functionality preserved.', 'color:#276749');
+            switchTab(0);
+        }
+        window.onload = initializeTool;
+
+        window.TRDTool = {
+            getData: () => getFormData(),
+            evaluateClearance: () => evaluatePreSessionClearance(),
+            exportVaultCSV: () => exportVaultToCSV(),
+            clearVault: () => { localStorage.removeItem('trd_psilocybin_vault_v1_13'); alert('Vault cleared.'); }
+        };
+    </script>
+</body>
+</html>

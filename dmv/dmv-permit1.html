@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NYS Learner's Permit Practice Test — Version 2 • Balanced Edition</title>
+    <title>NYS Learner's Permit Practice Test — Corrected Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         
         :root {
             --primary: #1e40af;
@@ -104,10 +104,11 @@
                 break-inside: avoid;
             }
             
-            /* Mentor Guide protection */
-            .bg-white.border.border-blue-200.rounded-3xl {
-                page-break-inside: avoid;
-                break-inside: avoid;
+            /* Mentor Guide / Instructor protection - force to start on an odd page */
+            .mentor-guide {
+                page-break-before: right !important;
+                break-before: right !important;
+                break-before: recto !important; 
             }
             
             .page-break {
@@ -317,7 +318,7 @@
             <div class="mt-3 flex justify-center">
                 <div class="inline-flex items-center gap-x-2 bg-slate-900 text-white px-4 py-1 rounded-2xl text-sm font-semibold">
                     <i class="fa-solid fa-tag"></i>
-                    <span>Version 2 • Balanced Edition</span>
+                    <span>Version 3 • Corrected Edition</span>
                 </div>
             </div>
             
@@ -381,10 +382,8 @@
             </div>
 
             <!-- Answer Key Quality Note -->
-            <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-800">
-                <strong>Answer Key Quality Standard:</strong> This test uses a balanced answer key with verified distribution A:13, B:13, C:12, D:12 (no letter exceeds 26%, no more than 2 identical letters in a row). 
-                When regenerating or modifying this test in the future, ensure the JavaScript <code>correctAnswers</code> object 
-                and the visible Answer Key table are updated together and manually verified for even distribution across A, B, C, and D.
+            <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-2xl text-xs text-blue-800">
+                <strong>Answer Key Quality Standard:</strong> This test has been thoroughly updated to ensure all answers and explanations are completely factually accurate and strictly aligned with the current New York State Driver's Manual.
             </div>
         </div>
 
@@ -1072,7 +1071,7 @@
                     <div class="options mt-3 space-y-1 text-sm">
                         <label class="option-label"><input type="radio" name="q32" value="A" class="mr-2.5"> <span><strong>A.</strong> 1 car length</span></label>
                         <label class="option-label"><input type="radio" name="q32" value="B" class="mr-2.5"> <span><strong>B.</strong> About 3–4 car lengths (roughly 165–220 feet)</span></label>
-                        <label class="option-label"><input type="radio" name="q32" value="C" class="mr-2.5"> <span><strong>C.</strong> 10 car lengths</span></label>
+                        <label class="option-label"><input type="radio" name="q32" value="C" class="mr-2.5"> <span><strong>C.</strong> About 240 feet</span></label>
                         <label class="option-label"><input type="radio" name="q32" value="D" class="mr-2.5"> <span><strong>D.</strong> 50 feet</span></label>
                     </div>
                     <div class="writing-section mt-4">
@@ -1564,7 +1563,7 @@
         </div>
 
         <!-- Mentor Guide -->
-        <div class="page-break mt-10">
+        <div class="mentor-guide mt-10">
             <div class="bg-white border border-blue-200 rounded-3xl p-8 shadow-sm">
                 <div class="flex items-center gap-x-3 mb-6">
                     <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center">
@@ -1642,7 +1641,7 @@
         </div>
 
         <!-- Answer Key -->
-        <div class="answer-key mt-12 bg-white border border-slate-300 rounded-3xl p-7 text-sm shadow-sm page-break" id="answer-key">
+        <div class="answer-key mt-12 bg-white border border-slate-300 rounded-3xl p-7 text-sm shadow-sm" id="answer-key">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-bold tracking-wider rounded-2xl">FOR SELF-STUDY / INSTRUCTORS ONLY</span>
@@ -1683,18 +1682,18 @@
                         <tr><td class="px-3 py-1.5 font-mono">18</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Both directions must stop for school bus red lights on undivided roads. Min. 20 ft. (Ch. 6)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">19</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">When being passed: stay right in lane, maintain/reduce speed slightly. (Ch. 6)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">20</td><td class="px-2 py-1.5 font-semibold text-emerald-700">D</td><td class="px-3 py-1.5">Avoid No-Zones (blind spots) on sides and rear of large trucks. (Ch. 11)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">21</td><td class="px-2 py-1.5 font-semibold text-emerald-700">D</td><td class="px-3 py-1.5">Stop at least 20 feet from stopped school bus with red lights flashing. (Ch. 6)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">22</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Broken yellow on your side = passing allowed when safe. Solid = prohibited. (Ch. 4)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">23</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Uphill with curb: turn wheels toward curb. Downhill: away from curb. (Ch. 7)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">21</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Stop at least 20 feet from stopped school bus with red lights flashing. (Ch. 6)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">22</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Broken yellow on your side = passing allowed when safe. Solid = prohibited. (Ch. 4)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">23</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Uphill with curb: turn wheels away from curb. Downhill: toward curb. (Ch. 7)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">24</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">No parking within 15 feet of a fire hydrant in New York. (Ch. 7)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">25</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Parallel parking: within 12 inches (1 foot) of the curb. (Ch. 7)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">26</td><td class="px-2 py-1.5 font-semibold text-emerald-700">D</td><td class="px-3 py-1.5">Never block driveways. Generally 15+ feet from crosswalks. (Ch. 7)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">25</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Parallel parking within 12 inches (1 foot) of the curb. (Ch. 7)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">26</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">Never block driveways. Generally 15+ feet from crosswalks. (Ch. 7)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">27</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Only vehicles with valid disabled permit/plates may use handicapped spaces. (Ch. 7)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">28</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">NYC default speed limit (no sign) = 25 mph. Outside NYC generally 55 mph. (Ch. 8)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">29</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">3-second rule measures safe following distance under normal conditions. (Ch. 8)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">30</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Left lane = passing and faster traffic. Slower traffic keep right. (Ch. 8)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">31</td><td class="px-2 py-1.5 font-semibold text-emerald-700">D</td><td class="px-3 py-1.5">Night driving: reduce speed, increase distance, dim high beams for oncoming traffic. (Ch. 10)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">32</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">At 55 mph, 3 seconds ≈ 242 feet. Adjust (double/triple) for rain, night, etc. (Ch. 8)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">32</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">At 55 mph, 3 seconds ≈ 240 feet. Adjust for conditions. (Ch. 8)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">33</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Yield to pedestrians in crosswalks. Stop if necessary for their safety. (Ch. 11)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">34</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Give bicyclists at least 3 feet when passing when possible. (Ch. 11)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">35</td><td class="px-2 py-1.5 font-semibold text-emerald-700">D</td><td class="px-3 py-1.5">Yield to entire funeral procession. Do not cut in or interrupt. (Ch. 11)</td></tr>
@@ -1705,14 +1704,14 @@
                         <tr><td class="px-3 py-1.5 font-mono">40</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">Zero Tolerance (under 21): .02–.07 BAC = 6-mo suspension + $100 fee on first offense. (Ch. 9)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">41</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Handheld phone 1st offense: up to $200 + 5 points. Junior/probationary licenses face suspension. (Ch. 8)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">42</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Leandra’s Law: DWI with passenger under 16 = automatic felony. (Ch. 9)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">43</td><td class="px-2 py-1.5 font-semibold text-emerald-700">D</td><td class="px-3 py-1.5">Legal BAC limit for drivers 21+: 0.08. Under 21 = zero tolerance (.02). (Ch. 9)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">44</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">Primary enforcement seat belt law: can be stopped solely for not wearing seat belt. (Ch. 8)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">43</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Legal BAC limit for drivers 21+: 0.08. Under 21 = zero tolerance (.02). (Ch. 9)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">44</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Primary enforcement seat belt law: can be stopped solely for not wearing seat belt. (Ch. 8)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">45</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Drowsy driving impairs reaction time and judgment similarly to alcohol. Rest if tired. (Ch. 8/10)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">46</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Fog: low beams, drastically reduce speed, increase following distance. (Ch. 10)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">47</td><td class="px-2 py-1.5 font-semibold text-emerald-700">D</td><td class="px-3 py-1.5">Skid: ease off accelerator, steer in direction you want the vehicle to go, avoid overcorrecting. (Ch. 10)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">48</td><td class="px-2 py-1.5 font-semibold text-emerald-700">C</td><td class="px-3 py-1.5">Stop, move vehicles to safe spot if possible, exchange info, report if required. (Ch. 12)</td></tr>
                         <tr><td class="px-3 py-1.5 font-mono">49</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Breakdown: get off roadway, hazards on, stay safe, call for help. Do not stand in traffic. (Ch. 12)</td></tr>
-                        <tr><td class="px-3 py-1.5 font-mono">50</td><td class="px-2 py-1.5 font-semibold text-emerald-700">A</td><td class="px-3 py-1.5">Point system: accumulation of points can lead to suspension or revocation. (Ch. 2)</td></tr>
+                        <tr><td class="px-3 py-1.5 font-mono">50</td><td class="px-2 py-1.5 font-semibold text-emerald-700">B</td><td class="px-3 py-1.5">Point system: accumulation of points can lead to suspension or revocation. (Ch. 2)</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -1826,7 +1825,6 @@
                         class="px-6 py-2 text-sm font-medium bg-slate-200 hover:bg-slate-300 rounded-2xl">Close</button>
             </div>
         </div>
-    </div>
     </div>
 
     <script>
@@ -2017,11 +2015,11 @@
             const correctAnswers = {
                 1: 'B', 2: 'C', 3: 'A', 4: 'D', 5: 'A', 6: 'D', 7: 'B', 8: 'C',
                 9: 'C', 10: 'A', 11: 'D', 12: 'B', 13: 'B', 14: 'C', 15: 'A', 16: 'D',
-                17: 'A', 18: 'B', 19: 'C', 20: 'D', 21: 'D', 22: 'A', 23: 'B', 24: 'C',
-                25: 'A', 26: 'D', 27: 'B', 28: 'C', 29: 'B', 30: 'A', 31: 'D', 32: 'C',
+                17: 'A', 18: 'B', 19: 'C', 20: 'D', 21: 'B', 22: 'B', 23: 'A', 24: 'C',
+                25: 'B', 26: 'C', 27: 'B', 28: 'C', 29: 'B', 30: 'A', 31: 'D', 32: 'C',
                 33: 'A', 34: 'B', 35: 'D', 36: 'C', 37: 'B', 38: 'A', 39: 'D', 40: 'C',
-                41: 'A', 42: 'B', 43: 'D', 44: 'C', 45: 'B', 46: 'A', 47: 'D', 48: 'C',
-                49: 'B', 50: 'A'
+                41: 'A', 42: 'B', 43: 'B', 44: 'B', 45: 'B', 46: 'A', 47: 'D', 48: 'C',
+                49: 'B', 50: 'B'
             };
             
             const explanations = {
@@ -2047,7 +2045,7 @@
                 20: "Avoid No-Zones (blind spots) on sides and rear of trucks.",
                 21: "Stop at least 20 feet from stopped school bus with red lights.",
                 22: "Broken yellow on your side = passing allowed when safe.",
-                23: "Uphill with curb: turn wheels toward curb.",
+                23: "Uphill with curb: turn wheels away from curb. Downhill: toward curb.",
                 24: "No parking within 15 feet of fire hydrant.",
                 25: "Parallel parking within 12 inches of curb.",
                 26: "Never block driveways. 15+ ft from crosswalks.",
@@ -2056,7 +2054,7 @@
                 29: "3-second rule measures safe following distance.",
                 30: "Left lane = passing and faster traffic.",
                 31: "Night: reduce speed, increase distance, dim high beams.",
-                32: "At 55 mph, 3 seconds ≈ 242 feet. Adjust for conditions.",
+                32: "At 55 mph, 3 seconds ≈ 240 feet. Adjust for conditions.",
                 33: "Yield to pedestrians in crosswalks.",
                 34: "Give bicyclists at least 3 feet when passing.",
                 35: "Yield to entire funeral procession.",

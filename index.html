@@ -1,209 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        .tool-card { transition: all 0.2s ease; }
-        .tool-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools Shelf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2333;
+    --paper:#f7f5f0;
+    --paper-deep:#efebe2;
+    --card:#ffffff;
+    --slate:#5a6478;
+    --slate-soft:#8088a0;
+    --line:#e2ddd1;
+    --terracotta:#c4622d;
+    --teal:#1f6b63;
+    --blue:#2a5599;
+    --plum:#7a4a6e;
+    --rust:#9a4530;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px;}
+
+  /* ===== Header / hero ===== */
+  header.hero{
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(28,35,51,0.02), rgba(28,35,51,0) 60%),
+      var(--paper);
+    padding:56px 0 38px;
+  }
+  .eyebrow{
+    font-size:0.74rem;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin:0 0 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--terracotta);
+    display:inline-block;
+  }
+  h1.title{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-weight:600;
+    font-size:clamp(2.1rem, 4.6vw, 3.1rem);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+    margin:0 0 16px;
+  }
+  p.lede{
+    font-size:1.05rem;
+    color:var(--slate);
+    max-width:560px;
+    margin:0 0 26px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    font-size:0.84rem;
+    color:var(--slate-soft);
+  }
+  .hero-meta span{
+    display:flex; align-items:center; gap:7px;
+  }
+  .dot{width:6px; height:6px; border-radius:50%; background:var(--terracotta); flex-shrink:0;}
+
+  /* ===== Search / filter ===== */
+  .toolbar{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:rgba(247,245,240,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:14px 0;
+  }
+  .toolbar-inner{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+  .search-box{
+    flex:1 1 240px;
+    position:relative;
+  }
+  .search-box input{
+    width:100%;
+    font-family:inherit;
+    font-size:0.92rem;
+    padding:10px 14px 10px 36px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--card);
+    color:var(--ink);
+  }
+  .search-box input:focus{
+    outline:2px solid var(--terracotta);
+    outline-offset:1px;
+  }
+  .search-box svg{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:14px; height:14px; color:var(--slate-soft); pointer-events:none;
+  }
+  .chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .chip{
+    font-size:0.78rem;
+    font-weight:600;
+    padding:7px 13px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--slate);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background 0.12s, color 0.12s, border-color 0.12s;
+  }
+  .chip:hover{border-color:var(--terracotta);}
+  .chip.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:var(--paper);
+  }
+  .no-results{
+    display:none;
+    text-align:center;
+    color:var(--slate-soft);
+    font-size:0.92rem;
+    padding:50px 0;
+  }
+  .no-results.show{display:block;}
+
+  /* ===== Sections ===== */
+  main{padding:42px 0 80px;}
+  section.category{margin-bottom:46px;}
+  .cat-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    border-left:3px solid var(--cat-color, var(--terracotta));
+    padding-left:14px;
+    margin-bottom:18px;
+  }
+  .cat-head h2{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:1.32rem;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.005em;
+  }
+  .cat-count{
+    font-size:0.78rem;
+    color:var(--slate-soft);
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .cat-desc{
+    font-size:0.88rem;
+    color:var(--slate);
+    margin:-12px 0 18px 17px;
+    max-width:560px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
+    gap:14px;
+  }
+  .tool-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 20px 18px;
+    display:flex;
+    flex-direction:column;
+    transition:transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+  }
+  .tool-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px -10px rgba(28,35,51,0.18);
+    border-color:var(--cat-color, var(--terracotta));
+  }
+  .tool-card .tag{
+    font-size:0.68rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--cat-color, var(--terracotta));
+    margin-bottom:9px;
+  }
+  .tool-card h3{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:1.08rem;
+    font-weight:600;
+    margin:0 0 8px;
+    line-height:1.28;
+  }
+  .tool-card p{
+    font-size:0.85rem;
+    color:var(--slate);
+    margin:0 0 16px;
+    flex-grow:1;
+    line-height:1.5;
+  }
+  .card-actions{display:flex; gap:8px;}
+  .btn{
+    flex:1;
+    text-align:center;
+    font-size:0.82rem;
+    font-weight:600;
+    padding:9px 0;
+    border-radius:8px;
+    text-decoration:none;
+    transition:opacity 0.12s, background 0.12s;
+  }
+  .btn-open{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .btn-open:hover{opacity:0.85;}
+  .btn-dl{
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--slate);
+  }
+  .btn-dl:hover{border-color:var(--slate-soft); color:var(--ink);}
+  .btn:focus-visible, .chip:focus-visible{
+    outline:2px solid var(--terracotta);
+    outline-offset:2px;
+  }
+
+  /* empty-category placeholder */
+  .empty-cat{
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+    padding:28px 22px;
+    text-align:center;
+    color:var(--slate-soft);
+    font-size:0.85rem;
+    background:var(--paper-deep);
+  }
+  .empty-cat code{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:1px 6px;
+    border-radius:5px;
+    font-size:0.78rem;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:26px 0 40px;
+    font-size:0.78rem;
+    color:var(--slate-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  footer strong{color:var(--slate);}
+</style>
 </head>
-<body class="bg-slate-100">
-    
-<!-- 
-================================================================================
-                    FINAL INDEX.HTML - READY TO PUSH
-================================================================================
+<body>
 
-FOLDER STRUCTURE YOU MUST HAVE (exact names):
-
-Portfolio/
-├── index.html                                          ← This file (must be lowercase)
-├── job-coaching/
-│   ├── Coaching_Guide.html                             ← Main Internship Coaching Worksheet
-│   └── Mobile_Session_Tracker.html                     ← Quick mobile session logger
-├── dmv/
-│   └── dmv-permit1.html
-├── ged/
-│   ├── science-ged.html
-│   ├── eng-ged-test1.html
-│   ├── eng-ged-test2.html
-│   └── ss-ged-test1.html
-
-IMPORTANT:
-- All folder names must be lowercase with hyphens where shown.
-- File names are strictly case-sensitive on GitHub Pages.
-- After any change: git add . → git commit → git push → wait 60s → hard refresh
-
-================================================================================
--->
-
-    <div class="max-w-5xl mx-auto px-6 py-10">
-        
-        <!-- Header -->
-        <div class="mb-10">
-            <h1 class="text-4xl font-semibold text-slate-900 tracking-tight">Tools Hub</h1>
-            <p class="text-slate-600 mt-2 text-lg">Collection of worksheets and practice tools</p>
-        </div>
-
-        <!-- Job Coaching Tools -->
-        <div class="mb-10">
-            <div class="flex items-center gap-x-3 mb-4">
-                <div class="w-8 h-8 bg-teal-100 text-teal-700 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-briefcase"></i>
-                </div>
-                <h2 class="font-semibold text-xl text-slate-800">Job Coaching Tools</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                
-                <!-- Internship Coaching Guide -->
-                <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
-                    <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">Internship Coaching Guide</h3>
-                        <p class="text-slate-600 mt-2 text-sm">Comprehensive person-centered job coaching worksheet with task analysis, session logging, fading plans, structured learning journal, and mentor resources.</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="job-coaching/Coaching_Guide.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="job-coaching/Coaching_Guide.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
-                    </div>
-                </div>
-
-                <!-- Quick Session Tracker -->
-                <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
-                    <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">Quick Session Tracker</h3>
-                        <p class="text-slate-600 mt-2 text-sm">Mobile-friendly tool for logging sessions on iPhone. Tracks per-task independence and prompts. Export and import supported.</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="job-coaching/Mobile_Session_Tracker.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="job-coaching/Mobile_Session_Tracker.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DMV Tools -->
-        <div class="mb-10">
-            <div class="flex items-center gap-x-3 mb-4">
-                <div class="w-8 h-8 bg-teal-100 text-teal-700 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-car"></i>
-                </div>
-                <h2 class="font-semibold text-xl text-slate-800">DMV &amp; Permit Tools</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
-                    <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">NYS Learner’s Permit Practice Test</h3>
-                        <p class="text-slate-600 mt-2 text-sm">Comprehensive 50-question practice test aligned with the official New York State Driver’s Manual.</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="dmv/dmv-permit1.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="dmv/dmv-permit1.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- GED Tools -->
-        <div class="mb-10">
-            <div class="flex items-center gap-x-3 mb-4">
-                <div class="w-8 h-8 bg-teal-100 text-teal-700 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-                <h2 class="font-semibold text-xl text-slate-800">GED Practice Tools</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                
-                <!-- GED Science -->
-                <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
-                    <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">GED Science: Limiting Factors &amp; Populations</h3>
-                        <p class="text-slate-600 mt-2 text-sm">23 multiple-choice + 1 extended response question focused on limiting factors and population dynamics.</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="ged/science-ged.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="ged/science-ged.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
-                    </div>
-                </div>
-
-                <!-- GED Social Studies -->
-                <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
-                    <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">GED Social Studies Practice Test</h3>
-                        <p class="text-slate-600 mt-2 text-sm">24 multiple-choice questions and 1 extended response covering Civics, U.S. History, Economics, and Geography.</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="ged/ss-ged-test1.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="ged/ss-ged-test1.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
-                    </div>
-                </div>
-
-                <!-- GED RLA 22 -->
-                <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
-                    <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">GED RLA 22: AI &amp; Future of Work</h3>
-                        <p class="text-slate-600 mt-2 text-sm">20 multiple-choice questions, an editing task, and an extended response essay about artificial intelligence in the workplace.</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="ged/eng-ged-test1.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="ged/eng-ged-test1.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
-                    </div>
-                </div>
-
-                <!-- GED RLA 23 -->
-                <div class="tool-card bg-white border border-slate-200 rounded-3xl p-6">
-                    <div class="mb-5">
-                        <h3 class="font-semibold text-xl text-slate-900">GED RLA 23: Digital Privacy</h3>
-                        <p class="text-slate-600 mt-2 text-sm">20 multiple-choice questions, an editing task, and an extended response essay about data protection and online privacy.</p>
-                    </div>
-                    <div class="flex gap-3">
-                        <a href="ged/eng-ged-test2.html" class="flex-1 bg-teal-700 hover:bg-teal-800 text-white text-center py-2.5 rounded-2xl text-sm font-medium">Open</a>
-                        <a href="ged/eng-ged-test2.html" download class="flex-1 border border-slate-300 hover:bg-slate-50 text-slate-700 text-center py-2.5 rounded-2xl text-sm font-medium">Download</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Survey Tools -->
-        <div class="mb-10">
-            <div class="flex items-center gap-x-3 mb-4">
-                <div class="w-8 h-8 bg-teal-100 text-teal-700 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-poll"></i>
-                </div>
-                <h2 class="font-semibold text-xl text-slate-800">Survey &amp; Feedback Tools</h2>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
-                <p class="mb-2">No survey tools added yet.</p>
-                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">surveys</code> (lowercase), upload your HTML file, then add a card in this section.</p>
-            </div>
-        </div>
-
-        <!-- Assessment Tools -->
-        <div class="mb-10">
-            <div class="flex items-center gap-x-3 mb-4">
-                <div class="w-8 h-8 bg-teal-100 text-teal-700 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <h2 class="font-semibold text-xl text-slate-800">Assessment Tools</h2>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
-                <p class="mb-2">No assessment tools added yet.</p>
-                <p class="text-xs max-w-md mx-auto">Create a folder named <code class="bg-slate-100 px-1 py-0.5 rounded text-[10px]">assessments</code> (lowercase), upload your HTML file, then add a card in this section.</p>
-            </div>
-        </div>
-
-        <div class="text-center text-xs text-slate-400 mt-8">
-            Last updated: June 2026 &nbsp;•&nbsp; 
-            Push this file as <strong>index.html</strong> (lowercase) after any changes.
-        </div>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Personal toolkit</p>
+    <h1 class="title">Tools Shelf</h1>
+    <p class="lede">Worksheets, practice tests, and tracking tools built for real sessions &mdash; permit prep, GED study, job coaching, and clinical research support.</p>
+    <div class="hero-meta">
+      <span><span class="dot"></span> 15 tools across 5 categories</span>
+      <span><span class="dot"></span> Self-contained HTML &mdash; works offline once downloaded</span>
+      <span><span class="dot"></span> Updated June 2026</span>
     </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="wrap toolbar-inner">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="search" placeholder="Search tools by name or description&hellip;" autocomplete="off">
+    </div>
+    <div class="chip-row" id="chipRow">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="coaching">Job Coaching</button>
+      <button class="chip" data-filter="dmv">DMV &amp; Permit</button>
+      <button class="chip" data-filter="ged">GED Practice</button>
+      <button class="chip" data-filter="clinical">Clinical &amp; Research</button>
+      <button class="chip" data-filter="other">Other</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- JOB COACHING -->
+  <section class="category" data-cat="coaching" style="--cat-color:var(--teal)">
+    <div class="cat-head">
+      <h2>Job Coaching Tools</h2>
+      <span class="cat-count">2 tools</span>
+    </div>
+    <p class="cat-desc">Person-centered coaching worksheets for supporting interns and employees with task analysis, fading plans, and session data.</p>
+    <div class="grid">
+
+      <div class="tool-card" data-name="internship coaching guide worksheet" data-desc="task analysis session logging fading plans learning journal mentor guide">
+        <div class="tag">Worksheet</div>
+        <h3>Internship Coaching Guide</h3>
+        <p>Task breakdowns, session logging, fading plans, a structured learning journal, and a full mentor guide &mdash; all in one customizable worksheet.</p>
+        <div class="card-actions">
+          <a href="job-coaching/coaching_guide.html" class="btn btn-open">Open</a>
+          <a href="job-coaching/coaching_guide.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="quick session tracker mobile" data-desc="mobile iphone per task independence prompts export import">
+        <div class="tag">Mobile</div>
+        <h3>Quick Session Tracker</h3>
+        <p>Phone-friendly logger for tracking per-task independence and prompt level during a session. Export and import your data as JSON.</p>
+        <div class="card-actions">
+          <a href="job-coaching/mobile_session_tracker.html" class="btn btn-open">Open</a>
+          <a href="job-coaching/mobile_session_tracker.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DMV -->
+  <section class="category" data-cat="dmv" style="--cat-color:var(--blue)">
+    <div class="cat-head">
+      <h2>DMV &amp; Permit Tools</h2>
+      <span class="cat-count">3 tools</span>
+    </div>
+    <p class="cat-desc">NYS learner's permit practice tests with answer keys, mentor guides, and printable layouts.</p>
+    <div class="grid">
+
+      <div class="tool-card" data-name="nys learners permit practice test 50 question comprehensive" data-desc="50 questions all categories official manual aligned printable">
+        <div class="tag">50 Questions</div>
+        <h3>Permit Practice Test &mdash; Comprehensive</h3>
+        <p>The full 50-question edition covering all 8 testable categories, with a built-in mentor guide and password-protected answer key.</p>
+        <div class="card-actions">
+          <a href="dmv/dmv-permit1.html" class="btn btn-open">Open</a>
+          <a href="dmv/dmv-permit1.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="nys learners permit practice test 30 question essential" data-desc="30 questions essential concepts printable interactive">
+        <div class="tag">30 Questions</div>
+        <h3>Permit Practice Test &mdash; Essential 30</h3>
+        <p>A focused set covering the highest-yield manual rules, with a written-justification box under every question.</p>
+        <div class="card-actions">
+          <a href="dmv/Permit_test_30questions.html" class="btn btn-open">Open</a>
+          <a href="dmv/Permit_test_30questions.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="nys learners permit master practice test 20 question" data-desc="20 questions core curriculum alignment printable">
+        <div class="tag">20 Questions</div>
+        <h3>Permit Master Test &mdash; Core 20</h3>
+        <p>A shorter, curriculum-aligned test matching the real exam's 20-question, 14-to-pass format.</p>
+        <div class="card-actions">
+          <a href="dmv/Permit_test_20questions.html" class="btn btn-open">Open</a>
+          <a href="dmv/Permit_test_20questions.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GED -->
+  <section class="category" data-cat="ged" style="--cat-color:var(--plum)">
+    <div class="cat-head">
+      <h2>GED Practice Tools</h2>
+      <span class="cat-count">8 tools</span>
+    </div>
+    <p class="cat-desc">Practice tests across all four GED subject areas, each with a mentor guide and a fully explained answer key.</p>
+    <div class="grid">
+
+      <div class="tool-card" data-name="ged science limiting factors population dynamics" data-desc="23 multiple choice extended response biology ecology data tables">
+        <div class="tag">Science</div>
+        <h3>Limiting Factors &amp; Population Dynamics</h3>
+        <p>23 multiple-choice questions plus an extended response, focused on carrying capacity, experimental design, and data tables.</p>
+        <div class="card-actions">
+          <a href="ged/science-ged.html" class="btn btn-open">Open</a>
+          <a href="ged/science-ged.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="ged social studies civics history economics geography" data-desc="24 multiple choice extended response federalist papers voter turnout dust bowl">
+        <div class="tag">Social Studies</div>
+        <h3>Social Studies Practice Test</h3>
+        <p>24 questions and an extended response spanning Federalist No. 51, voter turnout data, and the Dust Bowl migration.</p>
+        <div class="card-actions">
+          <a href="ged/ss-ged-test1.html" class="btn btn-open">Open</a>
+          <a href="ged/ss-ged-test1.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="ged math mathematical reasoning nys version 1" data-desc="24 multiple choice constructed response arithmetic algebra geometry probability">
+        <div class="tag">Math &middot; v1</div>
+        <h3>Math Practice Test &mdash; NYS Edition v1</h3>
+        <p>24 questions plus a constructed response on break-even analysis, covering arithmetic, algebra, geometry, and probability.</p>
+        <div class="card-actions">
+          <a href="ged/GED_Math_Practice_Test_NYS.html" class="btn btn-open">Open</a>
+          <a href="ged/GED_Math_Practice_Test_NYS.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="ged math mathematical reasoning nys version 2" data-desc="24 multiple choice constructed response data tables charts geometry probability">
+        <div class="tag">Math &middot; v2</div>
+        <h3>Math Practice Test &mdash; NYS Edition v2</h3>
+        <p>A second full math set with different stimulus data &mdash; rental revenue tables, savings charts, and a flower-bed geometry problem.</p>
+        <div class="card-actions">
+          <a href="ged/GED_Math_Practice_Test_NYS_v2.html" class="btn btn-open">Open</a>
+          <a href="ged/GED_Math_Practice_Test_NYS_v2.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="ged rla reasoning language arts test 1" data-desc="reading passages grammar editing extended response remote inspection cover letters">
+        <div class="tag">RLA &middot; Test 1</div>
+        <h3>RLA Practice Test 1</h3>
+        <p>Three reading passages, a grammar editing task, and an extended response on remote inspection technology and cover letters.</p>
+        <div class="card-actions">
+          <a href="ged/rla_test_1_nys.html" class="btn btn-open">Open</a>
+          <a href="ged/rla_test_1_nys.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="ged rla reasoning language arts test 2" data-desc="reading passages grammar editing extended response community solar overtime rules">
+        <div class="tag">RLA &middot; Test 2</div>
+        <h3>RLA Practice Test 2</h3>
+        <p>A second RLA set on community solar programs, overtime salary rules, and a fiction excerpt &mdash; plus grammar editing.</p>
+        <div class="card-actions">
+          <a href="ged/rla_test_2_nys.html" class="btn btn-open">Open</a>
+          <a href="ged/rla_test_2_nys.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="ged rla 22 ai future of work" data-desc="reading passages 20 questions editing extended response artificial intelligence workforce">
+        <div class="tag">RLA &middot; 22</div>
+        <h3>RLA 22: AI &amp; the Future of Work</h3>
+        <p>20 questions, an editing task, and an extended response essay on how artificial intelligence is reshaping the workplace.</p>
+        <div class="card-actions">
+          <a href="ged/eng-ged-test1.html" class="btn btn-open">Open</a>
+          <a href="ged/eng-ged-test1.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+      <div class="tool-card" data-name="ged rla 23 digital privacy data protection" data-desc="reading passages 20 questions editing extended response privacy online data">
+        <div class="tag">RLA &middot; 23</div>
+        <h3>RLA 23: Digital Privacy</h3>
+        <p>20 questions, an editing task, and an extended response essay on personal data protection and online privacy.</p>
+        <div class="card-actions">
+          <a href="ged/eng-ged-test2.html" class="btn btn-open">Open</a>
+          <a href="ged/eng-ged-test2.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CLINICAL / RESEARCH -->
+  <section class="category" data-cat="clinical" style="--cat-color:var(--rust)">
+    <div class="cat-head">
+      <h2>Clinical &amp; Research Tools</h2>
+      <span class="cat-count">1 tool</span>
+    </div>
+    <p class="cat-desc">Structured assessment instruments for approved clinical research use. Local data sovereignty &mdash; nothing leaves the device.</p>
+    <div class="grid">
+
+      <div class="tool-card" data-name="trd psilocybin clinical assessment tool" data-desc="madrs gad7 phq9 cssrs screening clearance checkpoint patient dashboard">
+        <div class="tag">Clinical Trial</div>
+        <h3>TRD Psilocybin Assessment Tool</h3>
+        <p>Full pre/post-session workflow for psilocybin TRD research: C-SSRS screening, MADRS/GAD-7/PHQ-9 scoring, clearance checkpoints, and a patient dashboard.</p>
+        <div class="card-actions">
+          <a href="survey-tools/trd_assessment_tool.html" class="btn btn-open">Open</a>
+          <a href="survey-tools/trd_assessment_tool.html" download class="btn btn-dl">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OTHER / EMPTY -->
+  <section class="category" data-cat="other">
+    <div class="cat-head" style="border-left-color:var(--line)">
+      <h2>Travel Training</h2>
+      <span class="cat-count">0 tools</span>
+    </div>
+    <div class="empty-cat">
+      Folder exists but is empty. Add an HTML file to <code>travel-training/</code>, then add a card here.
+    </div>
+  </section>
+
+  <p class="no-results" id="noResults">No tools match your search.</p>
+
+</main>
+
+<footer class="wrap">
+  <div>Built as static HTML &mdash; <strong>no server, no tracking</strong>.</div>
+  <div>Push as <strong>index.html</strong> (lowercase) at the repo root.</div>
+</footer>
+
+<script>
+(function(){
+  const search = document.getElementById('search');
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.tool-card');
+  const sections = document.querySelectorAll('section.category');
+  const noResults = document.getElementById('noResults');
+  let activeFilter = 'all';
+
+  function applyFilters(){
+    const q = search.value.trim().toLowerCase();
+    let anyVisible = false;
+
+    sections.forEach(sec => {
+      const cat = sec.getAttribute('data-cat');
+      const matchesCat = activeFilter === 'all' || activeFilter === cat;
+      let sectionHasVisible = false;
+
+      sec.querySelectorAll('.tool-card').forEach(card => {
+        const haystack = (card.getAttribute('data-name') + ' ' + card.getAttribute('data-desc')).toLowerCase();
+        const matchesSearch = q === '' || haystack.includes(q);
+        const show = matchesCat && matchesSearch;
+        card.style.display = show ? '' : 'none';
+        if (show) sectionHasVisible = true;
+      });
+
+      // empty-state sections (no .tool-card) follow category filter only
+      const isEmptyStateSection = sec.querySelector('.empty-cat');
+      if (isEmptyStateSection) {
+        sec.style.display = matchesCat && q === '' ? '' : 'none';
+        if (matchesCat && q === '') sectionHasVisible = true;
+      } else {
+        sec.style.display = sectionHasVisible ? '' : 'none';
+      }
+
+      if (sectionHasVisible) anyVisible = true;
+    });
+
+    noResults.classList.toggle('show', !anyVisible);
+  }
+
+  search.addEventListener('input', applyFilters);
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.getAttribute('data-filter');
+      applyFilters();
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

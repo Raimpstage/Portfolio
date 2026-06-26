@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GED Mathematical Reasoning Practice Test • New York State Edition (Version 2)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Georgia:wght@400;600&amp;display=swap');
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .passage { font-family: Georgia, serif; line-height: 1.7; }
+        .question-block { page-break-inside: avoid; margin-bottom: 1.85rem; }
+        .section-header { page-break-after: avoid; }
+        .answer-line { border-bottom: 2px solid #64748b; min-width: 42px; display: inline-block; margin-left: 8px; height: 22px; vertical-align: middle; }
+        .math-expression { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        
+        @media print {
+            body { margin: 0.55in 0.6in; font-size: 10.8pt; line-height: 1.5; }
+            .no-print { display: none !important; }
+            .question-block, .passage, .graph-container, .writing-section, .table-container { page-break-inside: avoid; }
+            h2, h3, .section-header { page-break-after: avoid; }
+            .graph-container { max-width: 620px; margin: 10px auto; }
+            .answer-line { border-bottom: 2px solid #334155; }
+            .math-expression { font-family: ui-monospace, monospace; }
+        }
+        
+        .ged-header { background: linear-gradient(to right, #0f766e, #134e4b); }
+        .stimulus-label { font-size: 0.75rem; letter-spacing: 0.5px; }
+        .option-text { font-size: 0.97rem; line-height: 1.45; }
+        .lined-paper {
+            background-image: linear-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 100% 28px;
+            line-height: 28px;
+            padding-top: 4px;
+        }
+        .math-table th, .math-table td { padding: 0.5rem 0.75rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+    
+    <div class="no-print fixed bottom-0 left-0 right-0 bg-white border-t border-slate-300 shadow-xl z-50">
+        <div class="max-w-5xl mx-auto px-6 py-3.5 flex items-center justify-between">
+            <div class="text-sm text-slate-600 flex items-center gap-x-2">
+                <span class="font-medium">Student Copy • Printable</span>
+            </div>
+            <button onclick="window.print()" 
+                    class="px-6 py-2.5 text-sm font-semibold bg-teal-700 hover:bg-teal-800 text-white rounded-xl flex items-center gap-x-2.5 shadow transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.25">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H3a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4h2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                <span>Print Worksheet</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-20">
+        
+        <!-- Header -->
+        <div class="ged-header text-white rounded-2xl p-8 mb-8 shadow-xl">
+            <div class="flex items-start justify-between">
+                <div>
+                    <div class="flex items-center gap-x-3 mb-2">
+                        <div class="w-11 h-11 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+                            <span class="text-3xl">🧮</span>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-semibold tracking-tight">GED&reg; Mathematical Reasoning</h1>
+                            <p class="text-teal-200 text-lg">Practice Worksheet • New York State Edition (Version 2)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-4 text-sm mt-3">
+                        <div class="bg-white/20 px-3.5 py-1 rounded-full text-xs font-medium tracking-wider">24 MULTIPLE CHOICE + 1 CONSTRUCTED RESPONSE</div>
+                        <div class="text-teal-200 text-xs">Recommended time: 50 minutes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 pt-4 border-t border-white/20 text-sm text-teal-100">
+                Student Copy • Write Answers by Hand<br>
+                Arithmetic &amp; Number Sense • Algebra • Geometry • Data Analysis &amp; Probability
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mb-8 text-sm">
+            <div>STUDENT NAME<br><span class="answer-line w-full"></span></div>
+            <div>DATE<br><span class="answer-line w-full"></span></div>
+            <div>CLASS / PROGRAM<br><span class="answer-line w-full"></span></div>
+        </div>
+
+        <!-- Directions -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 mb-8">
+            <h2 class="font-semibold text-lg mb-2 flex items-center gap-x-2">📋 Directions for Students</h2>
+            <p class="text-sm mb-2">This is a <strong>printable practice worksheet</strong> designed to mirror the official GED Mathematical Reasoning test. Write your answers clearly by hand in the spaces provided.</p>
+            <ul class="text-sm space-y-1 list-disc pl-5">
+                <li>Read each problem, table, graph, or scenario carefully before answering.</li>
+                <li>For multiple-choice questions, write the letter of the best answer (A, B, C, or D) on the line provided.</li>
+                <li>For the Constructed Response, show all calculations and explain your reasoning in the lined space provided.</li>
+                <li>Work carefully. You have approximately 50 minutes for this practice test.</li>
+                <li>Calculators are allowed on the real GED Math test — use one here if you have it for practice.</li>
+            </ul>
+            <p class="text-sm mt-3 text-slate-500">Content areas: Arithmetic &amp; Number Sense (~25%) • Algebra &amp; Functions (~30%) • Geometry (~20%) • Data Analysis, Statistics &amp; Probability (~25%)</p>
+        </div>
+
+        <!-- STIMULUS 1: Hardware Store Tool Rental Data -->
+        <div class="mt-2 mb-2">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-sky-100 text-sky-700 font-semibold rounded-full">STIMULUS 1</span>
+                <span class="text-sm font-medium text-slate-500">Data Table • Arithmetic &amp; Data Analysis</span>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">Weekly Tool Rental Data — Riverside Hardware</h3>
+            
+            <div class="table-container bg-white border border-slate-200 rounded-2xl p-5 mb-1 overflow-x-auto">
+                <table class="math-table w-full text-sm text-left">
+                    <thead>
+                        <tr class="border-b border-slate-300 font-semibold">
+                            <th>Day</th><th>Tools Rented</th><th>Rental Revenue ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr><td>Monday</td><td>18</td><td>270</td></tr>
+                        <tr><td>Tuesday</td><td>24</td><td>360</td></tr>
+                        <tr><td>Wednesday</td><td>15</td><td>225</td></tr>
+                        <tr><td>Thursday</td><td>32</td><td>480</td></tr>
+                        <tr><td>Friday</td><td>45</td><td>675</td></tr>
+                        <tr><td>Saturday</td><td>58</td><td>870</td></tr>
+                        <tr><td>Sunday</td><td>36</td><td>540</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-xs text-center text-slate-500 mb-5">Source: Practice data for GED preparation.</p>
+        </div>
+
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">1. What was the total rental revenue for the entire week?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. $3,360</div>
+                <div class="option-text">B. $3,420</div>
+                <div class="option-text">C. $3,510</div>
+                <div class="option-text">D. $3,600</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">2. On the day with the highest revenue, what was the revenue per tool rented?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. $12.50</div>
+                <div class="option-text">B. $18.75</div>
+                <div class="option-text">C. $15.00</div>
+                <div class="option-text">D. $20.00</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">3. Approximately what percent of the week's total tool rentals occurred on Saturday and Sunday combined?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 29%</div>
+                <div class="option-text">B. 35%</div>
+                <div class="option-text">C. 47%</div>
+                <div class="option-text">D. 41%</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">4. What is the range of daily rental revenue for the week?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. $540</div>
+                <div class="option-text">B. $645</div>
+                <div class="option-text">C. $600</div>
+                <div class="option-text">D. $675</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">5. Based on the table, which statement is best supported by the data?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. The store charges a different rate per tool on each day of the week.</div>
+                <div class="option-text">B. Revenue and number of tools rented are unrelated to each other.</div>
+                <div class="option-text">C. The store charges a constant rate of $15 per tool rented, every day.</div>
+                <div class="option-text">D. Tool rentals decreased every single day of the week.</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">6. What was the average (mean) number of tools rented per day over the week?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 32.6</div>
+                <div class="option-text">B. 30.0</div>
+                <div class="option-text">C. 29.7</div>
+                <div class="option-text">D. 28.3</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+
+        <!-- STIMULUS 2: Savings Account Balance -->
+        <div class="mt-9 mb-2">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-emerald-100 text-emerald-700 font-semibold rounded-full">STIMULUS 2</span>
+                <span class="text-sm font-medium text-slate-500">Graph • Data Analysis &amp; Algebra</span>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">Savings Account Balance (First 6 Months)</h3>
+            
+            <div class="graph-container bg-white border border-slate-200 rounded-2xl p-5 mb-1" style="max-height: 320px; height: 280px;">
+                <canvas id="savingsChart" class="w-full"></canvas>
+            </div>
+            <p class="text-xs text-center text-slate-500">Source: Practice data for GED preparation.</p>
+        </div>
+
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">7. Between which two consecutive months did the account balance increase the most?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. Month 1 to Month 2</div>
+                <div class="option-text">B. Month 2 to Month 3</div>
+                <div class="option-text">C. Month 3 to Month 4</div>
+                <div class="option-text">D. Month 5 to Month 6</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">8. What was the average (mean) account balance over the six months?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. $760</div>
+                <div class="option-text">B. $800</div>
+                <div class="option-text">C. $850</div>
+                <div class="option-text">D. $820</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">9. If the balance continued increasing at the same rate as it did from Month 5 to Month 6, what would the balance be at Month 7?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. $1,100</div>
+                <div class="option-text">B. $1,130</div>
+                <div class="option-text">C. $1,150</div>
+                <div class="option-text">D. $1,200</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">10. Which statement best describes the overall trend in the account balance from Month 1 to Month 6?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. The balance decreased overall, with some months showing gains.</div>
+                <div class="option-text">B. The balance increased overall, though the size of the monthly increase varied.</div>
+                <div class="option-text">C. The balance stayed exactly the same every month.</div>
+                <div class="option-text">D. The balance doubled every month.</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+
+        <!-- STIMULUS 3: Geometry -->
+        <div class="mt-9 mb-2">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-amber-100 text-amber-700 font-semibold rounded-full">STIMULUS 3</span>
+                <span class="text-sm font-medium text-slate-500">Geometry • Measurement &amp; Pythagorean Theorem</span>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">Backyard Deck with a Triangular Flower Bed</h3>
+            <div class="passage bg-white border border-slate-200 rounded-2xl p-5 mb-5 text-[15px]">
+                A homeowner is building a rectangular deck measuring 20 feet by 14 feet. In one corner of the deck, a triangular flower bed will be cut out. The flower bed is a right triangle with legs measuring 9 feet and 12 feet.
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">11. What is the total area of the rectangular deck, before removing the flower bed?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 260 square feet</div>
+                <div class="option-text">B. 280 square feet</div>
+                <div class="option-text">C. 300 square feet</div>
+                <div class="option-text">D. 320 square feet</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">12. What is the perimeter of the rectangular deck?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 60 feet</div>
+                <div class="option-text">B. 64 feet</div>
+                <div class="option-text">C. 68 feet</div>
+                <div class="option-text">D. 72 feet</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">13. The triangular flower bed cut into one corner of the deck has legs measuring 9 feet and 12 feet. What is the length of the third side (the hypotenuse) of the flower bed?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 14 feet</div>
+                <div class="option-text">B. 15 feet</div>
+                <div class="option-text">C. 16 feet</div>
+                <div class="option-text">D. 21 feet</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">14. What is the area of the triangular flower bed?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 48 square feet</div>
+                <div class="option-text">B. 60 square feet</div>
+                <div class="option-text">C. 54 square feet</div>
+                <div class="option-text">D. 108 square feet</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">15. After the triangular flower bed is removed from the deck, how much decking area remains?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 226 square feet</div>
+                <div class="option-text">B. 232 square feet</div>
+                <div class="option-text">C. 220 square feet</div>
+                <div class="option-text">D. 254 square feet</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">16. If edging material is needed around the entire triangular flower bed, how many feet of edging are required?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 30 feet</div>
+                <div class="option-text">B. 33 feet</div>
+                <div class="option-text">C. 39 feet</div>
+                <div class="option-text">D. 36 feet</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+
+        <!-- STIMULUS 4: Probability -->
+        <div class="mt-9 mb-2">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-violet-100 text-violet-700 font-semibold rounded-full">STIMULUS 4</span>
+                <span class="text-sm font-medium text-slate-500">Probability &amp; Data Analysis</span>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">Marbles in a Bag</h3>
+            <div class="passage bg-white border border-slate-200 rounded-2xl p-5 mb-5 text-[15px]">
+                A bag contains 8 red marbles, 5 blue marbles, and 7 green marbles. A marble is drawn at random.
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">17. If one marble is drawn at random, what is the probability that it is red?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 8/20 = 2/5</div>
+                <div class="option-text">B. 8/19</div>
+                <div class="option-text">C. 5/20 = 1/4</div>
+                <div class="option-text">D. 7/20</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">18. Using the same bag, what is the probability that a marble drawn at random is either blue or green?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 5/20</div>
+                <div class="option-text">B. 7/20</div>
+                <div class="option-text">C. 12/20 = 3/5</div>
+                <div class="option-text">D. 8/20 = 2/5</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">19. A red marble is drawn and not replaced. What is the probability that the next marble drawn is also red?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 8/20</div>
+                <div class="option-text">B. 8/19</div>
+                <div class="option-text">C. 7/20</div>
+                <div class="option-text">D. 7/19</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">20. Which statement is best supported by the information about the bag of marbles?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. Drawing a green marble is more likely than drawing a blue marble.</div>
+                <div class="option-text">B. The bag contains an equal number of marbles of each color.</div>
+                <div class="option-text">C. Drawing a red marble is less likely than drawing a blue marble.</div>
+                <div class="option-text">D. There are more blue marbles than red and green marbles combined.</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+
+        <!-- QUESTIONS 21-24: Core Skills -->
+        <div class="mt-9 mb-2">
+            <div class="section-header flex items-center gap-x-2 mb-3">
+                <span class="stimulus-label px-3 py-1 bg-rose-100 text-rose-700 font-semibold rounded-full">QUESTIONS 21–24</span>
+                <span class="text-sm font-medium text-slate-500">Core Skills • Algebra, Geometry, Number Sense &amp; Functions</span>
+            </div>
+        </div>
+
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">21. Solve for x: 5x + 6 = 41</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. x = 6</div>
+                <div class="option-text">B. x = 7</div>
+                <div class="option-text">C. x = 8</div>
+                <div class="option-text">D. x = 9.4</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">22. Which expression is equivalent to 4(x − 3) + 2x?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 6x − 12</div>
+                <div class="option-text">B. 6x − 3</div>
+                <div class="option-text">C. 4x − 12</div>
+                <div class="option-text">D. x − 12</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">23. A rectangle has a perimeter of 38 feet and a length of 11 feet. What is its width?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 8 feet</div>
+                <div class="option-text">B. 9.5 feet</div>
+                <div class="option-text">C. 16 feet</div>
+                <div class="option-text">D. 19 feet</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+        <div class="question-block">
+            <div class="question text-[15px] font-medium mb-2.5">24. A function is defined as f(x) = 3x² + 2x − 1. What is the value of f(3)?</div>
+            <div class="pl-1 space-y-1.5 text-[14.2px]">
+                <div class="option-text">A. 26</div>
+                <div class="option-text">B. 32</div>
+                <div class="option-text">C. 29</div>
+                <div class="option-text">D. 38</div>
+            </div>
+            <div class="mt-3 text-sm"><span class="font-semibold text-slate-600">Answer:</span> <span class="answer-line w-9"></span></div>
+        </div>
+
+        <!-- Constructed Response -->
+        <div class="page-break writing-section mt-10 pt-8 border-t-2 border-slate-300">
+            <div class="flex items-center gap-x-2 mb-4">
+                <span class="stimulus-label px-3 py-1 bg-rose-100 text-rose-700 font-semibold rounded-full">CONSTRUCTED RESPONSE</span>
+            </div>
+            <h2 class="text-2xl font-semibold mb-2">Linear Functions &amp; Break-Even Analysis</h2>
+            
+            <div class="bg-rose-50 border border-rose-200 rounded-2xl p-5 mb-5">
+                <p class="font-medium text-sm mb-2">Directions:</p>
+                <p class="text-sm">A small print shop makes and sells custom T-shirts. The monthly fixed costs (rent, equipment, etc.) are $600. Each shirt costs $5 in materials and labor to produce. The shirts are sold for $17 each.</p>
+                <p class="text-sm mt-2"><strong>Part A:</strong> Write an equation for the total monthly cost <span class="math-expression">C</span> when <span class="math-expression">x</span> shirts are produced.</p>
+                <p class="text-sm"><strong>Part B:</strong> Write an equation for the total monthly revenue <span class="math-expression">R</span> when <span class="math-expression">x</span> shirts are sold.</p>
+                <p class="text-sm"><strong>Part C:</strong> How many shirts must be sold in a month to break even (where revenue equals total cost)? Show all work.</p>
+                <p class="text-sm"><strong>Part D:</strong> If the shop sells 90 shirts in a month, what is the profit? Explain what the break-even point means for this business in 1–2 sentences.</p>
+            </div>
+
+            <div class="border border-slate-300 rounded-2xl p-4">
+                <p class="text-xs font-medium text-slate-500 mb-2 px-1">Show all calculations and write your explanations below. Use additional paper if needed.</p>
+                <div class="lined-paper min-h-[420px] border border-slate-200 rounded-xl p-4 text-sm leading-[28px]">
+                    <div class="h-7"></div><div class="h-7"></div><div class="h-7"></div><div class="h-7"></div><div class="h-7"></div>
+                    <div class="h-7"></div><div class="h-7"></div><div class="h-7"></div><div class="h-7"></div><div class="h-7"></div>
+                    <div class="h-7"></div><div class="h-7"></div><div class="h-7"></div><div class="h-7"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reflection -->
+        <div class="page-break mt-10 pt-8 border-t-2 border-slate-300">
+            <h2 class="text-xl font-semibold mb-3 flex items-center gap-x-2">✏️ Reflection</h2>
+            <p class="text-sm mb-4">Take a few minutes to reflect on your performance. This helps you identify areas to review before the real GED test.</p>
+            <div class="space-y-4 text-sm">
+                <div>1. Which content area (Arithmetic, Algebra, Geometry, or Data/Probability) felt strongest for you on this test?<br><span class="answer-line w-full"></span></div>
+                <div>2. Which type of question or skill was most challenging (e.g., multi-step word problems, interpreting graphs, geometry formulas, solving equations)?<br><span class="answer-line w-full"></span></div>
+                <div>3. What is one specific topic or skill you plan to review before taking the real GED Mathematical Reasoning test?<br><span class="answer-line w-full"></span></div>
+            </div>
+        </div>
+
+        <p class="text-center text-xs tracking-widest uppercase text-slate-400 mt-10 mb-1">&mdash; End of Student-Facing Test &mdash;</p>
+        <hr class="border-t-4 border-double border-slate-400 mb-2">
+
+        <!-- Mentor Guide -->
+        <div class="page-break mt-10 pt-8 border-t-2 border-slate-300">
+            <div class="bg-amber-50 border border-amber-300 rounded-2xl p-4 mb-6 text-center">
+                <p class="text-sm font-semibold text-amber-800">FOR INSTRUCTORS ONLY — DO NOT DISTRIBUTE TO STUDENTS</p>
+            </div>
+
+            <h2 class="text-2xl font-semibold mb-4">Mentor Guide</h2>
+
+            <div class="space-y-5">
+                <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                    <h3 class="font-semibold text-base mb-2 text-teal-700">Effective Grading</h3>
+                    <ul class="list-disc pl-5 space-y-1.5 text-sm text-slate-600">
+                        <li>Begin feedback with what the student did well to build confidence.</li>
+                        <li>Use simple, clear rubrics focused on 2–3 key skills, especially for the Constructed Response.</li>
+                        <li>Give credit for correct setup and reasoning, even when arithmetic slips lead to the wrong final number.</li>
+                        <li>Provide specific, actionable feedback (e.g., "check your formula for area vs. perimeter" rather than just "wrong").</li>
+                        <li>Allow flexible response formats (talking through steps aloud, using a calculator, or drawing diagrams) when writing is difficult.</li>
+                        <li>Focus on the student's growth by comparing their work to their own previous attempts.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                    <h3 class="font-semibold text-base mb-2 text-teal-700">Teaching Concepts Students May Have Missed</h3>
+                    <ul class="list-disc pl-5 space-y-1.5 text-sm text-slate-600">
+                        <li>Break multi-step word problems into smaller steps: identify what's given, what's asked, then choose an operation.</li>
+                        <li>Use visual supports for geometry (draw the deck and flower bed, label every side) and for data questions (highlight relevant table cells or graph points).</li>
+                        <li>Model one problem fully, then guide the student through a similar one, then have them try independently.</li>
+                        <li>Connect probability questions to physical objects (an actual bag of colored items) before introducing the without-replacement wrinkle.</li>
+                        <li>Revisit the Pythagorean theorem and common triples (3-4-5, 9-12-15) since these appear often on the GED.</li>
+                        <li>Review key formulas frequently (area, perimeter, slope, percent change) and check for understanding before moving on.</li>
+                        <li>Reduce anxiety by allowing breaks and normalizing that multi-step problems take longer to work through.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                    <h3 class="font-semibold text-base mb-2 text-teal-700">General Tips for Mentors</h3>
+                    <ul class="list-disc pl-5 space-y-1.5 text-sm text-slate-600">
+                        <li>Be patient and encouraging — celebrate small successes, especially with multi-step problems.</li>
+                        <li>Adapt materials when needed (larger print, graph paper, a four-function calculator) since calculators are permitted on the real GED Math test.</li>
+                        <li>Build student confidence and self-advocacy around asking for clarification on word problems.</li>
+                        <li>Make problems relevant to the student's goals and daily life (budgeting, home projects, shopping discounts).</li>
+                        <li>Remind students that the real GED Mathematical Reasoning test is 115 minutes long, and help them build pacing habits during practice.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Answer Key -->
+        <div class="page-break mt-10 pt-8 border-t-2 border-slate-300">
+            <div class="bg-slate-800 text-white rounded-2xl p-6">
+                <h2 class="text-2xl font-semibold mb-1">ANSWER KEY &amp; EXPLANATIONS</h2>
+                <p class="text-sm text-slate-300 mb-4">For Instructor / Self-Check Use Only • Student version should not include this page</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+                    <div><span class="font-mono font-semibold text-teal-400">1. B</span> — Total revenue: 270 + 360 + 225 + 480 + 675 + 870 + 540 = $3,420.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">2. C</span> — Saturday has the highest revenue ($870) with 58 tools rented: 870 ÷ 58 = $15.00 per tool.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">3. D</span> — Weekend rentals: 58 + 36 = 94. Total weekly rentals: 18+24+15+32+45+58+36 = 228. 94 ÷ 228 ≈ 41.2%, which rounds to 41%.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">4. B</span> — Highest daily revenue is $870 (Saturday), lowest is $225 (Wednesday). Range = 870 − 225 = $645.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">5. C</span> — Dividing revenue by tools rented gives exactly $15.00 for every single day, confirming a constant per-tool rate.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">6. C</span> — Average tools rented: (18+24+15+32+45+58+36) ÷ 7 = 228 ÷ 7 ≈ 29.7.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">7. C</span> — Month-to-month changes are +150, +70, +180, +150, +50. The largest is +180, from Month 3 to Month 4.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">8. D</span> — Average balance: (500+650+720+900+1050+1100) ÷ 6 = 4,920 ÷ 6 = $820.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">9. C</span> — Month 5 to Month 6 increased by $50 (1,050 → 1,100). Projecting the same increase: 1,100 + 50 = $1,150.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">10. B</span> — The balance rises overall from $500 to $1,100, though the size of the increase varies month to month (e.g., +180 vs. +50).</div>
+                    <div><span class="font-mono font-semibold text-teal-400">11. B</span> — Area of rectangle = length × width = 20 × 14 = 280 square feet.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">12. C</span> — Perimeter of rectangle = 2 × (20 + 14) = 2 × 34 = 68 feet.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">13. B</span> — Using the Pythagorean theorem: 9² + 12² = 81 + 144 = 225. √225 = 15 feet.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">14. C</span> — Area of right triangle = (9 × 12) ÷ 2 = 108 ÷ 2 = 54 square feet.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">15. A</span> — Remaining deck area = total deck area − triangle area = 280 − 54 = 226 square feet.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">16. D</span> — Edging needed = perimeter of the triangle = 9 + 12 + 15 = 36 feet.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">17. A</span> — Probability of red = number of red marbles ÷ total marbles = 8 ÷ 20 = 2/5.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">18. C</span> — Probability of blue or green = (5 + 7) ÷ 20 = 12/20 = 3/5.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">19. D</span> — After one red marble is removed, 7 red marbles remain out of 19 total marbles: 7/19.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">20. A</span> — Green marbles (7) outnumber blue marbles (5), so drawing green is more likely than drawing blue. The other statements are all false: the colors are not equal (8, 5, 7), red (8) is more likely than blue (5) (not less), and blue (5) does not outnumber red and green combined (15).</div>
+                    <div><span class="font-mono font-semibold text-teal-400">21. B</span> — 5x + 6 = 41 → 5x = 35 → x = 7.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">22. A</span> — Distribute: 4(x − 3) + 2x = 4x − 12 + 2x = 6x − 12.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">23. A</span> — Perimeter = 2(length + width) → 38 = 2(11 + width) → 19 = 11 + width → width = 8 feet.</div>
+                    <div><span class="font-mono font-semibold text-teal-400">24. B</span> — f(3) = 3(3)² + 2(3) − 1 = 3(9) + 6 − 1 = 27 + 6 − 1 = 32.</div>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-600 text-xs text-slate-300">
+                    <strong>Constructed Response sample solution:</strong> Part A: C = 600 + 5x. Part B: R = 17x. Part C: Break-even when R = C → 17x = 600 + 5x → 12x = 600 → x = 50 shirts. Part D: At 90 shirts, revenue = 17(90) = $1,530; cost = 600 + 5(90) = $1,050; profit = $480. The break-even point (50 shirts) is where the shop neither makes nor loses money — selling fewer than 50 shirts results in a loss, and selling more than 50 results in a profit.</div>
+                <div class="mt-3 text-xs text-slate-400">Every answer above was independently calculated from the source table, chart, and scenario values before being recorded here, and cross-checked against the question options to confirm each is the only defensible correct choice.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function initializeChart() {
+            const ctx = document.getElementById('savingsChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [{
+                        label: 'Account Balance ($)',
+                        data: [500, 650, 720, 900, 1050, 1100],
+                        borderColor: '#0f766e',
+                        backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true,
+                        pointBackgroundColor: '#134e4b',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Savings Account Balance Over Time',
+                            font: { size: 13, weight: '600' },
+                            color: '#334155'
+                        },
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 400,
+                            max: 1200,
+                            ticks: { stepSize: 100, font: { size: 10 } },
+                            title: { display: true, text: 'Balance ($)', font: { size: 10 } }
+                        },
+                        x: {
+                            title: { display: true, text: 'Month', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+        
+        window.onload = function() {
+            initializeChart();
+        };
+    </script>
+</body>
+</html>

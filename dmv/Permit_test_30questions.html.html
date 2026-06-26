@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYS Learner's Permit Practice Test — 30-Question Essential Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap');
+        
+        :root { --primary: #1e40af; }
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .header-font { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; }
+
+        .question-block {
+            page-break-inside: avoid; break-inside: avoid;
+            margin-bottom: 1.75rem; padding: 1.25rem; background: white;
+            border: 1px solid #e5e7eb; border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .section-header, .writing-section { page-break-inside: avoid; break-inside: avoid; }
+
+        @media print {
+            body { margin: 0.4in; font-size: 10pt; line-height: 1.4; color: #111827; background: white !important; }
+            .no-print, .sticky-bar, button { display: none !important; }
+            .question-block { box-shadow: none; border: 1px solid #d1d5db; margin-bottom: 1rem; padding: 0.75rem 0.9rem; }
+            h1, h2, h3, .section-header { page-break-after: avoid; break-after: avoid; color: #1e40af; }
+            .writing-section textarea { border: 1px solid #9ca3af; min-height: 48px; background: white; box-shadow: none; }
+            .confidence-option:has(input:checked) { background: white !important; color: #111827 !important; border-color: #9ca3af !important; }
+            .page-break { page-break-before: always; break-before: always; }
+            
+            /* --- Extreme Compact Instructor Page for Single-Page Fit (30 Rows) --- */
+            .mentor-guide-box { 
+                padding: 0.25rem 0 !important; 
+                margin-top: 0 !important; 
+                border: none !important; 
+                box-shadow: none !important; 
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            .mentor-guide-box .mb-6 { margin-bottom: 0.25rem !important; }
+            .mentor-guide-box h2 { font-size: 13pt !important; margin-bottom: 0.1rem !important; }
+            .mentor-guide-box h4 { font-size: 9.5pt !important; margin-top: 0.3rem !important; margin-bottom: 0.1rem !important; }
+            .mentor-guide-box p, .mentor-guide-box li { font-size: 8.5pt !important; line-height: 1.2 !important; margin-bottom: 0.15rem !important; }
+            .mentor-guide-box ul { margin-bottom: 0.2rem !important; padding-left: 1rem !important; }
+            
+            .answer-key { 
+                padding: 0.25rem 0 !important; 
+                margin-top: 0.25rem !important; 
+                border: none !important; 
+                box-shadow: none !important; 
+                page-break-before: avoid !important; 
+                break-before: avoid !important; 
+            }
+            .answer-key h2 { font-size: 13pt !important; margin-bottom: 0.1rem !important; margin-top: 0 !important; }
+            .answer-key .mb-4 { margin-bottom: 0.25rem !important; }
+            .answer-key table { font-size: 7.5pt !important; width: 100%; border-collapse: collapse; line-height: 1.1 !important; }
+            .answer-key td, .answer-key th { padding: 2px 4px !important; border: 1px solid #d1d5db; vertical-align: top; }
+            .answer-key th { background: #f1f5f9; text-align: left; font-weight: 600; }
+            .answer-key .pt-4 { padding-top: 0.25rem !important; margin-top: 0.25rem !important; }
+
+            /* --- Reflection Block: Much larger to fill remaining space on Q30 page --- */
+            .reflection-block {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+                margin-top: 0.4rem !important;
+            }
+            .reflection-block > div {
+                padding: 0.6rem 0.85rem !important;
+            }
+            .reflection-block h2 {
+                font-size: 12pt !important;
+                margin-bottom: 0.15rem !important;
+            }
+            .reflection-block label {
+                font-size: 9pt !important;
+            }
+            .reflection-block textarea {
+                min-height: 145px !important;
+                padding: 0.5rem 0.65rem !important;
+                font-size: 9.5pt !important;
+            }
+        }
+
+        .option-label {
+            display: flex; align-items: flex-start; padding: 0.5rem 0.75rem;
+            border-radius: 8px; transition: all 0.1s ease; cursor: pointer;
+        }
+        .option-label:hover { background-color: #f8fafc; }
+        .option-label input[type="radio"] { margin-top: 0.2rem; accent-color: #1e40af; }
+
+        .writing-section textarea {
+            width: 100%; padding: 0.65rem 0.85rem; border: 1px solid #cbd5e1;
+            border-radius: 8px; font-size: 0.95rem; resize: vertical; min-height: 68px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .writing-section textarea:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+
+        .section-header {
+            background: linear-gradient(to right, #1e40af, #3b82f6); color: white;
+            padding: 0.65rem 1.25rem; border-radius: 10px; margin-bottom: 1.25rem; font-weight: 600;
+        }
+
+        .correct-highlight { background-color: #dcfce7 !important; border-color: #22c55e !important; }
+        .incorrect-highlight { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+
+        .sticky-bar { position: sticky; top: 0; z-index: 50; background: white; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+
+        .question-number {
+            background: #1e40af; color: white; width: 28px; height: 28px; display: inline-flex;
+            align-items: center; justify-content: center; border-radius: 9999px; font-weight: 700; font-size: 0.875rem; flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <!-- Sticky Action Bar -->
+    <div class="sticky-bar no-print border-b border-slate-200 bg-white">
+        <div class="max-w-screen-xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <div class="flex items-center gap-x-3">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-car text-2xl text-blue-700"></i>
+                    <div>
+                        <span class="font-semibold text-xl tracking-tight">NYS DMV</span>
+                        <span class="text-sm text-slate-500 block -mt-1">Learner Permit Prep</span>
+                    </div>
+                </div>
+                <div class="hidden md:block h-6 w-px bg-slate-300"></div>
+                <div class="text-sm text-slate-600 hidden md:block">
+                    30 Questions • Essential Concepts • Interactive + Printable
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-x-2 flex-wrap">
+                <button onclick="saveProgress()" class="px-4 py-2 text-sm font-medium bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-xl flex items-center gap-x-2 transition-colors">
+                    <i class="fa-solid fa-save"></i><span class="hidden sm:inline">Save</span>
+                </button>
+                <button onclick="loadProgress()" class="px-4 py-2 text-sm font-medium bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-xl flex items-center gap-x-2 transition-colors">
+                    <i class="fa-solid fa-folder-open"></i><span class="hidden sm:inline">Load</span>
+                </button>
+                <button onclick="printCleanTest()" class="px-5 py-2 text-sm font-semibold bg-blue-700 hover:bg-blue-800 text-white rounded-xl flex items-center gap-x-2 transition-colors shadow-sm">
+                    <i class="fa-solid fa-print"></i><span>Print</span>
+                </button>
+                <button onclick="unlockAndCheckAnswers()" class="px-5 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl flex items-center gap-x-2 transition-colors shadow-sm">
+                    <i class="fa-solid fa-lock mr-1"></i><span>Check Answers</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-screen-xl mx-auto px-5 pt-8 pb-16">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-semibold tracking-tighter header-font text-slate-900">New York State</h1>
+            <h2 class="text-3xl font-semibold tracking-tighter header-font text-blue-700 -mt-1">Learner’s Permit Practice Test</h2>
+            
+            <div class="mt-3 flex justify-center">
+                <div class="inline-flex items-center gap-x-2 bg-slate-900 text-white px-4 py-1 rounded-2xl text-sm font-semibold">
+                    <i class="fa-solid fa-tag"></i><span>Essential 30-Question Edition • Audited Key</span>
+                </div>
+            </div>
+            <p class="mt-3 text-lg text-slate-600 max-w-md mx-auto">Focused on the highest-yield manual rules and concepts.</p>
+        </div>
+
+        <!-- Student Info -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-8 shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1.5">FULL NAME</label>
+                    <input type="text" id="student-name" class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1.5">DATE</label>
+                    <input type="date" id="test-date" class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1.5">ATTEMPT #</label>
+                    <input type="number" id="attempt" value="1" min="1" class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 mb-8 text-sm leading-relaxed shadow-sm">
+            <h3 class="font-semibold text-lg mb-3 flex items-center gap-x-2 text-slate-800">
+                <i class="fa-solid fa-info-circle text-blue-600"></i> How to Use This Test
+            </h3>
+            <p class="text-slate-600 mb-2">Answer all 30 questions. Use the writing box below each to briefly explain <em>why</em> you chose your answer. This critical thinking ensures you understand the rule rather than just guessing. (Passing the real test requires 14/20, but this is designed for total mastery).</p>
+        </div>
+
+        <!-- CATEGORY 1 -->
+        <div class="section-header">
+            <div class="flex items-center justify-between">
+                <div><span class="text-xs tracking-[1.5px] font-bold opacity-75">CATEGORY 1 OF 5</span>
+                <h2 class="text-2xl font-semibold">Road Signs, Signals & Intersections</h2></div>
+                <div class="text-right text-sm opacity-75">Questions 1–10</div>
+            </div>
+        </div>
+
+        <!-- Q1-10 HTML Generation -->
+        <div id="q1-block" class="question-block"><div class="flex gap-3"><div class="question-number">1</div><div class="flex-1"><div class="question font-medium text-slate-800">A sign that is red and octagonal with white letters reading “STOP” requires you to:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q1" value="A" class="mr-2.5"> <span><strong>A.</strong> Slow down and proceed if the intersection is clear</span></label><label class="option-label"><input type="radio" name="q1" value="B" class="mr-2.5"> <span><strong>B.</strong> Come to a full stop before the stop line or crosswalk and yield right-of-way to vehicles and pedestrians</span></label><label class="option-label"><input type="radio" name="q1" value="C" class="mr-2.5"> <span><strong>C.</strong> Stop only if you see a police officer or pedestrians</span></label><label class="option-label"><input type="radio" name="q1" value="D" class="mr-2.5"> <span><strong>D.</strong> Treat it like a yield sign</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q1-feedback"></textarea></div></div></div></div>
+
+        <div id="q2-block" class="question-block"><div class="flex gap-3"><div class="question-number">2</div><div class="flex-1"><div class="question font-medium text-slate-800">A yellow diamond-shaped sign with a black symbol of a pedestrian in a crosswalk means:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q2" value="A" class="mr-2.5"> <span><strong>A.</strong> No pedestrians allowed in this area</span></label><label class="option-label"><input type="radio" name="q2" value="B" class="mr-2.5"> <span><strong>B.</strong> School zone ahead</span></label><label class="option-label"><input type="radio" name="q2" value="C" class="mr-2.5"> <span><strong>C.</strong> You are approaching a pedestrian crossing — reduce speed and be prepared to stop</span></label><label class="option-label"><input type="radio" name="q2" value="D" class="mr-2.5"> <span><strong>D.</strong> Pedestrians must yield to vehicles</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q2-feedback"></textarea></div></div></div></div>
+
+        <div id="q3-block" class="question-block"><div class="flex gap-3"><div class="question-number">3</div><div class="flex-1"><div class="question font-medium text-slate-800">A flashing yellow traffic light means:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q3" value="A" class="mr-2.5"> <span><strong>A.</strong> Come to a complete stop</span></label><label class="option-label"><input type="radio" name="q3" value="B" class="mr-2.5"> <span><strong>B.</strong> Proceed with caution — the intersection is uncontrolled or hazardous</span></label><label class="option-label"><input type="radio" name="q3" value="C" class="mr-2.5"> <span><strong>C.</strong> The light is about to turn red</span></label><label class="option-label"><input type="radio" name="q3" value="D" class="mr-2.5"> <span><strong>D.</strong> Only emergency vehicles may proceed</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q3-feedback"></textarea></div></div></div></div>
+
+        <div id="q4-block" class="question-block"><div class="flex gap-3"><div class="question-number">4</div><div class="flex-1"><div class="question font-medium text-slate-800">An orange sign with black lettering and symbols indicates:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q4" value="A" class="mr-2.5"> <span><strong>A.</strong> A permanent change in traffic patterns</span></label><label class="option-label"><input type="radio" name="q4" value="B" class="mr-2.5"> <span><strong>B.</strong> Road work ahead — obey flag persons and reduce speed</span></label><label class="option-label"><input type="radio" name="q4" value="C" class="mr-2.5"> <span><strong>C.</strong> Tourist information</span></label><label class="option-label"><input type="radio" name="q4" value="D" class="mr-2.5"> <span><strong>D.</strong> School zone</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q4-feedback"></textarea></div></div></div></div>
+
+        <div id="q5-block" class="question-block"><div class="flex gap-3"><div class="question-number">5</div><div class="flex-1"><div class="question font-medium text-slate-800">A solid yellow line on your side of the center line means:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q5" value="A" class="mr-2.5"> <span><strong>A.</strong> You may pass if the way is clear</span></label><label class="option-label"><input type="radio" name="q5" value="B" class="mr-2.5"> <span><strong>B.</strong> Passing or crossing the center line is prohibited</span></label><label class="option-label"><input type="radio" name="q5" value="C" class="mr-2.5"> <span><strong>C.</strong> The road is one-way only</span></label><label class="option-label"><input type="radio" name="q5" value="D" class="mr-2.5"> <span><strong>D.</strong> Left turns are prohibited</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q5-feedback"></textarea></div></div></div></div>
+
+        <div id="q6-block" class="question-block"><div class="flex gap-3"><div class="question-number">6</div><div class="flex-1"><div class="question font-medium text-slate-800">At an uncontrolled intersection (no signs or signals), two vehicles arrive at the same time. Who has the right-of-way?</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q6" value="A" class="mr-2.5"> <span><strong>A.</strong> The vehicle on the left</span></label><label class="option-label"><input type="radio" name="q6" value="B" class="mr-2.5"> <span><strong>B.</strong> The vehicle on the right</span></label><label class="option-label"><input type="radio" name="q6" value="C" class="mr-2.5"> <span><strong>C.</strong> The larger vehicle</span></label><label class="option-label"><input type="radio" name="q6" value="D" class="mr-2.5"> <span><strong>D.</strong> Neither — both must wait</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q6-feedback"></textarea></div></div></div></div>
+
+        <div id="q7-block" class="question-block"><div class="flex gap-3"><div class="question-number">7</div><div class="flex-1"><div class="question font-medium text-slate-800">You are approaching an intersection with a green light. A pedestrian is in the crosswalk. What must you do?</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q7" value="A" class="mr-2.5"> <span><strong>A.</strong> Honk and proceed</span></label><label class="option-label"><input type="radio" name="q7" value="B" class="mr-2.5"> <span><strong>B.</strong> Yield the right-of-way to the pedestrian and allow them to finish crossing</span></label><label class="option-label"><input type="radio" name="q7" value="C" class="mr-2.5"> <span><strong>C.</strong> Speed up to clear quickly</span></label><label class="option-label"><input type="radio" name="q7" value="D" class="mr-2.5"> <span><strong>D.</strong> Stop only if they make eye contact</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q7-feedback"></textarea></div></div></div></div>
+
+        <div id="q8-block" class="question-block"><div class="flex gap-3"><div class="question-number">8</div><div class="flex-1"><div class="question font-medium text-slate-800">An emergency vehicle with flashing red lights and siren is approaching from behind. You should:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q8" value="A" class="mr-2.5"> <span><strong>A.</strong> Speed up to get out of the way faster</span></label><label class="option-label"><input type="radio" name="q8" value="B" class="mr-2.5"> <span><strong>B.</strong> Continue at your current speed</span></label><label class="option-label"><input type="radio" name="q8" value="C" class="mr-2.5"> <span><strong>C.</strong> Pull over to the right edge of the roadway and stop until it passes</span></label><label class="option-label"><input type="radio" name="q8" value="D" class="mr-2.5"> <span><strong>D.</strong> Move into the left lane immediately</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q8-feedback"></textarea></div></div></div></div>
+
+        <div id="q9-block" class="question-block"><div class="flex gap-3"><div class="question-number">9</div><div class="flex-1"><div class="question font-medium text-slate-800">You are making a right turn. A bicyclist is riding straight through the intersection. Who has the right-of-way?</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q9" value="A" class="mr-2.5"> <span><strong>A.</strong> You do, because you are turning</span></label><label class="option-label"><input type="radio" name="q9" value="B" class="mr-2.5"> <span><strong>B.</strong> Whoever arrives first</span></label><label class="option-label"><input type="radio" name="q9" value="C" class="mr-2.5"> <span><strong>C.</strong> The bicyclist — you must yield</span></label><label class="option-label"><input type="radio" name="q9" value="D" class="mr-2.5"> <span><strong>D.</strong> The bicyclist, but only if in a marked lane</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q9-feedback"></textarea></div></div></div></div>
+
+        <div id="q10-block" class="question-block"><div class="flex gap-3"><div class="question-number">10</div><div class="flex-1"><div class="question font-medium text-slate-800">When entering a traffic circle (roundabout), you must:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q10" value="A" class="mr-2.5"> <span><strong>A.</strong> Yield to traffic already in the circle and enter when safe</span></label><label class="option-label"><input type="radio" name="q10" value="B" class="mr-2.5"> <span><strong>B.</strong> Enter immediately and force others to yield</span></label><label class="option-label"><input type="radio" name="q10" value="C" class="mr-2.5"> <span><strong>C.</strong> Stop at the yield sign even if empty</span></label><label class="option-label"><input type="radio" name="q10" value="D" class="mr-2.5"> <span><strong>D.</strong> Use your left turn signal</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q10-feedback"></textarea></div></div></div></div>
+
+        <!-- CATEGORY 2 -->
+        <div class="section-header page-break">
+            <div class="flex items-center justify-between">
+                <div><span class="text-xs tracking-[1.5px] font-bold opacity-75">CATEGORY 2 OF 5</span>
+                <h2 class="text-2xl font-semibold">Passing, School Buses & Trucks</h2></div>
+                <div class="text-right text-sm opacity-75">Questions 11–13</div>
+            </div>
+        </div>
+
+        <div id="q11-block" class="question-block"><div class="flex gap-3"><div class="question-number">11</div><div class="flex-1"><div class="question font-medium text-slate-800">A stopped school bus has its red lights flashing. You are approaching from the opposite direction on an undivided road. You must:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q11" value="A" class="mr-2.5"> <span><strong>A.</strong> Slow down and proceed with caution</span></label><label class="option-label"><input type="radio" name="q11" value="B" class="mr-2.5"> <span><strong>B.</strong> Stop at least 20 feet away and remain stopped until lights stop flashing</span></label><label class="option-label"><input type="radio" name="q11" value="C" class="mr-2.5"> <span><strong>C.</strong> Stop only if children are visible</span></label><label class="option-label"><input type="radio" name="q11" value="D" class="mr-2.5"> <span><strong>D.</strong> Honk to signal the driver</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q11-feedback"></textarea></div></div></div></div>
+
+        <div id="q12-block" class="question-block"><div class="flex gap-3"><div class="question-number">12</div><div class="flex-1"><div class="question font-medium text-slate-800">You are driving on a highway. A large truck is in the lane to your right. You should AVOID:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q12" value="A" class="mr-2.5"> <span><strong>A.</strong> Driving in the truck’s blind spots (No-Zones) on the right side or directly behind</span></label><label class="option-label"><input type="radio" name="q12" value="B" class="mr-2.5"> <span><strong>B.</strong> Passing the truck safely on the left</span></label><label class="option-label"><input type="radio" name="q12" value="C" class="mr-2.5"> <span><strong>C.</strong> Giving the truck extra space when it is turning</span></label><label class="option-label"><input type="radio" name="q12" value="D" class="mr-2.5"> <span><strong>D.</strong> Using your turn signals early</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q12-feedback"></textarea></div></div></div></div>
+
+        <div id="q13-block" class="question-block"><div class="flex gap-3"><div class="question-number">13</div><div class="flex-1"><div class="question font-medium text-slate-800">The minimum distance you should stay behind a school bus when it is stopped with red lights flashing is:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q13" value="A" class="mr-2.5"> <span><strong>A.</strong> 10 feet</span></label><label class="option-label"><input type="radio" name="q13" value="B" class="mr-2.5"> <span><strong>B.</strong> At least 20 feet</span></label><label class="option-label"><input type="radio" name="q13" value="C" class="mr-2.5"> <span><strong>C.</strong> 50 feet</span></label><label class="option-label"><input type="radio" name="q13" value="D" class="mr-2.5"> <span><strong>D.</strong> One car length</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q13-feedback"></textarea></div></div></div></div>
+
+        <!-- CATEGORY 3 -->
+        <div class="section-header page-break">
+            <div class="flex items-center justify-between">
+                <div><span class="text-xs tracking-[1.5px] font-bold opacity-75">CATEGORY 3 OF 5</span>
+                <h2 class="text-2xl font-semibold">Parking, Speed & Following Distance</h2></div>
+                <div class="text-right text-sm opacity-75">Questions 14–18</div>
+            </div>
+        </div>
+
+        <div id="q14-block" class="question-block"><div class="flex gap-3"><div class="question-number">14</div><div class="flex-1"><div class="question font-medium text-slate-800">You may not park within how many feet of a fire hydrant in New York?</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q14" value="A" class="mr-2.5"> <span><strong>A.</strong> 5 feet</span></label><label class="option-label"><input type="radio" name="q14" value="B" class="mr-2.5"> <span><strong>B.</strong> 10 feet</span></label><label class="option-label"><input type="radio" name="q14" value="C" class="mr-2.5"> <span><strong>C.</strong> 15 feet</span></label><label class="option-label"><input type="radio" name="q14" value="D" class="mr-2.5"> <span><strong>D.</strong> 25 feet</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q14-feedback"></textarea></div></div></div></div>
+
+        <div id="q15-block" class="question-block"><div class="flex gap-3"><div class="question-number">15</div><div class="flex-1"><div class="question font-medium text-slate-800">When parking on a hill facing uphill with a curb, you should turn your front wheels:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q15" value="A" class="mr-2.5"> <span><strong>A.</strong> Away from the curb (to the left)</span></label><label class="option-label"><input type="radio" name="q15" value="B" class="mr-2.5"> <span><strong>B.</strong> Toward the curb (to the right)</span></label><label class="option-label"><input type="radio" name="q15" value="C" class="mr-2.5"> <span><strong>C.</strong> Straight ahead</span></label><label class="option-label"><input type="radio" name="q15" value="D" class="mr-2.5"> <span><strong>D.</strong> It does not matter on hills</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q15-feedback"></textarea></div></div></div></div>
+
+        <div id="q16-block" class="question-block"><div class="flex gap-3"><div class="question-number">16</div><div class="flex-1"><div class="question font-medium text-slate-800">When parallel parking, you should be no more than how far from the curb?</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q16" value="A" class="mr-2.5"> <span><strong>A.</strong> 6 inches</span></label><label class="option-label"><input type="radio" name="q16" value="B" class="mr-2.5"> <span><strong>B.</strong> 12 inches (one foot)</span></label><label class="option-label"><input type="radio" name="q16" value="C" class="mr-2.5"> <span><strong>C.</strong> 18 inches</span></label><label class="option-label"><input type="radio" name="q16" value="D" class="mr-2.5"> <span><strong>D.</strong> 2 feet</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q16-feedback"></textarea></div></div></div></div>
+
+        <div id="q17-block" class="question-block"><div class="flex gap-3"><div class="question-number">17</div><div class="flex-1"><div class="question font-medium text-slate-800">If no speed limit is posted in New York City, the default speed limit is:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q17" value="A" class="mr-2.5"> <span><strong>A.</strong> 30 mph</span></label><label class="option-label"><input type="radio" name="q17" value="B" class="mr-2.5"> <span><strong>B.</strong> 20 mph</span></label><label class="option-label"><input type="radio" name="q17" value="C" class="mr-2.5"> <span><strong>C.</strong> 25 mph</span></label><label class="option-label"><input type="radio" name="q17" value="D" class="mr-2.5"> <span><strong>D.</strong> 35 mph</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q17-feedback"></textarea></div></div></div></div>
+
+        <div id="q18-block" class="question-block"><div class="flex gap-3"><div class="question-number">18</div><div class="flex-1"><div class="question font-medium text-slate-800">The “3-second rule” is used to:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q18" value="A" class="mr-2.5"> <span><strong>A.</strong> Maintain a safe following distance under normal conditions</span></label><label class="option-label"><input type="radio" name="q18" value="B" class="mr-2.5"> <span><strong>B.</strong> Determine how fast you are allowed to drive</span></label><label class="option-label"><input type="radio" name="q18" value="C" class="mr-2.5"> <span><strong>C.</strong> Calculate stopping distance on wet roads</span></label><label class="option-label"><input type="radio" name="q18" value="D" class="mr-2.5"> <span><strong>D.</strong> Decide when to change lanes</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q18-feedback"></textarea></div></div></div></div>
+
+        <!-- CATEGORY 4 -->
+        <div class="section-header page-break">
+            <div class="flex items-center justify-between">
+                <div><span class="text-xs tracking-[1.5px] font-bold opacity-75">CATEGORY 4 OF 5</span>
+                <h2 class="text-2xl font-semibold">Sharing the Road</h2></div>
+                <div class="text-right text-sm opacity-75">Questions 19–23</div>
+            </div>
+        </div>
+
+        <div id="q19-block" class="question-block"><div class="flex gap-3"><div class="question-number">19</div><div class="flex-1"><div class="question font-medium text-slate-800">When driving at night, you should:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q19" value="A" class="mr-2.5"> <span><strong>A.</strong> Use high beams in all conditions</span></label><label class="option-label"><input type="radio" name="q19" value="B" class="mr-2.5"> <span><strong>B.</strong> Reduce speed, increase following distance, and use low beams when meeting traffic</span></label><label class="option-label"><input type="radio" name="q19" value="C" class="mr-2.5"> <span><strong>C.</strong> Drive at the posted speed limit regardless of visibility</span></label><label class="option-label"><input type="radio" name="q19" value="D" class="mr-2.5"> <span><strong>D.</strong> Turn off headlights in well-lit areas</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q19-feedback"></textarea></div></div></div></div>
+
+        <div id="q20-block" class="question-block"><div class="flex gap-3"><div class="question-number">20</div><div class="flex-1"><div class="question font-medium text-slate-800">When approaching a pedestrian who is crossing at a marked crosswalk, you must:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q20" value="A" class="mr-2.5"> <span><strong>A.</strong> Honk to warn them you are coming</span></label><label class="option-label"><input type="radio" name="q20" value="B" class="mr-2.5"> <span><strong>B.</strong> Yield the right-of-way and stop to let them cross safely</span></label><label class="option-label"><input type="radio" name="q20" value="C" class="mr-2.5"> <span><strong>C.</strong> Proceed if you have a green light</span></label><label class="option-label"><input type="radio" name="q20" value="D" class="mr-2.5"> <span><strong>D.</strong> Only stop if they make eye contact</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q20-feedback"></textarea></div></div></div></div>
+
+        <div id="q21-block" class="question-block"><div class="flex gap-3"><div class="question-number">21</div><div class="flex-1"><div class="question font-medium text-slate-800">When passing a bicyclist on a narrow road, New York law recommends you leave:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q21" value="A" class="mr-2.5"> <span><strong>A.</strong> At least 3 feet of space when possible</span></label><label class="option-label"><input type="radio" name="q21" value="B" class="mr-2.5"> <span><strong>B.</strong> 1 foot of space</span></label><label class="option-label"><input type="radio" name="q21" value="C" class="mr-2.5"> <span><strong>C.</strong> 6 inches of space</span></label><label class="option-label"><input type="radio" name="q21" value="D" class="mr-2.5"> <span><strong>D.</strong> No specific distance</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q21-feedback"></textarea></div></div></div></div>
+
+        <div id="q22-block" class="question-block"><div class="flex gap-3"><div class="question-number">22</div><div class="flex-1"><div class="question font-medium text-slate-800">When an emergency vehicle is stopped on the side of the road with lights flashing, the “Move Over Law” requires you to:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q22" value="A" class="mr-2.5"> <span><strong>A.</strong> Maintain your speed and lane</span></label><label class="option-label"><input type="radio" name="q22" value="B" class="mr-2.5"> <span><strong>B.</strong> Stop completely on the shoulder</span></label><label class="option-label"><input type="radio" name="q22" value="C" class="mr-2.5"> <span><strong>C.</strong> Move over to an adjacent lane if safe, or slow down significantly</span></label><label class="option-label"><input type="radio" name="q22" value="D" class="mr-2.5"> <span><strong>D.</strong> Only slow down if it is a police car</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q22-feedback"></textarea></div></div></div></div>
+
+        <div id="q23-block" class="question-block"><div class="flex gap-3"><div class="question-number">23</div><div class="flex-1"><div class="question font-medium text-slate-800">Large trucks and buses have significant blind spots called “No-Zones.” These are located:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q23" value="A" class="mr-2.5"> <span><strong>A.</strong> Only directly behind the vehicle</span></label><label class="option-label"><input type="radio" name="q23" value="B" class="mr-2.5"> <span><strong>B.</strong> On both sides, directly in front, and directly behind the vehicle</span></label><label class="option-label"><input type="radio" name="q23" value="C" class="mr-2.5"> <span><strong>C.</strong> Only on the left side</span></label><label class="option-label"><input type="radio" name="q23" value="D" class="mr-2.5"> <span><strong>D.</strong> Only when turning</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q23-feedback"></textarea></div></div></div></div>
+
+        <!-- CATEGORY 5 -->
+        <div class="section-header page-break">
+            <div class="flex items-center justify-between">
+                <div><span class="text-xs tracking-[1.5px] font-bold opacity-75">CATEGORY 5 OF 5</span>
+                <h2 class="text-2xl font-semibold">Safety, Impairment & Emergencies</h2></div>
+                <div class="text-right text-sm opacity-75">Questions 24–30</div>
+            </div>
+        </div>
+
+        <div id="q24-block" class="question-block"><div class="flex gap-3"><div class="question-number">24</div><div class="flex-1"><div class="question font-medium text-slate-800">Under New York’s Zero Tolerance Law, a driver under 21 years old with a BAC of 0.02 to 0.07 on a first offense will face:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q24" value="A" class="mr-2.5"> <span><strong>A.</strong> Only a warning</span></label><label class="option-label"><input type="radio" name="q24" value="B" class="mr-2.5"> <span><strong>B.</strong> Immediate arrest and jail time</span></label><label class="option-label"><input type="radio" name="q24" value="C" class="mr-2.5"> <span><strong>C.</strong> A 6-month license suspension and a $100 suspension termination fee</span></label><label class="option-label"><input type="radio" name="q24" value="D" class="mr-2.5"> <span><strong>D.</strong> A $25 fine only</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q24-feedback"></textarea></div></div></div></div>
+
+        <div id="q25-block" class="question-block"><div class="flex gap-3"><div class="question-number">25</div><div class="flex-1"><div class="question font-medium text-slate-800">The legal blood alcohol concentration (BAC) limit for drivers 21 and older in New York is:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q25" value="A" class="mr-2.5"> <span><strong>A.</strong> 0.05</span></label><label class="option-label"><input type="radio" name="q25" value="B" class="mr-2.5"> <span><strong>B.</strong> 0.10</span></label><label class="option-label"><input type="radio" name="q25" value="C" class="mr-2.5"> <span><strong>C.</strong> 0.00 (zero tolerance)</span></label><label class="option-label"><input type="radio" name="q25" value="D" class="mr-2.5"> <span><strong>D.</strong> 0.08</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q25-feedback"></textarea></div></div></div></div>
+
+        <div id="q26-block" class="question-block"><div class="flex gap-3"><div class="question-number">26</div><div class="flex-1"><div class="question font-medium text-slate-800">New York’s seat belt law is a primary enforcement law. This means:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q26" value="A" class="mr-2.5"> <span><strong>A.</strong> Police can stop and ticket you solely for not wearing a seat belt</span></label><label class="option-label"><input type="radio" name="q26" value="B" class="mr-2.5"> <span><strong>B.</strong> Police can only ticket you if stopped for another offense</span></label><label class="option-label"><input type="radio" name="q26" value="C" class="mr-2.5"> <span><strong>C.</strong> It only applies to drivers, not passengers</span></label><label class="option-label"><input type="radio" name="q26" value="D" class="mr-2.5"> <span><strong>D.</strong> It applies only on highways</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q26-feedback"></textarea></div></div></div></div>
+
+        <div id="q27-block" class="question-block"><div class="flex gap-3"><div class="question-number">27</div><div class="flex-1"><div class="question font-medium text-slate-800">Drowsy driving is dangerous because:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q27" value="A" class="mr-2.5"> <span><strong>A.</strong> It only affects truck drivers</span></label><label class="option-label"><input type="radio" name="q27" value="B" class="mr-2.5"> <span><strong>B.</strong> Reaction time and judgment are impaired similarly to alcohol impairment</span></label><label class="option-label"><input type="radio" name="q27" value="C" class="mr-2.5"> <span><strong>C.</strong> It is only a problem at night</span></label><label class="option-label"><input type="radio" name="q27" value="D" class="mr-2.5"> <span><strong>D.</strong> Coffee completely eliminates the risk</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q27-feedback"></textarea></div></div></div></div>
+
+        <div id="q28-block" class="question-block"><div class="flex gap-3"><div class="question-number">28</div><div class="flex-1"><div class="question font-medium text-slate-800">When driving in heavy fog, you should:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q28" value="A" class="mr-2.5"> <span><strong>A.</strong> Use high beams to see farther</span></label><label class="option-label"><input type="radio" name="q28" value="B" class="mr-2.5"> <span><strong>B.</strong> Use low beams or fog lights, reduce speed, and increase following distance</span></label><label class="option-label"><input type="radio" name="q28" value="C" class="mr-2.5"> <span><strong>C.</strong> Drive at normal speed but use hazards</span></label><label class="option-label"><input type="radio" name="q28" value="D" class="mr-2.5"> <span><strong>D.</strong> Follow the vehicle ahead closely</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q28-feedback"></textarea></div></div></div></div>
+
+        <div id="q29-block" class="question-block"><div class="flex gap-3"><div class="question-number">29</div><div class="flex-1"><div class="question font-medium text-slate-800">If your vehicle begins to skid on a slippery road, you should:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q29" value="A" class="mr-2.5"> <span><strong>A.</strong> Slam on the brakes</span></label><label class="option-label"><input type="radio" name="q29" value="B" class="mr-2.5"> <span><strong>B.</strong> Take your foot off the gas, steer in the direction you want to go, and avoid overcorrecting</span></label><label class="option-label"><input type="radio" name="q29" value="C" class="mr-2.5"> <span><strong>C.</strong> Turn the wheel in the opposite direction</span></label><label class="option-label"><input type="radio" name="q29" value="D" class="mr-2.5"> <span><strong>D.</strong> Shift into neutral immediately</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q29-feedback"></textarea></div></div></div></div>
+
+        <div id="q30-block" class="question-block"><div class="flex gap-3"><div class="question-number">30</div><div class="flex-1"><div class="question font-medium text-slate-800">If your vehicle breaks down on the highway, you should:</div><div class="options mt-3 space-y-1 text-sm"><label class="option-label"><input type="radio" name="q30" value="A" class="mr-2.5"> <span><strong>A.</strong> Stand in the roadway to flag help</span></label><label class="option-label"><input type="radio" name="q30" value="B" class="mr-2.5"> <span><strong>B.</strong> Pull as far off the road as possible, turn on hazard lights, and stay safe inside or behind a guardrail</span></label><label class="option-label"><input type="radio" name="q30" value="C" class="mr-2.5"> <span><strong>C.</strong> Walk along the shoulder</span></label><label class="option-label"><input type="radio" name="q30" value="D" class="mr-2.5"> <span><strong>D.</strong> Leave the vehicle unlocked with keys inside</span></label></div><div class="writing-section mt-4"><label class="text-xs font-semibold text-slate-500 block mb-1.5">Why did you choose this answer?</label><textarea id="q30-feedback"></textarea></div></div></div></div>
+
+        <!-- Reflection Section -->
+        <div class="mt-6 reflection-block">
+            <div class="bg-white border-2 border-blue-200 rounded-3xl p-5 shadow-sm">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-2 flex items-center gap-x-3">
+                    <i class="fa-solid fa-lightbulb"></i> Overall Reflection
+                </h2>
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">Which rule do you now understand better?</label>
+                        <textarea class="w-full border border-slate-300 rounded-2xl p-4 text-sm min-h-[260px]"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INSTRUCTOR PAGE: Mentor Guide + Answer Key -->
+        <div class="page-break print-mt-0 mt-10">
+            <!-- Mentor Strategy Guide -->
+            <div class="mentor-guide-box bg-white border border-blue-200 rounded-3xl p-8 shadow-sm">
+                <div class="flex items-center gap-x-3 mb-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-chalkboard-teacher text-blue-700 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-semibold text-blue-700">Mentor Evaluation Guide</h2>
+                        <p class="text-slate-600">Best Practices for Melissa Riggio Higher Education Program</p>
+                    </div>
+                </div>
+
+                <div class="prose prose-slate max-w-none text-sm leading-relaxed text-slate-700 space-y-4">
+                    <h4 class="font-semibold text-slate-800 text-base">1. The Justification Gate (Grading Protocol)</h4>
+                    <p><strong>Do not grade the multiple-choice letters until the justification boxes are filled.</strong> Review the written reasoning first. If a student leaves a box blank on the paper, pause the grading. Ask them to explain their choice out loud, and either have them write it or transcribe their verbal logic onto the paper for them. This eliminates guessing and exposes true comprehension.</p>
+
+                    <h4 class="font-semibold text-slate-800 text-base">2. Fostering Genuine Engagement</h4>
+                    <p>Encourage students to answer the clarification questions exactly as they understand them, using their own words. Use an inquiry-based framework: ask them to relate the traffic rule to a real-life scenario they might see around campus or their local neighborhood. Validating their unique perspective builds confidence.</p>
+
+                    <h4 class="font-semibold text-slate-800 text-base">3. Teaching from First Principles</h4>
+                    <p>When reviewing an incorrect answer, avoid simply marking it wrong with a red pen. Instead, break the driving rule down to its core safety purpose (First Principles). For example, if they miss a school bus question, cover up the wrong options and ask: <em>"Why does the law make us stop 20 feet away? What is the core danger we are trying to prevent?"</em></p>
+
+                    <h4 class="font-semibold text-slate-800 text-base">4. Corrective Feedback &amp; Visual Aids</h4>
+                    <p>If a student's underlying logic is sound but they circled the wrong letter, praise their reasoning first before correcting the final answer. Use the official NYS DMV Manual (MV-21) to show them actual pictures of road signs or intersection diagrams to visually anchor the concept.</p>
+                </div>
+            </div>
+
+            <!-- Master Verified Answer Key Table -->
+            <div class="answer-key bg-white border border-slate-300 rounded-3xl p-7 text-sm shadow-sm mt-8" id="answer-key">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-slate-800 mt-1">Master Answer Key &amp; Core Rationale</h2>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-xs">
+                        <thead>
+                            <tr class="bg-slate-100">
+                                <th class="w-8 px-3 py-2">Q#</th>
+                                <th class="w-12 px-2 py-2 text-center">Ans</th>
+                                <th class="px-3 py-2">Official DMV Manual Citation &amp; Rationale</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700">
+                            <tr><td class="px-3 py-2 font-mono">1</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Full stop required at STOP sign. Yield to traffic/pedestrians.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">2</td><td class="px-2 text-center font-semibold text-emerald-700">C</td><td class="px-3 py-2">Yellow diamond = warning sign. Slow down and prepare to stop.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">3</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Flashing yellow = proceed with caution.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">4</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Orange signs = work zone. Obey flag persons and reduced speeds.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">5</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Solid yellow on your side = no passing or crossing center line.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">6</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Uncontrolled intersection: yield to the vehicle on the right.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">7</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Always yield to pedestrians in crosswalks.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">8</td><td class="px-2 text-center font-semibold text-emerald-700">C</td><td class="px-3 py-2">Pull over to the right and stop for emergency vehicles.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">9</td><td class="px-2 text-center font-semibold text-emerald-700">C</td><td class="px-3 py-2">Right-turning drivers must yield to bicyclists proceeding straight.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">10</td><td class="px-2 text-center font-semibold text-emerald-700">A</td><td class="px-3 py-2">Yield to traffic already in the roundabout.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">11</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Both directions must stop for school bus red lights on undivided roads.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">12</td><td class="px-2 text-center font-semibold text-emerald-700">A</td><td class="px-3 py-2">Avoid No-Zones (blind spots) on sides and rear of large trucks.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">13</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Stop at least 20 feet from a stopped school bus with red lights.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">14</td><td class="px-2 text-center font-semibold text-emerald-700">C</td><td class="px-3 py-2">No parking within 15 feet of a fire hydrant in New York.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">15</td><td class="px-2 text-center font-semibold text-emerald-700">A</td><td class="px-3 py-2">Uphill with curb: turn wheels away from curb.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">16</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Parallel parking must be within 12 inches (1 foot) of the curb.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">17</td><td class="px-2 text-center font-semibold text-emerald-700">C</td><td class="px-3 py-2">NYC default speed limit (no sign) = 25 mph.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">18</td><td class="px-2 text-center font-semibold text-emerald-700">A</td><td class="px-3 py-2">3-second rule measures safe following distance under normal conditions.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">19</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Night driving: reduce speed, increase distance, dim high beams.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">20</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Yield to pedestrians in crosswalks.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">21</td><td class="px-2 text-center font-semibold text-emerald-700">A</td><td class="px-3 py-2">Give bicyclists at least 3 feet when passing when possible.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">22</td><td class="px-2 text-center font-semibold text-emerald-700">C</td><td class="px-3 py-2">Move Over Law: change lanes or slow significantly.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">23</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">No-Zones are on the left, right, front, and rear of large trucks.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">24</td><td class="px-2 text-center font-semibold text-emerald-700">C</td><td class="px-3 py-2">Zero Tolerance: 6-month suspension + fee for .02-.07 BAC.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">25</td><td class="px-2 text-center font-semibold text-emerald-700">D</td><td class="px-3 py-2">Legal BAC limit for drivers 21+ is 0.08.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">26</td><td class="px-2 text-center font-semibold text-emerald-700">A</td><td class="px-3 py-2">Primary enforcement means you can be stopped solely for a seat belt violation.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">27</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Drowsy driving impairs reaction time similarly to alcohol.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">28</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Fog: use low beams, drastically reduce speed.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">29</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Skid: ease off accelerator, steer in direction you want to go.</td></tr>
+                            <tr><td class="px-3 py-2 font-mono">30</td><td class="px-2 text-center font-semibold text-emerald-700">B</td><td class="px-3 py-2">Breakdown: get off roadway, hazards on, stay safe inside.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script Engine -->
+    <script>
+        function saveProgress() {
+            const data = {
+                name: document.getElementById('student-name').value,
+                date: document.getElementById('test-date').value,
+                attempt: document.getElementById('attempt').value,
+                answers: {}, feedback: {}
+            };
+            
+            for (let i = 1; i <= 30; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) data.answers[`q${i}`] = selected.value;
+                const fb = document.getElementById(`q${i}-feedback`);
+                if (fb && fb.value.trim() !== '') data.feedback[`q${i}`] = fb.value.trim();
+            }
+            
+            localStorage.setItem('nys_permit_30q_progress', JSON.stringify(data));
+            showToast('Progress saved successfully!', 'success');
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('nys_permit_30q_progress');
+            if (!saved) return showToast('No saved progress found.', 'error');
+            
+            const data = JSON.parse(saved);
+            if (data.name) document.getElementById('student-name').value = data.name;
+            if (data.date) document.getElementById('test-date').value = data.date;
+            if (data.attempt) document.getElementById('attempt').value = data.attempt;
+            
+            if (data.answers) {
+                Object.keys(data.answers).forEach(key => {
+                    const radio = document.querySelector(`input[name="${key}"][value="${data.answers[key]}"]`);
+                    if (radio) radio.checked = true;
+                });
+            }
+            if (data.feedback) {
+                Object.keys(data.feedback).forEach(key => {
+                    const ta = document.getElementById(`${key}-feedback`);
+                    if (ta) ta.value = data.feedback[key];
+                });
+            }
+            showToast('Progress loaded!', 'success');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 right-5 px-5 py-3 rounded-2xl shadow-xl text-sm flex items-center gap-x-3 z-[100] ${type === 'success' ? 'bg-emerald-600 text-white' : 'bg-red-600 text-white'}`;
+            toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} text-lg"></i><span>${message}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3200);
+        }
+
+        const CORRECT_PASSWORD = "NYSpermit2026";
+        
+        function unlockAndCheckAnswers() {
+            if (sessionStorage.getItem('answersUnlocked') === 'true') return checkAnswers();
+            const pass = prompt("Instructor/Review Mode. Please enter password to grade answers:");
+            if (pass === CORRECT_PASSWORD) {
+                sessionStorage.setItem('answersUnlocked', 'true');
+                checkAnswers();
+            } else if (pass !== null) {
+                alert("Incorrect Password.");
+            }
+        }
+
+        function checkAnswers() {
+            let correctCount = 0;
+            const total = 30;
+            
+            const correctAnswers = {
+                1:'B', 2:'C', 3:'B', 4:'B', 5:'B', 6:'B', 7:'B', 8:'C', 9:'C', 10:'A',
+                11:'B', 12:'A', 13:'B', 14:'C', 15:'A', 16:'B', 17:'C', 18:'A', 19:'B', 20:'B',
+                21:'A', 22:'C', 23:'B', 24:'C', 25:'D', 26:'A', 27:'B', 28:'B', 29:'B', 30:'B'
+            };
+            
+            const explanations = {
+                1:"Full stop required at STOP sign. Yield to traffic/pedestrians.",
+                2:"Yellow diamond = warning sign. Slow down and prepare to stop.",
+                3:"Flashing yellow = proceed with caution.",
+                4:"Orange signs = work zone. Obey flag persons and reduced speeds.",
+                5:"Solid yellow on your side = no passing or crossing center line.",
+                6:"Uncontrolled intersection: yield to the vehicle on the right.",
+                7:"Always yield to pedestrians in crosswalks.",
+                8:"Pull over to the right and stop for emergency vehicles.",
+                9:"Right-turning drivers must yield to bicyclists proceeding straight.",
+                10:"Yield to traffic already in the roundabout.",
+                11:"Both directions must stop for school bus red lights on undivided roads.",
+                12:"Avoid No-Zones (blind spots) on sides and rear of large trucks.",
+                13:"Stop at least 20 feet from a stopped school bus with red lights.",
+                14:"No parking within 15 feet of a fire hydrant in New York.",
+                15:"Uphill with curb: turn wheels away from curb.",
+                16:"Parallel parking must be within 12 inches (1 foot) of the curb.",
+                17:"NYC default speed limit (no sign) = 25 mph.",
+                18:"3-second rule measures safe following distance under normal conditions.",
+                19:"Night driving: reduce speed, increase distance, dim high beams.",
+                20:"Yield to pedestrians in crosswalks.",
+                21:"Give bicyclists at least 3 feet when passing when possible.",
+                22:"Move Over Law: change lanes or slow significantly.",
+                23:"No-Zones are on the left, right, front, and rear of large trucks.",
+                24:"Zero Tolerance: 6-month suspension + fee for .02-.07 BAC.",
+                25:"Legal BAC limit for drivers 21+ is 0.08.",
+                26:"Primary enforcement means you can be stopped solely for a seat belt violation.",
+                27:"Drowsy driving impairs reaction time similarly to alcohol.",
+                28:"Fog: use low beams, drastically reduce speed.",
+                29:"Skid: ease off accelerator, steer in direction you want to go.",
+                30:"Breakdown: get off roadway, hazards on, stay safe inside."
+            };
+            
+            for (let i = 1; i <= total; i++) {
+                const block = document.getElementById(`q${i}-block`);
+                if (!block) continue;
+                
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const correct = correctAnswers[i];
+                
+                block.querySelectorAll('.option-label').forEach(l => l.classList.remove('correct-highlight', 'incorrect-highlight'));
+                
+                let isCorrect = false;
+                if (selected) {
+                    isCorrect = selected.value === correct;
+                    if (isCorrect) correctCount++;
+                    selected.parentElement.classList.add(isCorrect ? 'correct-highlight' : 'incorrect-highlight');
+                    if (!isCorrect) {
+                        const correctRadio = document.querySelector(`input[name="q${i}"][value="${correct}"]`);
+                        if (correctRadio) correctRadio.parentElement.classList.add('correct-highlight');
+                    }
+                } else {
+                    const correctRadio = document.querySelector(`input[name="q${i}"][value="${correct}"]`);
+                    if (correctRadio) correctRadio.parentElement.classList.add('correct-highlight');
+                }
+                
+                let expDiv = block.querySelector('.explanation-div');
+                if (!expDiv) {
+                    expDiv = document.createElement('div');
+                    expDiv.className = `explanation-div mt-3 p-3 rounded-xl text-xs ${isCorrect ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-red-50 text-red-700 border border-red-200'}`;
+                    block.appendChild(expDiv);
+                }
+                expDiv.innerHTML = `<div class="flex items-start gap-x-2"><i class="fa-solid ${isCorrect ? 'fa-check-circle text-emerald-600' : 'fa-times-circle text-red-600'} mt-0.5"></i><div><span class="font-semibold">${isCorrect ? 'Correct!' : 'Incorrect.'} Answer: ${correct}</span><br><span class="text-[11px]">${explanations[i]}</span></div></div>`;
+            }
+            
+            const percentage = Math.round((correctCount / total) * 100);
+            let message = `You got ${correctCount}/${total} (${percentage}%). `;
+            if (percentage >= 90) message += "Excellent! You are well prepared.";
+            else if (percentage >= 76) message += "Good job! Review your missed questions.";
+            else message += "Keep studying! Focus on the categories you missed.";
+            
+            let sb = document.getElementById('score-banner');
+            if (!sb) {
+                sb = document.createElement('div');
+                sb.id = 'score-banner';
+                sb.className = 'fixed top-20 left-1/2 -translate-x-1/2 z-[200] px-8 py-4 bg-white shadow-2xl border border-slate-200 rounded-3xl text-center w-[90%] max-w-md';
+                document.body.appendChild(sb);
+            }
+            sb.innerHTML = `<div class="flex items-center justify-between gap-x-6"><div><div class="text-xs text-slate-500">SCORE</div><div class="text-3xl font-semibold text-slate-900">${correctCount}/${total}</div><div class="text-emerald-600 font-semibold">${percentage}%</div></div><div class="text-left text-sm text-slate-600 flex-1">${message}</div><button onclick="this.parentElement.parentElement.remove()" class="text-slate-400">×</button></div>`;
+            
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+
+        let saveTimeout;
+        function setupAutoSave() {
+            document.querySelectorAll('input[type="radio"], textarea').forEach(input => {
+                input.addEventListener('change', () => {
+                    clearTimeout(saveTimeout);
+                    saveTimeout = setTimeout(() => {
+                        const data = { answers: {}, feedback: {} };
+                        ['student-name', 'test-date', 'attempt'].forEach(id => {
+                            const el = document.getElementById(id);
+                            if (el) data[id === 'student-name' ? 'name' : id] = el.value;
+                        });
+                        for (let i = 1; i <= 30; i++) {
+                            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                            if (selected) data.answers[`q${i}`] = selected.value;
+                            const fb = document.getElementById(`q${i}-feedback`);
+                            if (fb && fb.value.trim() !== '') data.feedback[`q${i}`] = fb.value.trim();
+                        }
+                        localStorage.setItem('nys_permit_30q_progress', JSON.stringify(data));
+                    }, 1200);
+                });
+            });
+        }
+
+        let savedFieldValues = {};
+        function prepareForPrint() {
+            savedFieldValues = {};
+            ['student-name', 'test-date', 'attempt'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { savedFieldValues[id] = el.value; el.value = ''; }
+            });
+            for (let i = 1; i <= 30; i++) {
+                const ta = document.getElementById(`q${i}-feedback`);
+                if (ta) { savedFieldValues[`q${i}-feedback`] = ta.value; ta.value = ''; }
+            }
+        }
+        function restoreAfterPrint() {
+            ['student-name', 'test-date', 'attempt'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el && savedFieldValues[id] !== undefined) el.value = savedFieldValues[id];
+            });
+            for (let i = 1; i <= 30; i++) {
+                const ta = document.getElementById(`q${i}-feedback`);
+                if (ta && savedFieldValues[`q${i}-feedback`] !== undefined) ta.value = savedFieldValues[`q${i}-feedback`];
+            }
+        }
+
+        window.onbeforeprint = prepareForPrint;
+        window.onafterprint = restoreAfterPrint;
+        function printCleanTest() { prepareForPrint(); window.print(); }
+
+        window.onload = () => { initializeTailwind(); setupAutoSave(); };
+    </script>
+</body>
+</html>

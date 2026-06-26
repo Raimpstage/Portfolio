@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RLA Test 2 — NYS</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --rule: #333;
+    --accent: #6b1f2a;
+    --paper: #fdfdfb;
+    --soft: #f4f1ea;
+    --border: #ccc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    background: var(--paper);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    line-height: 1.55;
+  }
+  h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; }
+  .running-header {
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+    margin-bottom: 1.2rem;
+  }
+  .title-block {
+    text-align: center;
+    border: 3px solid var(--accent);
+    padding: 1.5rem 1rem;
+    margin-bottom: 2rem;
+    background: var(--soft);
+  }
+  .title-block .testid {
+    font-family: Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+  }
+  .title-block h1 {
+    margin: 0.3rem 0;
+    font-size: 1.4rem;
+  }
+  .time-banner {
+    display: inline-block;
+    margin-top: 0.8rem;
+    background: var(--accent);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    padding: 0.4rem 1rem;
+    border-radius: 3px;
+  }
+  .instructions {
+    font-size: 0.95rem;
+    text-align: left;
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background: white;
+    border: 1px solid var(--border);
+  }
+  .name-fields {
+    margin-top: 1.2rem;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+  }
+  .name-fields div { margin-bottom: 0.6rem; }
+  .fill-line {
+    display: inline-block;
+    border-bottom: 1px solid var(--ink);
+    min-width: 250px;
+    height: 1.1em;
+  }
+  .section-divider {
+    margin: 2.5rem 0 1.5rem;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: white;
+    background: var(--accent);
+    padding: 0.5rem 0.9rem;
+    font-size: 1.05rem;
+  }
+  .passage-box {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .passage-box h3 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.05rem;
+  }
+  .question {
+    margin: 1.1rem 0;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid #e0ddd3;
+    background: white;
+  }
+  .qtext { margin: 0 0 0.5rem; }
+  .options label.option {
+    display: block;
+    margin: 0.3rem 0 0.3rem 0.2rem;
+    cursor: pointer;
+  }
+  .options input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  .er-box, .reflection-box {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  textarea {
+    width: 100%;
+    font-family: Georgia, serif;
+    font-size: 0.95rem;
+    border: 1px solid var(--border);
+    padding: 0.6rem;
+    resize: vertical;
+  }
+  .end-marker {
+    text-align: center;
+    margin: 3rem 0 0.5rem;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .double-rule {
+    border: none;
+    border-top: 4px double var(--rule);
+    margin: 0.5rem 0 2.5rem;
+  }
+  .instructor-page {
+    page-break-before: always;
+  }
+  .mentor-section, .rubric-section, .key-section {
+    background: var(--soft);
+    border: 1px solid var(--border);
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .mentor-section h2, .rubric-section h2, .key-section h2 {
+    color: var(--accent);
+    margin-top: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.8rem;
+    background: white;
+    font-size: 0.92rem;
+  }
+  table, th, td {
+    border: 1px solid var(--border);
+  }
+  th, td {
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--accent);
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  .rubric-table td:first-child {
+    font-weight: bold;
+    text-align: center;
+    width: 8%;
+  }
+  ul.checklist li { margin-bottom: 0.5rem; }
+  @media print {
+    body { background: white; }
+    .question, .passage-box, .er-box, .reflection-box { break-inside: avoid; }
+    .instructor-page { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== TITLE PAGE ============== -->
+<div class="title-block">
+  <div class="testid">RLA Test 2 — NYS</div>
+  <h1>GED&reg; Practice Test &mdash; Reasoning Through Language Arts</h1>
+  <div class="time-banner">Recommended Time: 90&ndash;100 minutes (includes 45 minutes for the Extended Response)</div>
+  <div class="instructions">
+    <strong>Instructions:</strong> This practice test includes three reading passages, a grammar/editing
+    passage, and one Extended Response writing task. Read each passage carefully before answering the
+    questions that follow it. For multiple-choice questions, select the one best answer. For the Extended
+    Response, plan your essay before writing, and use specific evidence from both source texts provided.
+    A four-function calculator is not needed for this test.
+  </div>
+  <div class="name-fields">
+    <div>Name: <span class="fill-line"></span> &nbsp;&nbsp; Date: <span class="fill-line" style="min-width:120px;"></span></div>
+    <div>Mentor: <span class="fill-line"></span></div>
+  </div>
+</div>
+
+<!-- ============== PASSAGE 1 ============== -->
+<div class="section-divider">Reading for Meaning &mdash; Informational Passage</div>
+<div class="passage-box">
+  <h3>Passage 1: How Community Solar Programs Work</h3>
+      <p>For decades, the only way to use solar power at home was to install panels on your own roof, an option that worked well for homeowners with sturdy, sun-facing roofs and enough savings to cover the upfront cost. Renters, apartment dwellers, and homeowners with shaded or poorly angled roofs were largely shut out of the solar market, even if they wanted to reduce their energy bills and their reliance on fossil fuels. Community solar programs were developed specifically to close that gap.</p>
+      <p>A community solar program works differently from a rooftop installation. Instead of placing panels on an individual building, a company or utility builds a single, larger solar array somewhere in the region, often on a field, an old industrial lot, or the roof of a warehouse. Local residents and businesses can then subscribe to a share of that array's output, even if they never see the panels in person. Each subscriber's electricity bill is credited based on their share of the energy the array produces that month, usually at a modest discount compared to standard utility rates. In most programs, subscribers pay no upfront installation cost at all; they simply switch their billing to include the community solar credit.</p>
+      <p>Critics of community solar point out that the savings are often smaller than rooftop solar would provide, since subscribers are sharing the benefit of one array across many households rather than capturing the full output of their own dedicated panels. Some programs also lock subscribers into multi-year contracts with cancellation fees, which can be a problem for renters who move frequently. Supporters counter that for the millions of households who could never install rooftop panels in the first place, even a modest, no-upfront-cost discount represents real progress, and that competition between providers has started to push contract terms in a more flexible direction.</p>
+      <p>By the early 2020s, community solar programs were operating in dozens of states, with subscriber numbers growing each year. The technology itself is not new or experimental; what changed was the business model, which made solar accessible to people who had been excluded from it for purely structural reasons, like not owning a roof, rather than for any lack of interest in renewable energy. Some utilities now offer community solar as a default option for new customers, requiring people to opt out rather than opt in, a change that supporters credit with much of the recent growth in subscriber numbers.</p>
+</div>
+    <div class="question" id="q-p1q1">
+      <p class="qtext"><strong>1.</strong> According to the passage, which group was historically excluded from rooftop solar installation?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q1" value="A">
+          <span><strong>A.</strong> Renters and apartment dwellers without their own roof to use.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q1" value="B">
+          <span><strong>B.</strong> Anyone who lived in a state without sunshine.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q1" value="C">
+          <span><strong>C.</strong> People who already had low electricity bills.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q1" value="D">
+          <span><strong>D.</strong> Only people who lived in large cities.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q2">
+      <p class="qtext"><strong>2.</strong> How does a community solar program differ from a traditional rooftop solar installation, according to the passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q2" value="A">
+          <span><strong>A.</strong> Community solar requires a higher upfront payment than rooftop panels.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q2" value="B">
+          <span><strong>B.</strong> Community solar uses a single, larger array that many subscribers share, rather than individual rooftop panels.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q2" value="C">
+          <span><strong>C.</strong> Community solar panels are installed directly on each subscriber's roof.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q2" value="D">
+          <span><strong>D.</strong> Community solar is only available to businesses, not individual households.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q3">
+      <p class="qtext"><strong>3.</strong> Which detail from the passage best supports a critic's concern about community solar?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q3" value="A">
+          <span><strong>A.</strong> Subscribers pay no upfront installation cost.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q3" value="B">
+          <span><strong>B.</strong> The technology has existed for decades.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q3" value="C">
+          <span><strong>C.</strong> Some programs lock subscribers into multi-year contracts with cancellation fees.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q3" value="D">
+          <span><strong>D.</strong> Subscriber numbers were growing each year.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q4">
+      <p class="qtext"><strong>4.</strong> What is the most likely purpose of the final paragraph?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q4" value="A">
+          <span><strong>A.</strong> To argue that community solar should be banned in most states.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q4" value="B">
+          <span><strong>B.</strong> To prove that rooftop solar no longer exists.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q4" value="C">
+          <span><strong>C.</strong> To explain how solar panels are manufactured.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q4" value="D">
+          <span><strong>D.</strong> To clarify that the underlying solar technology is not new, but the business model that made it accessible to excluded groups is what changed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q5">
+      <p class="qtext"><strong>5.</strong> Which statement best expresses the main idea of the passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q5" value="A">
+          <span><strong>A.</strong> Community solar programs were created to give people without suitable roofs access to solar savings, though they come with tradeoffs compared to rooftop solar.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q5" value="B">
+          <span><strong>B.</strong> Community solar programs eliminated all electricity bills for subscribers.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q5" value="C">
+          <span><strong>C.</strong> Rooftop solar is illegal in most states.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q5" value="D">
+          <span><strong>D.</strong> Community solar only benefits large businesses, not households.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q6">
+      <p class="qtext"><strong>6.</strong> As used in the final paragraph, what does "structural reasons" most nearly mean?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q6" value="A">
+          <span><strong>A.</strong> Reasons related to the architecture style of a building.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q6" value="B">
+          <span><strong>B.</strong> Reasons rooted in circumstances like not owning property, rather than personal choice or lack of interest.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q6" value="C">
+          <span><strong>C.</strong> Reasons related to faulty wiring.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q6" value="D">
+          <span><strong>D.</strong> Reasons that only apply to commercial buildings.</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== PASSAGE 2 ============== -->
+<div class="section-divider">Identifying and Creating Arguments &mdash; Informational Passage</div>
+<div class="passage-box">
+  <h3>Passage 2: Should Overtime Rules Change for Salaried Workers?</h3>
+      <p>Under current federal rules, most hourly workers are entitled to overtime pay -- typically time-and-a-half -- when they work more than forty hours in a week. Many salaried workers, however, are classified as "exempt" and receive no overtime pay no matter how many hours they work, as long as their salary is above a certain threshold and their job duties meet specific criteria. Labor advocates have pushed for years to raise that salary threshold, arguing that it has not kept pace with inflation and that many workers classified as exempt are doing essentially the same tasks as hourly employees, just without the overtime protection.</p>
+      <p>Supporters of raising the threshold point to cases where salaried assistant managers at retail or restaurant chains work fifty or sixty hours a week for a fixed salary that, once divided by actual hours worked, amounts to less per hour than the cashiers they supervise earn with overtime included. Raising the threshold, they argue, would force employers to either pay these workers overtime or hire additional staff to cover the extra hours, both of which benefit workers. A recent policy analysis estimated that several million workers currently classified as exempt would become eligible for overtime protection if the threshold were significantly raised.</p>
+      <p>Business groups oppose a sharp increase, arguing that it would force companies to either convert valued salaried employees to hourly status, which many employees experience as a demotion in status even when the pay works out similarly, or cut staff and redistribute work among fewer people to control costs. Small business owners in particular argue that a uniform national threshold does not account for regional differences in cost of living; a salary that comfortably clears the threshold in a rural area might be a relatively low salary in an expensive city, while a national threshold set too high could disproportionately burden employers in lower-cost regions.</p>
+      <p>Both sides generally agree that the rules have not been updated frequently enough to track changes in pay and cost of living, even when they disagree sharply on what the new threshold should be. Some economists have proposed indexing the threshold automatically to inflation going forward, so that the debate would not need to be relitigated from scratch every time an update became overdue. Whether lawmakers will adopt that kind of automatic adjustment, or continue updating the threshold only through periodic, contentious negotiations, remains an open question that is likely to resurface every few years regardless of which side currently has more political support.</p>
+</div>
+    <div class="question" id="q-p2q1">
+      <p class="qtext"><strong>7.</strong> According to the passage, what determines whether a salaried worker is classified as "exempt" from overtime pay?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q1" value="A">
+          <span><strong>A.</strong> Whether the worker has been employed for more than five years.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q1" value="B">
+          <span><strong>B.</strong> Whether the worker is employed in a unionized workplace.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q1" value="C">
+          <span><strong>C.</strong> Whether the worker's salary is above a certain threshold and their job duties meet specific criteria.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q1" value="D">
+          <span><strong>D.</strong> Whether the worker has a college degree.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q2">
+      <p class="qtext"><strong>8.</strong> Which piece of evidence do supporters of raising the threshold use to argue their position?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q2" value="A">
+          <span><strong>A.</strong> Most salaried workers prefer not to receive overtime pay.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q2" value="B">
+          <span><strong>B.</strong> Hourly workers are paid more than salaried workers in every industry.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q2" value="C">
+          <span><strong>C.</strong> The current threshold was set too high to begin with.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q2" value="D">
+          <span><strong>D.</strong> Salaried assistant managers sometimes earn less per hour than the hourly employees they supervise, once long hours are factored in.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q3">
+      <p class="qtext"><strong>9.</strong> What concern do small business owners raise about a uniform national salary threshold?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q3" value="A">
+          <span><strong>A.</strong> It does not account for regional differences in cost of living.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q3" value="B">
+          <span><strong>B.</strong> It only applies to large corporations, not small businesses.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q3" value="C">
+          <span><strong>C.</strong> It would eliminate the exempt classification entirely.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q3" value="D">
+          <span><strong>D.</strong> It would require all workers to become salaried.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q4">
+      <p class="qtext"><strong>10.</strong> What is the most likely reason the author includes the detail about indexing the threshold to inflation in the final paragraph?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q4" value="A">
+          <span><strong>A.</strong> To argue that the threshold should never be changed again.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q4" value="B">
+          <span><strong>B.</strong> To suggest a possible way to reduce the need for repeated political debate over updating the threshold.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q4" value="C">
+          <span><strong>C.</strong> To prove that inflation does not actually affect wages.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q4" value="D">
+          <span><strong>D.</strong> To explain how inflation is calculated by economists.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q5">
+      <p class="qtext"><strong>11.</strong> Which statement is a fact stated in the passage, rather than an opinion held by one side of the debate?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q5" value="A">
+          <span><strong>A.</strong> Raising the threshold would definitely improve life for all workers.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q5" value="B">
+          <span><strong>B.</strong> Salaried positions are always better than hourly positions.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q5" value="C">
+          <span><strong>C.</strong> Hourly workers are entitled to overtime pay, typically time-and-a-half, when they work more than forty hours in a week under current federal rules.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q5" value="D">
+          <span><strong>D.</strong> Small businesses should be exempt from all labor laws.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q6">
+      <p class="qtext"><strong>12.</strong> What is the primary purpose of this passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q6" value="A">
+          <span><strong>A.</strong> To argue that all salaried workers should immediately receive overtime pay.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q6" value="B">
+          <span><strong>B.</strong> To provide step-by-step legal instructions for filing an overtime complaint.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q6" value="C">
+          <span><strong>C.</strong> To argue that business groups are wrong about regional cost-of-living differences.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q6" value="D">
+          <span><strong>D.</strong> To present both sides of the debate over the overtime salary threshold and a possible compromise approach.</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== PASSAGE 3 ============== -->
+<div class="section-divider">Reading for Meaning &mdash; Literary Passage</div>
+<div class="passage-box">
+  <h3>Passage 3: Learning the Clutch (fiction excerpt)</h3>
+      <p>Daniel had explained the clutch three times already, and his son Theo's expression had moved from confident to confused to something closer to despair. "Just ease off it slow," Daniel said, for the fourth time, trying to keep his voice light. "Like letting go of a rope, not dropping it."</p>
+      <p>The car bucked forward and stalled, again. Theo's hands stayed on the wheel, knuckles pale, staring straight ahead at the empty parking lot they'd chosen specifically because there was nothing to hit. "I'm never going to get this," he said, not quite to his father, more to the windshield.</p>
+      <p>Daniel remembered, suddenly and clearly, his own father's patience -- or lack of it -- teaching him to drive a stick shift in a church parking lot decades earlier. His father had sighed loudly every time the car stalled, and eventually Daniel had stopped asking questions and just nodded along, pretending to understand things he didn't, just to avoid another sigh. He had sworn, even at sixteen, that he would never teach anyone to drive that way.</p>
+      <p>"You stalled it," Daniel said now, "which means you're doing it right." Theo turned to look at him, eyebrows raised. "I mean it," Daniel continued. "Everybody stalls it learning. The only way to never stall is to never try. So you're exactly on schedule." He reached over and turned the key himself this time, restarting the engine. "Again. And this time, talk to me while you do it -- tell me what your foot's doing."</p>
+      <p>Theo exhaled, some of the tension leaving his shoulders, and put the car back in first gear. "Okay. Pressing the clutch down... now I'm trying to feel where it catches..." The car rolled forward, jerky but moving, and didn't stall. Theo laughed, surprised, and Daniel found himself laughing too, not because the moment was particularly funny but because something had loosened in the car that had nothing to do with the clutch at all.</p>
+      <p>They circled the empty lot twice more before Daniel finally said it was enough for one afternoon. As Theo climbed out, still talking through what he'd felt with his foot on the clutch, Daniel lingered behind the wheel a moment longer, thinking that he had not, in fact, broken the pattern completely -- he had simply chosen which parts of it to keep. The patience, he decided, he would keep. The sighing, he was glad to leave behind in that church parking lot decades ago, where it belonged.</p>
+</div>
+    <div class="question" id="q-p3q1">
+      <p class="qtext"><strong>13.</strong> How does Theo's emotional state change over the course of the passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q1" value="A">
+          <span><strong>A.</strong> He moves from frustration and despair to relief and surprised laughter.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q1" value="B">
+          <span><strong>B.</strong> He starts angry and ends terrified.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q1" value="C">
+          <span><strong>C.</strong> He starts confident and ends bored.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q1" value="D">
+          <span><strong>D.</strong> He remains completely calm throughout the passage.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q2">
+      <p class="qtext"><strong>14.</strong> What is the most likely reason the author includes the flashback to Daniel's own father teaching him to drive?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q2" value="A">
+          <span><strong>A.</strong> To show that Daniel's father was a better driver than Daniel.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q2" value="B">
+          <span><strong>B.</strong> To reveal Daniel's motivation for handling Theo's frustration differently than his own father did.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q2" value="C">
+          <span><strong>C.</strong> To explain why the car they are using is old.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q2" value="D">
+          <span><strong>D.</strong> To suggest that Daniel never learned to drive properly.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q3">
+      <p class="qtext"><strong>15.</strong> What does Daniel mean when he tells Theo, "you're exactly on schedule"?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q3" value="A">
+          <span><strong>A.</strong> Theo is running late for an appointment.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q3" value="B">
+          <span><strong>B.</strong> Theo has been practicing for the exact right number of hours.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q3" value="C">
+          <span><strong>C.</strong> Stalling the car is a normal, expected part of learning, not a sign of failure.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q3" value="D">
+          <span><strong>D.</strong> The driving lesson is almost finished.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q4">
+      <p class="qtext"><strong>16.</strong> Which detail from the passage best supports the idea that Daniel is intentionally trying to reduce Theo's anxiety?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q4" value="A">
+          <span><strong>A.</strong> Daniel sighs loudly every time the car stalls.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q4" value="B">
+          <span><strong>B.</strong> Daniel refuses to let Theo try again after stalling.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q4" value="C">
+          <span><strong>C.</strong> Daniel tells Theo to drive faster.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q4" value="D">
+          <span><strong>D.</strong> Daniel reframes stalling as a sign Theo is "doing it right" instead of criticizing the mistake.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q5">
+      <p class="qtext"><strong>17.</strong> What does the final sentence -- "something had loosened in the car that had nothing to do with the clutch at all" -- most likely suggest?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q5" value="A">
+          <span><strong>A.</strong> The car had a mechanical problem that was just fixed.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q5" value="B">
+          <span><strong>B.</strong> The emotional tension between Daniel and Theo eased, beyond just the technical driving lesson.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q5" value="C">
+          <span><strong>C.</strong> Theo decided he no longer wanted to learn to drive.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q5" value="D">
+          <span><strong>D.</strong> Daniel was relieved the lesson was finally over.</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== GRAMMAR PASSAGE ============== -->
+<div class="section-divider">Grammar and Language Conventions &mdash; Editing Passage</div>
+<div class="passage-box">
+  <h3>Grammar and Language Conventions: Editing Passage</h3>
+  <p style="font-size:0.85rem; color:#555;"><em>Read the passage below. Numbers in parentheses indicate sentence numbers. Some sentences contain errors in grammar, usage, spelling, or punctuation.</em></p>
+<p>(1) Last month, the tenant association at Riverside Court held it's first meeting in over a year to discuss a planned rent increase. (2) Nearly forty residents attended, which was more then the association had expected based on past turnout. (3) The meeting's main organizer, a retired teacher named Mrs. Okafor who has lived in the building for over twenty years passed around a sign-up sheet for a follow-up committee. (4) Several residents raised concerns about the increase, others focused instead on long-delayed repairs to the building's elevator. (5) By the end of the meeting, the group having agreed to send a formal letter to the property management company within two weeks. (6) Whether the letter actually changes anything, it remains uncertain, but most residents seemed to feel that organizing was worthwhile regardless of the outcome. (7) Mrs. Okafor reminded everyone that the committee would need volunteers willing to attend a longer meeting in three weeks. (8) Either way, residents left the meeting feeling more informed then they had going in.</p>
+</div>
+    <div class="question" id="q-gq1">
+      <p class="qtext"><strong>18.</strong> Sentence 1: "...held it's first meeting in over a year..." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq1" value="A">
+          <span><strong>A.</strong> Change "held" to "holds"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq1" value="B">
+          <span><strong>B.</strong> Add a comma after "meeting"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq1" value="C">
+          <span><strong>C.</strong> Change "it's" to "its"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq1" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq2">
+      <p class="qtext"><strong>19.</strong> Sentence 2: "...which was more then the association had expected..." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq2" value="A">
+          <span><strong>A.</strong> Change "then" to "than"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq2" value="B">
+          <span><strong>B.</strong> Change "more" to "most"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq2" value="C">
+          <span><strong>C.</strong> Remove the word "which"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq2" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq3">
+      <p class="qtext"><strong>20.</strong> Sentence 3: "The meeting's main organizer, a retired teacher named Mrs. Okafor who has lived in the building for over twenty years passed around a sign-up sheet..." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq3" value="A">
+          <span><strong>A.</strong> Change "passed" to "pass"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq3" value="B">
+          <span><strong>B.</strong> Add a comma after "years"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq3" value="C">
+          <span><strong>C.</strong> Remove the comma after "organizer"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq3" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq4">
+      <p class="qtext"><strong>21.</strong> Sentence 4: "Several residents raised concerns about the increase, others focused instead on long-delayed repairs to the building's elevator." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq4" value="A">
+          <span><strong>A.</strong> Change "raised" to "raise"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq4" value="B">
+          <span><strong>B.</strong> Remove the apostrophe in "building's"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq4" value="C">
+          <span><strong>C.</strong> No correction is needed.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq4" value="D">
+          <span><strong>D.</strong> Change the comma after "increase" to a semicolon</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq5">
+      <p class="qtext"><strong>22.</strong> Sentence 5: "By the end of the meeting, the group having agreed to send a formal letter to the property management company within two weeks." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq5" value="A">
+          <span><strong>A.</strong> Change "having agreed" to "had agreed"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq5" value="B">
+          <span><strong>B.</strong> Change "By" to "At"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq5" value="C">
+          <span><strong>C.</strong> Add a comma after "agreed"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq5" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq6">
+      <p class="qtext"><strong>23.</strong> Sentence 6: "Whether the letter actually changes anything, it remains uncertain, but most residents seemed to feel that organizing was worthwhile regardless of the outcome." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq6" value="A">
+          <span><strong>A.</strong> Change "Whether" to "While"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq6" value="B">
+          <span><strong>B.</strong> Add a comma after "Whether"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq6" value="C">
+          <span><strong>C.</strong> Remove the word "it"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq6" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== EXTENDED RESPONSE ============== -->
+<div class="section-divider">Extended Response</div>
+<div class="er-box">
+<p><strong>Extended Response Task</strong></p>
+<p>A local school district is debating whether to switch from a five-day school week to a four-day school week with longer daily hours. Two parents wrote letters to the school board sharing their views.</p>
+
+<p><strong>Argument A &mdash; Letter from a parent supporting the change:</strong><br>
+"A four-day week would save the district money on transportation and building operations, and a district survey of neighboring towns that already made this switch found that 74% of teachers there reported feeling less burned out after the change. Longer school days mean more uninterrupted instructional time per day, with fewer transitions between classes. Several of those neighboring districts also reported stable or improved test scores in the two years after switching, based on state assessment data. Our teachers are leaving for other districts at a high rate, and this could help us keep them."</p>
+
+<p><strong>Argument B &mdash; Letter from a parent opposing the change:</strong><br>
+"Longer school days are exhausting for young children, especially elementary students who already struggle to focus by mid-afternoon under the current schedule. A three-day weekend sounds appealing, but it creates a real child care problem for working parents who can't simply take an extra day off every week. The neighboring districts cited in support of this change are mostly rural, with very different family income levels and access to after-school programs than our district has. National research on four-day school weeks remains limited and mixed, and our district would essentially be running an experiment on our own children based on a small number of similar-sounding but not truly comparable examples."</p>
+
+<p><strong>Your Task:</strong> Write an essay analyzing both arguments above to determine which one is better supported. In your response, develop an argument in which you explain how one position is better supported than the other. Incorporate relevant, specific evidence from both letters to support your argument. Be sure to discuss the strengths and weaknesses of the evidence in each letter.</p>
+
+<p><em>You should spend up to 45 minutes reading, planning, and writing your response. Your response will be scored on (1) the quality of your reading and analysis, (2) your development of ideas and organizational structure, and (3) your clarity and command of standard English conventions.</em></p>
+  <textarea rows="20" placeholder="Write your Extended Response here..."></textarea>
+</div>
+
+<!-- ============== STUDENT REFLECTION ============== -->
+<div class="section-divider">Student Reflection</div>
+<div class="reflection-box">
+  <p><strong>1.</strong> Which section of this test felt most comfortable for you? Why do you think that is?</p>
+  <textarea rows="3" placeholder="Your answer..."></textarea>
+  <p style="margin-top:1rem;"><strong>2.</strong> Which section felt most challenging? What specifically made it difficult?</p>
+  <textarea rows="3" placeholder="Your answer..."></textarea>
+  <p style="margin-top:1rem;"><strong>3.</strong> Pick one question you were unsure about. Even if you got it right, explain your reasoning here.</p>
+  <textarea rows="3" placeholder="Your answer..."></textarea>
+</div>
+
+<!-- ============== END OF STUDENT-FACING TEST ============== -->
+<div class="end-marker">&mdash; End of Student-Facing Test &mdash;</div>
+<hr class="double-rule">
+
+<!-- ============== INSTRUCTOR SECTION ============== -->
+<div class="instructor-page">
+  <div class="running-header">RLA Test 2 — NYS &mdash; Instructor Section &mdash; Mentor Guide</div>
+
+  <div class="mentor-section">
+    <h2>Mentor Guide</h2>
+    <p>This guide is for the mentor or instructor reviewing this test with the student. The goal is not
+    simply to mark answers right or wrong, but to understand <em>why</em> the student arrived at each answer.</p>
+    <ul class="checklist">
+      <li><strong>Review every answer with the student</strong> &mdash; including correct ones. Ask the student
+      to explain their reasoning out loud for each question, not just the ones they missed.</li>
+      <li><strong>Treat unexplained correct answers as a finding, not a pass.</strong> If a student got a
+      question right but cannot explain why, treat it the same as a wrong answer for instructional purposes.
+      A correct guess and a correct deduction look identical on this key but mean very different things
+      about what the student actually understands.</li>
+      <li><strong>Give specific, critical feedback tied to the actual error.</strong> Instead of "review this
+      topic," name the misconception directly &mdash; for example, "you chose this option because you treated
+      the supporter's opinion in paragraph 1 as a stated fact" is more useful than "reread the passage."</li>
+      <li><strong>Watch for patterns across questions.</strong> If a student misses multiple questions that
+      depend on distinguishing fact from opinion, or struggles across several grammar items involving comma
+      placement, that is a signal to change the teaching approach &mdash; break the skill into smaller steps,
+      use a different example, or approach it from a new angle &mdash; rather than re-explaining the same way.</li>
+    </ul>
+    <p><strong>Section-by-section notes:</strong></p>
+    <ul class="checklist">
+      <li><strong>Passage 1 (Informational):</strong> Tests literal comprehension, inference, vocabulary in
+      context, and main idea. If a student struggles here, check whether they are reading too quickly and
+      missing supporting detail sentences, versus genuinely misunderstanding vocabulary.</li>
+      <li><strong>Passage 2 (Argument):</strong> Tests the ability to distinguish a stated fact from a claim
+      or opinion, and to evaluate the strength/weakness of evidence. This is one of the harder skill areas on
+      the real RLA test &mdash; expect to spend extra review time here.</li>
+      <li><strong>Passage 3 (Literary):</strong> Tests figurative language, inference about character, and
+      tone/mood shifts. If a student answers literally where a figurative reading is required (e.g., the
+      "coat in a closet" question), that is a specific, nameable skill gap worth flagging.</li>
+      <li><strong>Grammar/Editing:</strong> Tests subject-verb agreement, spelling, sentence fragments,
+      comma usage with nonrestrictive clauses, and redundant subjects. Identify which specific error
+      category (not just "grammar" broadly) the student is missing.</li>
+      <li><strong>Extended Response:</strong> Use the rubric below. Review the essay with the student
+      sentence-by-sentence if needed, focusing especially on whether they used specific evidence from
+      <em>both</em> letters, not just one.</li>
+    </ul>
+  </div>
+
+  <div class="running-header">RLA Test 2 — NYS &mdash; Instructor Section &mdash; Scoring Rubric</div>
+  <div class="rubric-section">
+    <h2>Extended Response Scoring Rubric (4-Point Scale)</h2>
+    <table class="rubric-table">
+      <tr><th>Score</th><th>Criteria</th></tr>
+      <tr>
+        <td>4</td>
+        <td>Clearly identifies which argument is better supported and explains why using specific, accurate
+        evidence from <strong>both</strong> letters. Discusses strengths and/or weaknesses of the evidence
+        (e.g., sample size, data source, relevance). Well-organized with clear transitions. Few or no
+        distracting errors in grammar, usage, or mechanics.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Identifies a position and supports it with evidence from both letters, but evidence use may be
+        less precise, or discussion of evidence quality is thin or one-sided. Organization is generally
+        clear. Some errors in conventions, but they do not interfere with meaning.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Takes a position but relies mainly on one letter, restates the letters without much analysis, or
+        misrepresents some evidence. Organization may be unclear in places. Errors in conventions are
+        noticeable and occasionally interfere with meaning.</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Minimal or unclear position. Little to no use of specific evidence from the letters. Disorganized
+        or very brief response. Frequent errors in conventions that interfere with meaning.</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>Blank, off-topic, or a response that does not address the task (e.g., simply restates the prompt
+        with no argument or evidence).</td>
+      </tr>
+    </table>
+    <p style="margin-top:1rem; font-size:0.9rem; color:#555;"><em>Note: There is no single "correct" position
+    (Argument A or B) &mdash; both are defensible. Score based on the quality of analysis and evidence use,
+    not on which side the student chooses.</em></p>
+  </div>
+
+  <div class="running-header">RLA Test 2 — NYS &mdash; Instructor Section &mdash; Answer Key</div>
+  <div class="key-section">
+    <h2>Answer Key and Explanations</h2>
+    <p style="font-size:0.9rem; color:#555;">Total multiple-choice questions: 23</p>
+    <table>
+      <tr><th>Q#</th><th>Section</th><th>Answer</th><th>Explanation</th></tr>
+        <tr>
+          <td>1</td>
+          <td>Passage 1</td>
+          <td><strong>A</strong></td>
+          <td>Paragraph 1 states that 'renters, apartment dwellers, and homeowners with shaded or poorly angled roofs were largely shut out of the solar market.' The other options describe restrictions never mentioned in the passage.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Passage 1</td>
+          <td><strong>B</strong></td>
+          <td>Paragraph 2 explains that a company builds 'a single, larger solar array' and that 'local residents and businesses can then subscribe to a share' of it -- directly matching this option, while the others contradict stated details (no upfront cost, no individual rooftop panels, availability to both households and businesses).</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Passage 1</td>
+          <td><strong>C</strong></td>
+          <td>Paragraph 3 directly attributes this concern to critics: contract lock-in 'can be a problem for renters who move frequently.' The other options are either neutral facts or describe growth, not a criticism.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Passage 1</td>
+          <td><strong>D</strong></td>
+          <td>The final paragraph explicitly distinguishes the (unchanged) technology from the (changed) business model, tying it back to the structural exclusion described in paragraph 1 -- it does not argue for a ban, claim rooftop solar vanished, or explain manufacturing.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Passage 1</td>
+          <td><strong>A</strong></td>
+          <td>This synthesizes the passage's core argument: a deliberate solution to structural exclusion (paragraph 1 and 4), with acknowledged tradeoffs (paragraph 3). The other options overstate or invert claims the passage makes.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Passage 1</td>
+          <td><strong>B</strong></td>
+          <td>The sentence contrasts being excluded 'for purely structural reasons, like not owning a roof, rather than for any lack of interest' -- this frames structural reasons as circumstantial barriers, not architecture, wiring, or a commercial-only restriction.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Passage 2</td>
+          <td><strong>C</strong></td>
+          <td>Paragraph 1 directly states exempt status depends on the salary being 'above a certain threshold and their job duties meet specific criteria.' None of the other factors are mentioned in the passage.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Passage 2</td>
+          <td><strong>D</strong></td>
+          <td>Paragraph 2 gives this exact example: assistant managers working 50-60 hours a week for a fixed salary that 'amounts to less per hour than the cashiers they supervise earn with overtime included.' The other options are not supported anywhere in the passage.</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Passage 2</td>
+          <td><strong>A</strong></td>
+          <td>Paragraph 3 states this concern directly, explaining that a threshold appropriate for a rural area could be a low salary in an expensive city, or burden employers in lower-cost regions if set too high nationally. The other options misstate the passage's content.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Passage 2</td>
+          <td><strong>B</strong></td>
+          <td>The passage frames this as a proposal so 'the debate would not need to be relitigated from scratch every time an update became overdue' -- a practical compromise idea, not an argument against ever changing the threshold or a technical explanation of inflation.</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Passage 2</td>
+          <td><strong>C</strong></td>
+          <td>This is stated as a neutral description of current federal rules in paragraph 1, not attributed to either side as an argument. The other options are value judgments or sweeping claims the passage does not make as fact.</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Passage 2</td>
+          <td><strong>D</strong></td>
+          <td>The passage presents the labor-advocate perspective, the business-group perspective, and a proposed indexing compromise, without arguing for one side -- it does not call for immediate action, give legal instructions, or argue against the cost-of-living point.</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Passage 3</td>
+          <td><strong>A</strong></td>
+          <td>Theo's expression moves to 'something closer to despair' early on, and by the end he 'laughed, surprised,' with tension leaving his shoulders -- a clear arc from frustration to relief, not anger-to-terror, confidence-to-boredom, or constant calm.</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Passage 3</td>
+          <td><strong>B</strong></td>
+          <td>The flashback directly leads into Daniel's sworn intention to 'never teach anyone to drive that way' -- it explains his patient approach with Theo as a deliberate contrast to his own father's impatience, not a comment on driving skill or the car's age.</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Passage 3</td>
+          <td><strong>C</strong></td>
+          <td>Daniel explains immediately before this that 'everybody stalls it learning. The only way to never stall is to never try' -- reframing the stall as expected progress, not lateness, a time quota, or the lesson ending.</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Passage 3</td>
+          <td><strong>D</strong></td>
+          <td>This reframing is the passage's clearest example of Daniel deliberately countering pressure with reassurance -- the sighing detail belongs to Daniel's own father in the flashback, not to Daniel, and the other two options never occur in the passage.</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Passage 3</td>
+          <td><strong>B</strong></td>
+          <td>The phrase explicitly separates the loosening from anything mechanical ('nothing to do with the clutch at all'), pointing to the emotional shift between father and son rather than a literal car repair, Theo quitting, or simple relief at ending.</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Grammar/Editing</td>
+          <td><strong>C</strong></td>
+          <td>"It's" is a contraction for "it is," but the sentence calls for the possessive pronoun "its" (the meeting belonging to the association). None of the other changes are grammatically required.</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>Grammar/Editing</td>
+          <td><strong>A</strong></td>
+          <td>"Then" refers to time or sequence; the comparison here requires "than." The other changes are not supported by any grammar rule here.</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Grammar/Editing</td>
+          <td><strong>B</strong></td>
+          <td>The nonrestrictive clause beginning "a retired teacher..." must be set off by commas on both sides; a comma is missing after "years" to close the clause before "passed."</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>Grammar/Editing</td>
+          <td><strong>D</strong></td>
+          <td>As written, this is a comma splice: two independent clauses joined only by a comma. Changing the comma to a semicolon correctly joins the two related independent clauses.</td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td>Grammar/Editing</td>
+          <td><strong>A</strong></td>
+          <td>As written, the sentence lacks a complete main verb ("having agreed" is a participle phrase, not a predicate). Changing it to "had agreed" creates a grammatically complete sentence in the past perfect tense.</td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td>Grammar/Editing</td>
+          <td><strong>C</strong></td>
+          <td>The sentence has a redundant subject: "Whether the letter...it remains uncertain" duplicates the subject. Removing "it" creates a correct sentence: "Whether the letter actually changes anything remains uncertain."</td>
+        </tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

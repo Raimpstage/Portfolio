@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RLA Test 1 — NYS</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --rule: #333;
+    --accent: #6b1f2a;
+    --paper: #fdfdfb;
+    --soft: #f4f1ea;
+    --border: #ccc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    background: var(--paper);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    line-height: 1.55;
+  }
+  h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; }
+  .running-header {
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+    margin-bottom: 1.2rem;
+  }
+  .title-block {
+    text-align: center;
+    border: 3px solid var(--accent);
+    padding: 1.5rem 1rem;
+    margin-bottom: 2rem;
+    background: var(--soft);
+  }
+  .title-block .testid {
+    font-family: Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+  }
+  .title-block h1 {
+    margin: 0.3rem 0;
+    font-size: 1.4rem;
+  }
+  .time-banner {
+    display: inline-block;
+    margin-top: 0.8rem;
+    background: var(--accent);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    padding: 0.4rem 1rem;
+    border-radius: 3px;
+  }
+  .instructions {
+    font-size: 0.95rem;
+    text-align: left;
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background: white;
+    border: 1px solid var(--border);
+  }
+  .name-fields {
+    margin-top: 1.2rem;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+  }
+  .name-fields div { margin-bottom: 0.6rem; }
+  .fill-line {
+    display: inline-block;
+    border-bottom: 1px solid var(--ink);
+    min-width: 250px;
+    height: 1.1em;
+  }
+  .section-divider {
+    margin: 2.5rem 0 1.5rem;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: white;
+    background: var(--accent);
+    padding: 0.5rem 0.9rem;
+    font-size: 1.05rem;
+  }
+  .passage-box {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .passage-box h3 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.05rem;
+  }
+  .question {
+    margin: 1.1rem 0;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid #e0ddd3;
+    background: white;
+  }
+  .qtext { margin: 0 0 0.5rem; }
+  .options label.option {
+    display: block;
+    margin: 0.3rem 0 0.3rem 0.2rem;
+    cursor: pointer;
+  }
+  .options input[type="radio"] {
+    margin-right: 0.5rem;
+  }
+  .er-box, .reflection-box {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  textarea {
+    width: 100%;
+    font-family: Georgia, serif;
+    font-size: 0.95rem;
+    border: 1px solid var(--border);
+    padding: 0.6rem;
+    resize: vertical;
+  }
+  .end-marker {
+    text-align: center;
+    margin: 3rem 0 0.5rem;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .double-rule {
+    border: none;
+    border-top: 4px double var(--rule);
+    margin: 0.5rem 0 2.5rem;
+  }
+  .instructor-page {
+    page-break-before: always;
+  }
+  .mentor-section, .rubric-section, .key-section {
+    background: var(--soft);
+    border: 1px solid var(--border);
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .mentor-section h2, .rubric-section h2, .key-section h2 {
+    color: var(--accent);
+    margin-top: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.8rem;
+    background: white;
+    font-size: 0.92rem;
+  }
+  table, th, td {
+    border: 1px solid var(--border);
+  }
+  th, td {
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--accent);
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  .rubric-table td:first-child {
+    font-weight: bold;
+    text-align: center;
+    width: 8%;
+  }
+  ul.checklist li { margin-bottom: 0.5rem; }
+  @media print {
+    body { background: white; }
+    .question, .passage-box, .er-box, .reflection-box { break-inside: avoid; }
+    .instructor-page { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== TITLE PAGE ============== -->
+<div class="title-block">
+  <div class="testid">RLA Test 1 — NYS</div>
+  <h1>GED&reg; Practice Test &mdash; Reasoning Through Language Arts</h1>
+  <div class="time-banner">Recommended Time: 90&ndash;100 minutes (includes 45 minutes for the Extended Response)</div>
+  <div class="instructions">
+    <strong>Instructions:</strong> This practice test includes three reading passages, a grammar/editing
+    passage, and one Extended Response writing task. Read each passage carefully before answering the
+    questions that follow it. For multiple-choice questions, select the one best answer. For the Extended
+    Response, plan your essay before writing, and use specific evidence from both source texts provided.
+    A four-function calculator is not needed for this test.
+  </div>
+  <div class="name-fields">
+    <div>Name: <span class="fill-line"></span> &nbsp;&nbsp; Date: <span class="fill-line" style="min-width:120px;"></span></div>
+    <div>Mentor: <span class="fill-line"></span></div>
+  </div>
+</div>
+
+<!-- ============== PASSAGE 1 ============== -->
+<div class="section-divider">Reading for Meaning &mdash; Informational Passage</div>
+<div class="passage-box">
+  <h3>Passage 1: The Rise of Remote Inspection Technology</h3>
+      <p>For most of the twentieth century, inspecting a bridge, a pipeline, or the inside of a factory boiler meant sending a trained worker into a tight, often dangerous space. Bridge inspectors were lowered on ropes to examine support cables. Pipeline workers crawled through narrow tunnels with flashlights, checking for cracks or corrosion. Boiler inspectors waited for machinery to cool completely before climbing inside, sometimes losing days of production time in the process. The work was necessary, but it was slow, costly, and physically risky.</p>
+      <p>Beginning in the 1990s, a new option became available: remote-operated inspection tools. Small wheeled or flying robots, equipped with cameras and sensors, could travel into spaces too small or too hazardous for a person. A drone could fly along the underside of a bridge in an afternoon, a task that once took a three-person crew several days. A robotic crawler could move through a pipeline while gas was still flowing, eliminating the need to shut down operations. These tools did not eliminate the need for skilled inspectors; rather, they changed what the job looked like. Instead of climbing into the boiler, an inspector might sit at a monitor, guiding a small robot and analyzing the images it sent back.</p>
+      <p>The shift created new demands on the workforce. Companies needed inspectors who understood structural engineering and corrosion patterns, but who could also operate cameras, read sensor data, and troubleshoot when a robot's signal failed. Training programs that once focused almost entirely on physical techniques, such as how to rig a harness safely, began adding courses on remote-sensing equipment and basic robotics. Some experienced inspectors who had spent decades doing hands-on work resisted the change at first, arguing that no camera could replace the judgment of a hand run along a suspicious weld. Industry data, however, showed that remote inspection caught certain types of hairline cracks more reliably than the human eye alone, because sensors could detect temperature differences invisible to a visual check.</p>
+      <p>By the 2010s, most large infrastructure projects required at least some remote inspection as a standard part of routine maintenance. The technology did not replace inspectors; it gave them a new set of tools and, in many cases, kept them out of genuinely dangerous situations. For workers entering the field today, comfort with both traditional inspection skills and remote technology is no longer optional. It is the baseline expectation for the job, and that expectation is likely to keep rising as the tools themselves continue to improve.</p>
+</div>
+    <div class="question" id="q-p1q1">
+      <p class="qtext"><strong>1.</strong> According to the passage, what was one major drawback of traditional, in-person inspection methods?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q1" value="A">
+          <span><strong>A.</strong> They were slow, costly, and physically risky for workers.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q1" value="B">
+          <span><strong>B.</strong> They required workers to have engineering degrees.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q1" value="C">
+          <span><strong>C.</strong> They could only be performed at night.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q1" value="D">
+          <span><strong>D.</strong> They were banned in most states by the 1990s.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q2">
+      <p class="qtext"><strong>2.</strong> Which detail from the passage best supports the idea that remote inspection tools can outperform human inspectors in some situations?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q2" value="A">
+          <span><strong>A.</strong> Drones can fly along a bridge in an afternoon.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q2" value="B">
+          <span><strong>B.</strong> Sensors detected temperature differences invisible to the human eye, catching certain hairline cracks more reliably.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q2" value="C">
+          <span><strong>C.</strong> Training programs added courses on robotics.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q2" value="D">
+          <span><strong>D.</strong> Some inspectors resisted the new technology at first.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q3">
+      <p class="qtext"><strong>3.</strong> What is the most likely reason the author includes the detail about experienced inspectors resisting the new technology?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q3" value="A">
+          <span><strong>A.</strong> To prove that remote inspection technology does not work.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q3" value="B">
+          <span><strong>B.</strong> To argue that older workers should be replaced.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q3" value="C">
+          <span><strong>C.</strong> To show that the transition involved genuine professional disagreement, not just smooth adoption.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q3" value="D">
+          <span><strong>D.</strong> To explain why robots are dangerous.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q4">
+      <p class="qtext"><strong>4.</strong> Based on the passage, how did the role of a pipeline inspector most likely change with the introduction of robotic crawlers?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q4" value="A">
+          <span><strong>A.</strong> Inspectors stopped working with pipelines entirely.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q4" value="B">
+          <span><strong>B.</strong> Inspectors began building the robots themselves.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q4" value="C">
+          <span><strong>C.</strong> Pipeline inspection became less important to companies.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q4" value="D">
+          <span><strong>D.</strong> Inspectors could check pipelines without requiring a full shutdown of operations.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q5">
+      <p class="qtext"><strong>5.</strong> Which statement best expresses the main idea of the passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q5" value="A">
+          <span><strong>A.</strong> Inspection work has shifted to combine traditional skills with new remote technology, changing job requirements rather than eliminating the job.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q5" value="B">
+          <span><strong>B.</strong> Remote inspection robots have made human inspectors unnecessary.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q5" value="C">
+          <span><strong>C.</strong> Bridge inspection is more dangerous than pipeline inspection.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q5" value="D">
+          <span><strong>D.</strong> Most companies have stopped doing physical inspections altogether.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p1q6">
+      <p class="qtext"><strong>6.</strong> As used in paragraph 3, what does the word "baseline" most nearly mean in the final paragraph's context?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p1q6" value="A">
+          <span><strong>A.</strong> An old, outdated requirement.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q6" value="B">
+          <span><strong>B.</strong> A minimum standard expectation.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q6" value="C">
+          <span><strong>C.</strong> An optional bonus skill.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p1q6" value="D">
+          <span><strong>D.</strong> A type of robot.</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== PASSAGE 2 ============== -->
+<div class="section-divider">Identifying and Creating Arguments &mdash; Informational Passage</div>
+<div class="passage-box">
+  <h3>Passage 2: Should Job Applications Require a Cover Letter?</h3>
+      <p>Hiring managers disagree sharply about whether cover letters still serve a purpose. Supporters argue that a cover letter reveals things a resume cannot: how clearly a candidate writes, how well they tailor their interest to a specific role, and whether they can explain a gap or transition in their work history. A well-written cover letter, they argue, takes real effort, and that effort itself signals genuine interest in the position rather than a candidate blasting out the same resume to fifty different companies.</p>
+      <p>Critics respond that cover letters mostly measure something irrelevant to job performance: a person's comfort with a specific, somewhat old-fashioned writing format. A skilled welder, machinist, or warehouse supervisor may be excellent at their job and terrible at composing formal business prose, especially if English is not their first language or if they simply have not written this kind of document before. Critics also point out that many cover letters are now generated with the help of artificial intelligence tools, which undermines the claim that the letter reveals genuine effort or personal voice. If a hiring manager cannot tell whether a human or a chatbot wrote the letter, the argument that it proves "real effort" becomes much weaker.</p>
+      <p>A middle position has emerged at some companies: making the cover letter optional, but reviewing it carefully when one is submitted. This approach lets candidates who write well showcase that skill, without penalizing candidates whose strengths lie elsewhere. Data from a handful of companies that switched to optional cover letters showed little change in the quality of new hires, though the sample sizes were small and the companies that tried this approach may not be representative of employers generally.</p>
+      <p>Behind the debate is a larger question about what hiring is supposed to measure in the first place. If a job requires strong writing skills, a cover letter is a reasonable test of that skill. If a job does not require writing, requiring a cover letter anyway may filter out strong candidates for reasons that have nothing to do with whether they can do the work.</p>
+      <p>Some career counselors have begun advising job seekers to ask, before applying, whether the role itself involves regular written communication. If it does, they suggest treating the cover letter as a genuine writing sample worth the extra time. If it does not, they recommend keeping the letter brief and functional rather than polished, on the theory that a short, clear letter signals respect for the hiring manager's time without pretending the document is the centerpiece of the application. Neither approach guarantees a job offer, but both treat the cover letter as a tool suited to a specific purpose, rather than as a universal requirement that means the same thing in every hiring context.</p>
+</div>
+    <div class="question" id="q-p2q1">
+      <p class="qtext"><strong>7.</strong> Which sentence from the passage is a claim made by supporters of cover letters, rather than a fact stated by the author?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q1" value="A">
+          <span><strong>A.</strong> "Hiring managers disagree sharply about whether cover letters still serve a purpose."</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q1" value="B">
+          <span><strong>B.</strong> "A middle position has emerged at some companies."</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q1" value="C">
+          <span><strong>C.</strong> "A well-written cover letter...takes real effort, and that effort itself signals genuine interest."</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q1" value="D">
+          <span><strong>D.</strong> "Data from a handful of companies...showed little change in the quality of new hires."</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q2">
+      <p class="qtext"><strong>8.</strong> What evidence do critics use to challenge the claim that cover letters show "genuine effort"?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q2" value="A">
+          <span><strong>A.</strong> Many cover letters are now written with the help of AI tools, making it hard to tell who really wrote them.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q2" value="B">
+          <span><strong>B.</strong> Cover letters are too short to show real writing skill.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q2" value="C">
+          <span><strong>C.</strong> Most hiring managers do not read cover letters at all.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q2" value="D">
+          <span><strong>D.</strong> Cover letters take longer to write than resumes.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q3">
+      <p class="qtext"><strong>9.</strong> Which detail most weakens the strength of the evidence about companies that made cover letters optional?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q3" value="A">
+          <span><strong>A.</strong> The companies were all in the same industry.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q3" value="B">
+          <span><strong>B.</strong> The cover letters were reviewed by AI instead of humans.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q3" value="C">
+          <span><strong>C.</strong> The companies later required cover letters again.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q3" value="D">
+          <span><strong>D.</strong> The sample sizes were small and may not represent employers generally.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q4">
+      <p class="qtext"><strong>10.</strong> Based on the passage, which job would the author's final argument suggest is LEAST in need of a cover letter requirement?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q4" value="A">
+          <span><strong>A.</strong> A marketing copywriter position.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q4" value="B">
+          <span><strong>B.</strong> A warehouse equipment operator position.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q4" value="C">
+          <span><strong>C.</strong> A technical writing position.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q4" value="D">
+          <span><strong>D.</strong> A grant-writing position for a nonprofit.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q5">
+      <p class="qtext"><strong>11.</strong> What is the primary purpose of this passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q5" value="A">
+          <span><strong>A.</strong> To present both sides of a debate about the value of cover letters and raise a broader question about hiring criteria.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q5" value="B">
+          <span><strong>B.</strong> To prove that cover letters should be eliminated entirely.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q5" value="C">
+          <span><strong>C.</strong> To give step-by-step instructions for writing a cover letter.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q5" value="D">
+          <span><strong>D.</strong> To argue that AI tools have ruined the hiring process.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p2q6">
+      <p class="qtext"><strong>12.</strong> Which statement is an opinion rather than a fact stated in the passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p2q6" value="A">
+          <span><strong>A.</strong> Some companies have made cover letters optional.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q6" value="B">
+          <span><strong>B.</strong> Critics point out that many cover letters are AI-assisted.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q6" value="C">
+          <span><strong>C.</strong> Cover letters are an old-fashioned and unnecessary requirement.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p2q6" value="D">
+          <span><strong>D.</strong> A handful of companies studied the effect of optional cover letters.</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== PASSAGE 3 ============== -->
+<div class="section-divider">Reading for Meaning &mdash; Literary Passage</div>
+<div class="passage-box">
+  <h3>Passage 3: The Long Way Home (fiction excerpt)</h3>
+      <p>Marisol had taken the same bus route for eleven years, and she could have drawn the stops from memory: the laundromat, the boarded-up diner, the church with the crooked steeple, the school where her daughter now worked as a teacher's aide. Tonight, though, the bus turned left where it should have turned right, and a recorded voice announced a detour for road construction. A ripple of irritation moved through the other passengers -- sighs, a muttered complaint, someone checking a phone for the time.</p>
+      <p>Marisol did not sigh. She watched the unfamiliar streets slide past the window: a mural she had never noticed, painted across the side of a hardware store; a small park with a fountain that wasn't running; a bakery with its lights still on, flour dust visible on the windows even from the street. She thought about how many times she had taken this exact route without really looking at anything beyond the next stop, the next transfer, the next thing she had to do.</p>
+      <p>When she was younger, she had wanted to be the kind of person who noticed things -- who could describe a stranger's coat or the exact color of the sky and make it sound like it mattered. Somewhere in the last decade, between two jobs and a daughter to raise alone, that version of herself had quietly gone missing, the way a coat left in a closet is technically still there but might as well not exist.</p>
+      <p>The bus lurched around a final turn and rejoined its normal route, the church with the crooked steeple rising up ahead, familiar and unremarkable. Marisol almost laughed. Eleven years of the same stops, and it had taken a five-minute detour to remind her that there were still things worth looking at, if she bothered to look. She did not know if she would remember this feeling tomorrow, on the ordinary ride home. But for tonight, at least, she had noticed the mural, the still fountain, the flour dust on the bakery window -- and that, she decided, was not nothing.</p>
+      <p>When she stepped off at her usual stop, she found herself walking a little slower than she normally did, glancing at the front of the laundromat, the boarded-up diner, the school where her daughter worked -- buildings she had passed thousands of times without truly seeing. None of it looked new. But for the length of the walk home, she let herself look anyway, the way she used to, back when noticing things had still felt like part of who she was.</p>
+</div>
+    <div class="question" id="q-p3q1">
+      <p class="qtext"><strong>13.</strong> How do most other passengers react to the detour, based on the passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q1" value="A">
+          <span><strong>A.</strong> With excitement about seeing something new.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q1" value="B">
+          <span><strong>B.</strong> With anger directed at the bus driver.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q1" value="C">
+          <span><strong>C.</strong> With total indifference, not reacting at all.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q1" value="D">
+          <span><strong>D.</strong> With mild irritation, such as sighing and checking the time.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q2">
+      <p class="qtext"><strong>14.</strong> What does the comparison to "a coat left in a closet" mean in the context of paragraph 3?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q2" value="A">
+          <span><strong>A.</strong> A part of Marisol's identity still technically exists but has been ignored for so long it might as well be gone.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q2" value="B">
+          <span><strong>B.</strong> Marisol literally forgot where she put her coat.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q2" value="C">
+          <span><strong>C.</strong> Marisol prefers to wear old coats instead of new ones.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q2" value="D">
+          <span><strong>D.</strong> The story is mainly about Marisol's closet.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q3">
+      <p class="qtext"><strong>15.</strong> What is the most likely reason the author includes specific visual details like the mural, the still fountain, and the flour dust on the bakery window?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q3" value="A">
+          <span><strong>A.</strong> To prove that the detour route is more dangerous than the normal route.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q3" value="B">
+          <span><strong>B.</strong> To give the reader directions to follow the bus route.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q3" value="C">
+          <span><strong>C.</strong> To show, through concrete images, the kind of noticing Marisol feels she has lost touch with.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q3" value="D">
+          <span><strong>D.</strong> To suggest that Marisol is planning to move to a new neighborhood.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q4">
+      <p class="qtext"><strong>16.</strong> Which best describes the shift in Marisol's mood from the beginning to the end of the passage?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q4" value="A">
+          <span><strong>A.</strong> From angry to relieved.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q4" value="B">
+          <span><strong>B.</strong> From bored and routine-driven to quietly reflective and almost amused.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q4" value="C">
+          <span><strong>C.</strong> From frightened to calm.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q4" value="D">
+          <span><strong>D.</strong> From confused to angry.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-p3q5">
+      <p class="qtext"><strong>17.</strong> What can be reasonably inferred about Marisol's life in the years leading up to this bus ride?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="p3q5" value="A">
+          <span><strong>A.</strong> She has been focused on responsibilities like work and raising her daughter, leaving little time to notice her surroundings.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q5" value="B">
+          <span><strong>B.</strong> She has traveled extensively and seen many new places.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q5" value="C">
+          <span><strong>C.</strong> She has always disliked her neighborhood.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="p3q5" value="D">
+          <span><strong>D.</strong> She recently moved to this city.</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== GRAMMAR PASSAGE ============== -->
+<div class="section-divider">Grammar and Language Conventions &mdash; Editing Passage</div>
+<div class="passage-box">
+  <h3>Grammar and Language Conventions: Editing Passage</h3>
+  <p style="font-size:0.85rem; color:#555;"><em>Read the passage below. Numbers in parentheses indicate sentence numbers. Some sentences contain errors in grammar, usage, spelling, or punctuation.</em></p>
+<p>(1) Every spring, the maintenance department at Hillcrest Apartments post a notice reminding tenants to clean out their storage units. (2) Last year, the notice went out in March, and most tenants ignored it until the final deadline in May. (3) This year, the property manager tried a new approach: sending three seperate reminders spaced two weeks apart instead of one single notice. (4) The first reminder went out in early March, the second in mid-March, and the third reminder went out at the end of March. (5) By April, nearly eighty percent of tenants having cleaned out their units, compared to only forty percent by the same point last year. (6) The property manager, who has worked at Hillcrest for nine years now believes that breaking a single deadline into smaller steps makes people more likely to act. (7) Whether this approach works as well for other tasks, like rent payments or maintenance requests, it remains to be seen. (8) Either way, the tenants seem to appreciate getting reminders that don't all arrive at once.</p>
+</div>
+    <div class="question" id="q-gq1">
+      <p class="qtext"><strong>18.</strong> Sentence 1: "Every spring, the maintenance department at Hillcrest Apartments post a notice reminding tenants to clean out their storage units." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq1" value="A">
+          <span><strong>A.</strong> Change "Every" to "Each"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq1" value="B">
+          <span><strong>B.</strong> Change "post" to "posts"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq1" value="C">
+          <span><strong>C.</strong> Add a comma after "department"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq1" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq2">
+      <p class="qtext"><strong>19.</strong> Sentence 3: "...sending three seperate reminders spaced two weeks apart..." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq2" value="A">
+          <span><strong>A.</strong> Change "three" to "3"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq2" value="B">
+          <span><strong>B.</strong> Remove the word "spaced"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq2" value="C">
+          <span><strong>C.</strong> Change "seperate" to "separate"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq2" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq3">
+      <p class="qtext"><strong>20.</strong> Sentence 5: "By April, nearly eighty percent of tenants having cleaned out their units, compared to only forty percent by the same point last year." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq3" value="A">
+          <span><strong>A.</strong> Change "having cleaned" to "had cleaned"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq3" value="B">
+          <span><strong>B.</strong> Change "By" to "In"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq3" value="C">
+          <span><strong>C.</strong> Add a comma after "eighty percent"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq3" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq4">
+      <p class="qtext"><strong>21.</strong> Sentence 6: "The property manager, who has worked at Hillcrest for nine years now believes that breaking a single deadline into smaller steps makes people more likely to act." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq4" value="A">
+          <span><strong>A.</strong> Change "believes" to "believe"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq4" value="B">
+          <span><strong>B.</strong> Remove the comma after "manager"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq4" value="C">
+          <span><strong>C.</strong> No correction is needed.</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq4" value="D">
+          <span><strong>D.</strong> Add a comma after "years"</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq5">
+      <p class="qtext"><strong>22.</strong> Sentence 7: "Whether this approach works as well for other tasks, like rent payments or maintenance requests, it remains to be seen." Which correction should be made to this sentence?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq5" value="A">
+          <span><strong>A.</strong> Change "Whether" to "While"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq5" value="B">
+          <span><strong>B.</strong> Remove the word "it"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq5" value="C">
+          <span><strong>C.</strong> Add a comma after "Whether"</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq5" value="D">
+          <span><strong>D.</strong> No correction is needed.</span>
+        </label>
+      </div>
+    </div>
+    <div class="question" id="q-gq6">
+      <p class="qtext"><strong>23.</strong> Which sentence from the passage uses a colon or semicolon correctly to join two related ideas?</p>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="gq6" value="A">
+          <span><strong>A.</strong> Sentence 2: "Last year, the notice went out in March, and most tenants ignored it..."</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq6" value="B">
+          <span><strong>B.</strong> Sentence 8: "Either way, the tenants seem to appreciate getting reminders..."</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq6" value="C">
+          <span><strong>C.</strong> Sentence 3: "This year, the property manager tried a new approach: sending three separate reminders..."</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="gq6" value="D">
+          <span><strong>D.</strong> Sentence 4: "The first reminder went out in early March, the second in mid-March..."</span>
+        </label>
+      </div>
+    </div>
+
+<!-- ============== EXTENDED RESPONSE ============== -->
+<div class="section-divider">Extended Response</div>
+<div class="er-box">
+<p><strong>Extended Response Task</strong></p>
+<p>Two community members wrote letters to a local newspaper about whether the city should replace a free public parking lot downtown with a small park.</p>
+
+<p><strong>Argument A &mdash; Letter from a downtown shop owner:</strong><br>
+"Removing the parking lot will hurt small businesses like mine. Customers already complain about parking downtown, and many drive in from outside the city because there's no good public transit option here. A study by the downtown business association found that 68% of shoppers surveyed said convenient parking was a major factor in choosing to shop downtown versus at the outlet mall on the highway. If people can't park, they'll simply shop somewhere else, and struggling local businesses will close. A park is nice, but it doesn't pay anyone's rent."</p>
+
+<p><strong>Argument B &mdash; Letter from a city parks advocate:</strong><br>
+"This parking lot sits empty more than half the time, according to the city's own usage data collected over six months, which showed average daily occupancy of only 31%. Meanwhile, the surrounding neighborhood has no public green space within walking distance for over 1,200 residents, based on city zoning records. Cities that have converted underused lots to small parks, such as a similar project in a comparably sized city two states over, reported increased foot traffic to nearby businesses within two years, not decreased traffic. A park could become a gathering space that draws people downtown more often, not less."</p>
+
+<p><strong>Your Task:</strong> Write an essay analyzing both arguments above to determine which one is better supported. In your response, develop an argument in which you explain how one position is better supported than the other. Incorporate relevant, specific evidence from both letters to support your argument. Be sure to discuss the strengths and weaknesses of the evidence in each letter.</p>
+
+<p><em>You should spend up to 45 minutes reading, planning, and writing your response. Your response will be scored on (1) the quality of your reading and analysis, (2) your development of ideas and organizational structure, and (3) your clarity and command of standard English conventions.</em></p>
+  <textarea rows="20" placeholder="Write your Extended Response here..."></textarea>
+</div>
+
+<!-- ============== STUDENT REFLECTION ============== -->
+<div class="section-divider">Student Reflection</div>
+<div class="reflection-box">
+  <p><strong>1.</strong> Which section of this test felt most comfortable for you? Why do you think that is?</p>
+  <textarea rows="3" placeholder="Your answer..."></textarea>
+  <p style="margin-top:1rem;"><strong>2.</strong> Which section felt most challenging? What specifically made it difficult?</p>
+  <textarea rows="3" placeholder="Your answer..."></textarea>
+  <p style="margin-top:1rem;"><strong>3.</strong> Pick one question you were unsure about. Even if you got it right, explain your reasoning here.</p>
+  <textarea rows="3" placeholder="Your answer..."></textarea>
+</div>
+
+<!-- ============== END OF STUDENT-FACING TEST ============== -->
+<div class="end-marker">&mdash; End of Student-Facing Test &mdash;</div>
+<hr class="double-rule">
+
+<!-- ============== INSTRUCTOR SECTION ============== -->
+<div class="instructor-page">
+  <div class="running-header">RLA Test 1 — NYS &mdash; Instructor Section &mdash; Mentor Guide</div>
+
+  <div class="mentor-section">
+    <h2>Mentor Guide</h2>
+    <p>This guide is for the mentor or instructor reviewing this test with the student. The goal is not
+    simply to mark answers right or wrong, but to understand <em>why</em> the student arrived at each answer.</p>
+    <ul class="checklist">
+      <li><strong>Review every answer with the student</strong> &mdash; including correct ones. Ask the student
+      to explain their reasoning out loud for each question, not just the ones they missed.</li>
+      <li><strong>Treat unexplained correct answers as a finding, not a pass.</strong> If a student got a
+      question right but cannot explain why, treat it the same as a wrong answer for instructional purposes.
+      A correct guess and a correct deduction look identical on this key but mean very different things
+      about what the student actually understands.</li>
+      <li><strong>Give specific, critical feedback tied to the actual error.</strong> Instead of "review this
+      topic," name the misconception directly &mdash; for example, "you chose this option because you treated
+      the supporter's opinion in paragraph 1 as a stated fact" is more useful than "reread the passage."</li>
+      <li><strong>Watch for patterns across questions.</strong> If a student misses multiple questions that
+      depend on distinguishing fact from opinion, or struggles across several grammar items involving comma
+      placement, that is a signal to change the teaching approach &mdash; break the skill into smaller steps,
+      use a different example, or approach it from a new angle &mdash; rather than re-explaining the same way.</li>
+    </ul>
+    <p><strong>Section-by-section notes:</strong></p>
+    <ul class="checklist">
+      <li><strong>Passage 1 (Informational):</strong> Tests literal comprehension, inference, vocabulary in
+      context, and main idea. If a student struggles here, check whether they are reading too quickly and
+      missing supporting detail sentences, versus genuinely misunderstanding vocabulary.</li>
+      <li><strong>Passage 2 (Argument):</strong> Tests the ability to distinguish a stated fact from a claim
+      or opinion, and to evaluate the strength/weakness of evidence. This is one of the harder skill areas on
+      the real RLA test &mdash; expect to spend extra review time here.</li>
+      <li><strong>Passage 3 (Literary):</strong> Tests figurative language, inference about character, and
+      tone/mood shifts. If a student answers literally where a figurative reading is required (e.g., the
+      "coat in a closet" question), that is a specific, nameable skill gap worth flagging.</li>
+      <li><strong>Grammar/Editing:</strong> Tests subject-verb agreement, spelling, sentence fragments,
+      comma usage with nonrestrictive clauses, and redundant subjects. Identify which specific error
+      category (not just "grammar" broadly) the student is missing.</li>
+      <li><strong>Extended Response:</strong> Use the rubric below. Review the essay with the student
+      sentence-by-sentence if needed, focusing especially on whether they used specific evidence from
+      <em>both</em> letters, not just one.</li>
+    </ul>
+  </div>
+
+  <div class="running-header">RLA Test 1 — NYS &mdash; Instructor Section &mdash; Scoring Rubric</div>
+  <div class="rubric-section">
+    <h2>Extended Response Scoring Rubric (4-Point Scale)</h2>
+    <table class="rubric-table">
+      <tr><th>Score</th><th>Criteria</th></tr>
+      <tr>
+        <td>4</td>
+        <td>Clearly identifies which argument is better supported and explains why using specific, accurate
+        evidence from <strong>both</strong> letters. Discusses strengths and/or weaknesses of the evidence
+        (e.g., sample size, data source, relevance). Well-organized with clear transitions. Few or no
+        distracting errors in grammar, usage, or mechanics.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Identifies a position and supports it with evidence from both letters, but evidence use may be
+        less precise, or discussion of evidence quality is thin or one-sided. Organization is generally
+        clear. Some errors in conventions, but they do not interfere with meaning.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Takes a position but relies mainly on one letter, restates the letters without much analysis, or
+        misrepresents some evidence. Organization may be unclear in places. Errors in conventions are
+        noticeable and occasionally interfere with meaning.</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Minimal or unclear position. Little to no use of specific evidence from the letters. Disorganized
+        or very brief response. Frequent errors in conventions that interfere with meaning.</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>Blank, off-topic, or a response that does not address the task (e.g., simply restates the prompt
+        with no argument or evidence).</td>
+      </tr>
+    </table>
+    <p style="margin-top:1rem; font-size:0.9rem; color:#555;"><em>Note: There is no single "correct" position
+    (Argument A or B) &mdash; both are defensible. Score based on the quality of analysis and evidence use,
+    not on which side the student chooses.</em></p>
+  </div>
+
+  <div class="running-header">RLA Test 1 — NYS &mdash; Instructor Section &mdash; Answer Key</div>
+  <div class="key-section">
+    <h2>Answer Key and Explanations</h2>
+    <p style="font-size:0.9rem; color:#555;">Total multiple-choice questions: 23</p>
+    <table>
+      <tr><th>Q#</th><th>Section</th><th>Answer</th><th>Explanation</th></tr>
+        <tr>
+          <td>1</td>
+          <td>Passage 1</td>
+          <td><strong>A</strong></td>
+          <td>The second sentence of paragraph 1 directly states that the work 'was slow, costly, and physically risky.' No degree requirement, nighttime restriction, or ban is mentioned anywhere in the passage.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Passage 1</td>
+          <td><strong>B</strong></td>
+          <td>Paragraph 3 explicitly ties sensor-detected temperature differences to catching cracks 'more reliably than the human eye alone' -- this is the only option describing a performance advantage over a person, not just speed or convenience.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Passage 1</td>
+          <td><strong>C</strong></td>
+          <td>The passage presents the resistance neutrally, immediately followed by data on the technology's reliability -- it's used to show the change was contested and gradual, not to prove the technology failed or to argue for replacing workers, which the passage never suggests.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Passage 1</td>
+          <td><strong>D</strong></td>
+          <td>Paragraph 2 states a robotic crawler 'could move through a pipeline while gas was still flowing, eliminating the need to shut down operations' -- this is an inference directly supported by that sentence, unlike the other options.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Passage 1</td>
+          <td><strong>A</strong></td>
+          <td>The final paragraph summarizes this directly: the technology 'did not replace inspectors' but added a new skill set, and comfort with both traditional and remote skills is now the baseline. The other options overstate or distort claims the passage does not make.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Passage 1</td>
+          <td><strong>B</strong></td>
+          <td>The sentence states comfort with both skill sets 'is no longer optional. It is the baseline expectation' -- contrasting directly with 'optional,' which signals baseline means a required minimum standard, not something outdated, optional, or a device.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Passage 2</td>
+          <td><strong>C</strong></td>
+          <td>This sentence is explicitly attributed to supporters ('they argue') and presents an interpretation, not a verifiable fact -- unlike the other options, which describe what is happening (disagreement existing, a policy emerging, a data result) rather than arguing a position.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Passage 2</td>
+          <td><strong>A</strong></td>
+          <td>Paragraph 2 states this directly: AI-assisted writing 'undermines the claim that the letter reveals genuine effort or personal voice.' The other options are not stated anywhere in the passage.</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Passage 2</td>
+          <td><strong>D</strong></td>
+          <td>Paragraph 3 directly flags this limitation in its final clause. The other options are not stated in the passage and are not supported by it.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Passage 2</td>
+          <td><strong>B</strong></td>
+          <td>The final paragraph argues a cover letter only makes sense as a test 'if a job requires strong writing skills.' The other three roles (copywriter, technical writer, grant writer) inherently require writing; equipment operation does not, matching the welder/machinist example used earlier in the passage.</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Passage 2</td>
+          <td><strong>A</strong></td>
+          <td>The passage presents supporter and critic viewpoints in balance, plus a middle-ground policy, ending on a broader question about what hiring should measure -- it does not argue for elimination, give instructions, or claim AI has 'ruined' hiring.</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Passage 2</td>
+          <td><strong>C</strong></td>
+          <td>Calling cover letters 'old-fashioned and unnecessary' is a value judgment / opinion. The other three options describe things the passage states as having occurred, not judgments.</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Passage 3</td>
+          <td><strong>D</strong></td>
+          <td>Paragraph 1 describes 'a ripple of irritation' with specific examples (sighs, a muttered complaint, checking a phone), which is mild irritation -- not excitement, anger at the driver, or total indifference.</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Passage 3</td>
+          <td><strong>A</strong></td>
+          <td>The sentence explicitly compares her younger, more observant self to a coat that's 'technically still there but might as well not exist' -- a figurative statement about a dormant part of her identity, not a literal coat.</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Passage 3</td>
+          <td><strong>C</strong></td>
+          <td>These details directly embody the 'noticing' Marisol describes wanting to reclaim in paragraph 3 -- they are concrete examples of exactly the kind of observation the story centers on, not safety information, directions, or a moving subplot.</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Passage 3</td>
+          <td><strong>B</strong></td>
+          <td>She begins on an unremarkable, memorized route and ends 'almost laughing,' having had a reflective realization about noticing things -- this matches a shift from routine to quiet reflection/amusement, not fear, anger, or confusion.</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Passage 3</td>
+          <td><strong>A</strong></td>
+          <td>Paragraph 3 states the noticing version of herself went missing 'between two jobs and a daughter to raise alone' -- directly supporting that responsibilities consumed her attention, while the other options have no textual support.</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Grammar/Editing</td>
+          <td><strong>B</strong></td>
+          <td>The subject 'department' is singular, so the verb must agree: 'posts,' not 'post.' None of the other changes are required by any grammar rule.</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>Grammar/Editing</td>
+          <td><strong>C</strong></td>
+          <td>"Seperate" is a common misspelling; the correct spelling is "separate." The other changes are not required.</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Grammar/Editing</td>
+          <td><strong>A</strong></td>
+          <td>As written, the sentence has no main verb ("having cleaned" is a participle phrase, not a complete predicate). Changing it to "had cleaned" creates a grammatically complete sentence with proper past-perfect tense for an action completed before a past reference point.</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>Grammar/Editing</td>
+          <td><strong>D</strong></td>
+          <td>The phrase "who has worked at Hillcrest for nine years" is a nonrestrictive clause that must be set off by commas on both sides; a comma is missing after "years" to close the clause before "now believes."</td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td>Grammar/Editing</td>
+          <td><strong>B</strong></td>
+          <td>As written, the sentence has a redundant subject ("Whether this approach works...it remains to be seen" awkwardly duplicates the subject). Removing "it" creates a grammatically correct sentence: "Whether this approach works as well for other tasks...remains to be seen."</td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td>Grammar/Editing</td>
+          <td><strong>C</strong></td>
+          <td>Sentence 3 uses a colon correctly to introduce an explanation/elaboration of "a new approach." The other sentences listed do not contain a colon or semicolon at all.</td>
+        </tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>
